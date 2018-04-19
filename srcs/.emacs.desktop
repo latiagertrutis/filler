@@ -1,0 +1,91 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Tue Apr 10 18:27:01 2018
+;; Desktop file format version 208
+;; Emacs version 25.2.2
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (23244 58837 766293 501000) (desktop . "208") "latiagertrutis@latiagertrutis" nil nil ((((font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-19-*-*-*-m-0-iso10646-1") (font-parameter) (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#FDF4C1") (background-color . "#282828") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 0) (alpha) (fullscreen . fullboth) (display-type . color) (background-mode . dark) (cursor-color . "#FDF4C1") (sticky) (environment) (fullscreen-restore) (frameset--id . "6C12-1C6D-6DA2-87D8") (frameset--mini t . t) (height . 46) (width . 171) (modeline . t) (minibuffer . t) (unsplittable) (left . 0) (top . 0) (icon-name) (visibility . t) (display . ":1") (explicit-name)) ((min-height . 8) (min-width . 30) (min-height-ignore . 5) (min-width-ignore . 23) (min-height-safe . 2) (min-width-safe . 6) (min-pixel-height . 184) (min-pixel-width . 330) (min-pixel-height-ignore . 115) (min-pixel-width-ignore . 253) (min-pixel-height-safe . 46) (min-pixel-width-safe . 66)) vc (pixel-width . 1920) (pixel-height . 1057) (total-width . 175) (total-height . 46) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (hc (pixel-width . 1920) (pixel-height . 942) (total-width . 175) (total-height . 41) (normal-height . 0.8916745506149479) (normal-width . 1.0) (combination-limit . t) (leaf (pixel-width . 355) (pixel-height . 942) (total-width . 32) (total-height . 41) (normal-height . 1.0) (normal-width . 0.18518518518518517) (buffer "fdf.h" (selected) (hscroll . 0) (fringes 8 8 nil) (margins 3) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 1849) (start . 1533))) (leaf (pixel-width . 938) (pixel-height . 942) (total-width . 86) (total-height . 41) (normal-height . 1.0) (normal-width . 0.4884659410589217) (buffer "key_pressed.c" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins 3) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 1793) (start . 1293))) (leaf (last . t) (pixel-width . 627) (pixel-height . 942) (total-width . 57) (total-height . 41) (normal-height . 1.0) (normal-width . 0.32634887375589317) (buffer "rotate_map.c" (selected) (hscroll . 0) (fringes 8 8 nil) (margins 2) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated) (point . 1063) (start . 1)))) (leaf (last . t) (pixel-width . 1920) (pixel-height . 115) (total-width . 175) (total-height . 5) (normal-height . 0.10832544938505206) (normal-width . 1.0) (buffer "*Flycheck errors*" (selected) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 2 t nil 0 t) (vscroll . 0) (dedicated . side) (point . 1) (start . 1)))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("~/Dropbox/42/42Paris/fdf/srcs/" "~/Dropbox/42/42Paris/fdf/srcs/rotate_map.c" "~/Dropbox/42/42Paris/fdf/srcs/hooks.c" "~/Dropbox/42/42Paris/fdf/srcs/main.c" "~/Dropbox/42/42Paris/fdf/srcs/key_pressed.c" "~/Dropbox/42/42Paris/fdf/includes/fdf.h" "~/Dropbox/42/42Paris/fdf/Makefile" "~/.emacs.d/init.el"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/home/latiagertrutis/Dropbox/42/42Paris/fdf/srcs/key_pressed.c"
+  "key_pressed.c"
+  'c-mode
+  '(abbrev-mode autopair-mode undo-tree-mode rainbow-delimiters-mode flycheck-mode auto-revert-mode auto-complete-mode indent-guide-mode highlight-parentheses-mode highlight-numbers-mode color-identifiers-mode linum-mode)
+  1793
+  '(1732 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (1710 1688 1351 1149 1127 1081 1089 1110 923 1039 979 1018 1333 1412 1316 1793))))
+
+(desktop-create-buffer 208
+  "/home/latiagertrutis/Dropbox/42/42Paris/fdf/srcs/rotate_map.c"
+  "rotate_map.c"
+  'c-mode
+  '(abbrev-mode autopair-mode undo-tree-mode rainbow-delimiters-mode flycheck-mode auto-revert-mode auto-complete-mode indent-guide-mode highlight-parentheses-mode highlight-numbers-mode color-identifiers-mode linum-mode)
+  1063
+  '(1610 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1023 1210 1527 1140 1053 1147 1022 1147 1063))))
+
+(desktop-create-buffer 208
+  "/home/latiagertrutis/Dropbox/42/42Paris/fdf/includes/fdf.h"
+  "fdf.h"
+  'c-mode
+  '(abbrev-mode autopair-mode undo-tree-mode rainbow-delimiters-mode flycheck-mode auto-revert-mode auto-complete-mode indent-guide-mode highlight-parentheses-mode highlight-numbers-mode color-identifiers-mode linum-mode)
+  1849
+  '(1460 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1460 1429 1407 1385 1368 1443 1195 1413 1391 1369 1247 892 1060 986 1170 1194))))
+
+(desktop-create-buffer 208
+  "/home/latiagertrutis/Dropbox/42/42Paris/fdf/srcs/hooks.c"
+  "hooks.c"
+  'c-mode
+  '(abbrev-mode autopair-mode undo-tree-mode rainbow-delimiters-mode flycheck-mode auto-revert-mode auto-complete-mode indent-guide-mode highlight-parentheses-mode highlight-numbers-mode color-identifiers-mode linum-mode)
+  1097
+  '(1043 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (995 1097))))
+
+(desktop-create-buffer 208
+  "/home/latiagertrutis/Dropbox/42/42Paris/fdf/srcs/main.c"
+  "main.c"
+  'c-mode
+  '(abbrev-mode autopair-mode undo-tree-mode rainbow-delimiters-mode flycheck-mode auto-revert-mode auto-complete-mode indent-guide-mode highlight-parentheses-mode highlight-numbers-mode color-identifiers-mode linum-mode)
+  1234
+  '(1234 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/latiagertrutis/Dropbox/42/42Paris/fdf/Makefile"
+  "Makefile"
+  'makefile-gmake-mode
+  '(autopair-mode undo-tree-mode rainbow-delimiters-mode flycheck-mode auto-revert-mode indent-guide-mode highlight-parentheses-mode highlight-numbers-mode linum-mode)
+  1699
+  '(1701 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (2007 1935 1672 1934 1934 1672 1618 1949 1827 1747 1729 1706 1700 1699))))
+

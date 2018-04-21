@@ -6,7 +6,7 @@
 #    By: mrodrigu <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/04/18 04:35:01 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/04/21 04:05:06 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,9 @@ FUNCTIONS = input_reader.c \
 			line_writter.c \
 			main.c \
 			create_image.c \
-			project_point.c
+			project_point.c \
+			put_legend.c \
+			update_legend.c
 
 HEADERS = $(INCL_DIR)fdf.h
 

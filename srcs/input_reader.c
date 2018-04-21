@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 02:48:17 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/19 06:03:17 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/04/20 23:36:30 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_point	*locate_point(t_point *coord, char *line, int n, int i)
 	return (coord);
 }
 
-static int	check_line(char *line)
+static int		check_line(char *line)
 {
 	int		n;
 

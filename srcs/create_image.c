@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 22:10:45 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/13 22:33:56 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/04/21 04:37:15 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	create_image(t_win *win)
 {
-	int		bit_per_pixel = 32;
-	int		size_line = W_WIDTH * 4;
+	int		bit_per_pixel = sizeof(int) * 8;
+	int		size_line = W_WIDTH * sizeof(int);
 	int		endian = 0;
 
 	win->img_ptr = mlx_new_image(win->mlx_id, W_WIDTH, W_HEIGHT);

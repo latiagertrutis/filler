@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 21:53:34 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/19 06:35:32 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/04/21 04:37:11 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ void				draw_line(t_win *win, t_2dpi ini_p0, t_2dpi p0, t_2dpi pf)
 	int dy;
 	int err;
 	int e2;
+	
 	dx = ft_abs((int)pf.x - (int)p0.x);
 	dy = ft_abs((int)pf.y - (int)p0.y);
 	err = (dx > dy ? dx : -dy) / 2;
 	while(1)
 	{
-//		mlx_pixel_put(win->mlx_id, win->win_id, (int)p0.x, (int)p0.y, select_color(ini_p0, p0, pf));
 		if ((p0.x == pf.x && p0.y == pf.y) || p0.x >= W_WIDTH || p0.x < 0 || p0.y >= W_HEIGHT || p0.y < 0)
 			break;
 		((int *)(win->img))[ft_abs(p0.x) + ft_abs((W_WIDTH * p0.y))] = select_color(ini_p0, p0, pf);

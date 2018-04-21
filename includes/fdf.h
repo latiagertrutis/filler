@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 19:05:37 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/19 05:57:49 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/04/21 04:04:52 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,16 @@ typedef struct		s_2dpi
 	int				z;
 }					t_2dpi;
 
+typedef struct	s_legend
+{	
+	void		*win_id;
+	void		*img_ptr;
+	char		*img;
+	double		ang_x;
+	double		ang_y;
+	double		ang_z	;
+}				t_legend;
+
 typedef struct	s_win
 {
 	void		*mlx_id;
@@ -98,6 +108,7 @@ typedef struct	s_win
 	t_2dp		coord_y;
 	t_2dp		coord_z;
 	t_2dp		origin;
+	t_legend	legend;
 }				t_win;
 
 t_point			*input_reader(char *file);
@@ -116,4 +127,6 @@ void			draw_line(t_win *win, t_2dpi ini_p0, t_2dpi p0, t_2dpi pf);
 void			line_writter(t_win *win);
 void			create_image(t_win *win);
 void			project_point(t_2dpi *p);
+void			put_legend(t_win *win);
+void			update_legend(t_win *win);
 #endif

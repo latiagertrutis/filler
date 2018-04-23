@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 19:05:37 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/21 04:04:52 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/04/23 03:33:02 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@
 #define K_U_ARR 65362
 #define K_R_ARR 65363
 #define K_D_ARR 65364
+#define K_POINT 46
+#define	K_SLASH 47
+#define K_P1 49
+#define K_N 110
+#define K_M 109
 #endif
 
 #ifdef __APPLE__
@@ -59,6 +64,9 @@
 #define K_D_ARR 125
 #define K_POINT 47
 #define	K_SLASH 44
+#define K_P1 49
+#define K_N 110
+#define K_M 109
 #endif
 
 typedef struct		s_point
@@ -88,9 +96,10 @@ typedef struct	s_legend
 	void		*win_id;
 	void		*img_ptr;
 	char		*img;
-	double		ang_x;
-	double		ang_y;
-	double		ang_z	;
+	int			ang_x;
+	int			ang_y;
+	int			ang_z;
+	char		p1;
 }				t_legend;
 
 typedef struct	s_win

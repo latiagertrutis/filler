@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 05:00:09 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/21 04:46:29 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/04/23 03:37:46 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static void		select_rotation(t_win *win, double x, double y, double z)
 	rotate_point(&(win->coord_x), x, y, z);
 	rotate_point(&(win->coord_y), x, y, z);
 	rotate_point(&(win->coord_z), x, y, z);
-	win->legend.ang_x = (int)(win->legend.ang_x + x) % 360;
-	win->legend.ang_y = (int)(win->legend.ang_y + y) % 360;
-	win->legend.ang_z = (int)(win->legend.ang_z + z) % 360;
+	win->legend.ang_x = (win->legend.ang_x + (int)x) % 360;
+	win->legend.ang_y = (win->legend.ang_y + (int)y) % 360;
+	win->legend.ang_z = (win->legend.ang_z + (int)z) % 360;
 }
 
 static void		rotate(t_win *win, int keycode)
@@ -86,6 +86,22 @@ int				key_pressed(int keycode, t_win *win)
 	else if (keycode == K_L_ARR || keycode == K_U_ARR || keycode == K_R_ARR ||
 			keycode == K_D_ARR || keycode == K_POINT || keycode == K_SLASH)
 		rotate(win, keycode);
+	else if (keycode == K_P1)
+	{
+		win->legend.p1 = win->legend.p1 ? 0 : 1;		
+		mlx_destroy_image(win->mlx_id, win->img_ptr);
+		update_legend(win);
+		line_writter(win);
+	}
+	else if (keycode == K_N || keycode == K_M)
+	{
+		if (keycode == K_N)
+			resize_point(&(win->coord_z), -ZOOM);
+		else
+			resize_point(&(win->coord_z), ZOOM);
+		mlx_destroy_image(win->mlx_id, win->img_ptr);
+		line_writter(win);
+	}
 	else if (keycode == K_ESC)
 	{
 		ft_putstr("\033[1;95mLeaving the program\n¯\\_(ツ)_/¯\n\033[0m");

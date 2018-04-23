@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 03:48:50 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/21 04:41:03 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/04/23 03:17:18 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,6 @@ void			update_legend(t_win *win)
 	mlx_string_put(win->mlx_id, win->legend.win_id, 215, 80, 0xffcc75, ft_itoa(win->legend.ang_y));
 	mlx_string_put(win->mlx_id, win->legend.win_id, 130, 100, 0xffcc75, "ANGLE Z:");
 	mlx_string_put(win->mlx_id, win->legend.win_id, 215, 100, 0xffcc75, ft_itoa(win->legend.ang_z));
+	mlx_string_put(win->mlx_id, win->legend.win_id, 130, 120, 0xffcc75, "PERSP:");
+	mlx_string_put(win->mlx_id, win->legend.win_id, 215, 120, 0xffcc75, win->legend.p1 ? "yes" : "no");
 }

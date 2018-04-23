@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 04:03:14 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/21 03:15:03 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/04/23 03:05:51 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,8 @@ static double	ini_size(t_win *win)
 	
 }
 
-t_win			*window(void *mlx_id, t_point *map)
-{
-	t_win	*win;
-
-	if (!(win = (t_win *)ft_memalloc(sizeof(t_win))))
-		exit_failure(NULL);
-	if (!(win->win_id = mlx_new_window(mlx_id, W_WIDTH, W_HEIGHT, "FDF")))
-		exit_failure("Can not create window");
-	success("Window created");
+static void		ini_window(t_win *win, void *mlx_id, t_point *map)
+{	
 	win->mlx_id = mlx_id;
 	win->map_wid = map->x + 1;
 	win->map_hei = map->y + 1;
@@ -83,7 +76,23 @@ t_win			*window(void *mlx_id, t_point *map)
 	win->coord_z.x = 0.0;
 	win->coord_z.y = 0.0;
 	win->coord_z.z = win->coord_x.x;
+	win->legend.ang_x = 0.0;
+	win->legend.ang_y = 0.0;
+	win->legend.ang_z = 0.0;
+	win->legend.p1 = 0;
 	win->map = initialize_map(map, win);
+}
+
+t_win			*window(void *mlx_id, t_point *map)
+{
+	t_win	*win;
+
+	if (!(win = (t_win *)ft_memalloc(sizeof(t_win))))
+		exit_failure(NULL);
+	if (!(win->win_id = mlx_new_window(mlx_id, W_WIDTH, W_HEIGHT, "FDF")))
+		exit_failure("Can not create window");
+	success("Window created");
+	ini_window(win, mlx_id, map);
 	line_writter(win);
 	put_legend(win);
 	return (win);

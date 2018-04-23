@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 04:46:58 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/19 05:52:21 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/04/23 04:02:38 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 void	project_point(t_2dpi *p)
 {
+//	t_2dpi p0;
+
+//	p0 = *p;
 	p->x = 1000.0 * (p->x / (2000.0 - p->z));
 	p->y = 1000.0 *(p->y / (2000.0 - p->z));
+//	p->x = (int)((sqrt(2.0) / 2.0) * ((double)p0.x - (double)p0.y));
+//	p->y = (int)((sqrt(2.0 / 3.0) * (double)p0.z) - ((1.0 / sqrt(6.0)) * ((double)p0.x + (double)p0.y)));
 }

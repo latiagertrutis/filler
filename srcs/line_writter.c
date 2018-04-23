@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:56:28 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/19 06:44:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/04/23 03:07:46 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static t_2dpi vectadd(t_2dp origin, t_2dp v1, t_2dp v2, t_2dp v3)
 	aux.x = lround(origin.x + v1.x + v2.x + v3.x);
 	aux.y = lround(origin.y + v1.y + v2.y + v3.y);
 	aux.z = origin.z + v1.z + v2.z + v3.z;
-//	project_point(&aux);
 	return (aux);
 }
 	
@@ -37,6 +36,8 @@ static t_2dpi	new_point(t_win *win, t_2dpi p0)
 	t_2dpi pf;
 
 	pf = vectadd(win->origin, esc_prod(win->coord_x, (double)p0.x), esc_prod(win->coord_y, (double)p0.y), esc_prod(win->coord_z, (double)p0.z));
+	if (win->legend.p1)
+		project_point(&pf);
 	pf.z = (int)p0.z;
 	return (pf);
 }

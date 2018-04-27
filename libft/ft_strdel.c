@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrodrigu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/30 21:31:25 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/02/26 19:34:03 by mrodrigu         ###   ########.fr       */
+/*   Created: 2017/11/13 00:28:03 by jagarcia          #+#    #+#             */
+/*   Updated: 2017/12/01 19:47:24 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "../srcs/libft/libft.h"
-# include <unistd.h>
-# include <stdlib.h>
-
-# define BUFF_SIZE 1000
-# define END_OF_LINE '\n'
-
-int				get_next_line(const int fd, char **line);
-
-#endif
+void	ft_strdel(char **as)
+{
+	if (as)
+	{
+		free(*as);
+		*as = NULL;
+	}
+}

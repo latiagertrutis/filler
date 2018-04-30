@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 11:55:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/28 15:40:35 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/04/30 16:00:49 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include <unistd.h>
 #include <stdlib.h>
+#include "../libft/includes/libft.h"
+#include "graphics.h"
 
 typedef struct		s_mapel
 {

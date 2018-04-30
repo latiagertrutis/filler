@@ -6,45 +6,58 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/04/29 22:31:11 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/04/30 16:20:09 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY : man norme all clean fclean re
+.PHONY : all clean fclean re graf
 
 NAME = jagarcia.filler
 
+GRAF_NAME = interface
+
 CFLAGS = -Wall -Wextra -Werror
 
-MAIN_FUNCS = 
+MAIN_FUNCS = ft_seek.c
+
+GRAPHIC_FUNCS = main_graphic.c
+
+OBJ_DIR = objects/
+LIBFT_DIR = ./libft/
+MAIN_DIR = srcs/
+INCLUDES_DIR = includes/
+GRAPHIC_DIR = srcs/graphics/
 
 
 LIBFT_NAME = libft.a
 LIBFT_ABREV = ft
-LIBFT_DIR = ./libft/
+HEADERS = filler.h \
+			graphics.h
 
-
-HEADERS = fdf.h
-INCLUDES_DIR = includes/
-
-
-MAIN_DIR = srcs/
+HEADER_PATH = $(patsubst %.h, $(INCLUDES_DIR)%.h,$(HEADERS))
 MAIN_OBJ = $(patsubst %.c, $(OBJ_DIR)%.o,$(MAIN_FUNCS))
+GRAPHIC_OBJ = $(patsubst %.c, $(OBJ_DIR)%.o,$(GRAPHIC_FUNCS))
 
-
-OBJ_DIR = objects/
 OBJ = $(MAIN_OBJ)
 
 
 all : $(NAME)
 
-$(NAME) : $(MAINS_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
+$(NAME) : $(MAIN_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
 	gcc $(OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(FLAGS) -o $(NAME)
+
+$(GRAF_NAME): $(MAIN_OBJ) $(GRAPHIC_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
+	gcc $(MAIN_OBJ) $(GRAPHIC_OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(FLAGS) -o $(GRAF_NAME)
 
 $(LIBFT_DIR)$(LIBFT_NAME):
 	$(MAKE) -C $(LIBFT_DIR)
 
-$(OBJ_DIR)%.o : $(MAINS_DIR)%.c $(HEADER_PATH)
+$(OBJ_DIR)%.o : $(MAIN_DIR)%.c $(HEADER_PATH)
+	gcc $(CFLAGS) -c -I $(INCLUDES_DIR) $<
+	mkdir -p $(OBJ_DIR)
+	mv -f $(@F) $(OBJ_DIR)
+
+$(OBJ_DIR)%.o : $(GRAPHIC_DIR)%.c
 	gcc $(CFLAGS) -c -I $(INCLUDES_DIR) $<
 	mkdir -p $(OBJ_DIR)
 	mv -f $(@F) $(OBJ_DIR)
@@ -60,3 +73,5 @@ fclean: clean
 
 re: fclean
 	make
+
+graf: $(GRAF_NAME)

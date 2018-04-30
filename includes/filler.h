@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 11:55:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/29 13:36:00 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/04/30 15:46:12 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct		s_data
 	int				map_height;
 	t_mapel			*map;
 }					t_data;
-
 void		ft_seek(int fd, int cuant);
 void		*map_reader(void);
 int			get_next_line(const int fd, char **line);

@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/04/29 14:23:21 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/04/29 22:31:11 by jagarcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ LIBFT_DIR = ./libft/
 
 HEADERS = fdf.h
 INCLUDES_DIR = includes/
-HEADER_PATH = $(patsubst %.h, $(INCLUDES_DIR)%.h, $(HEADERS))
 
 
 MAIN_DIR = srcs/
@@ -40,7 +39,7 @@ OBJ = $(MAIN_OBJ)
 all : $(NAME)
 
 $(NAME) : $(MAINS_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
-	gcc $(OBJ) -L $(LIBFT_DIR) -l$(LIBFT_ABREV) -lftprintf -I $(INCLUDES_DIR) $(FLAGS) -o $(NAME)
+	gcc $(OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(FLAGS) -o $(NAME)
 
 $(LIBFT_DIR)$(LIBFT_NAME):
 	$(MAKE) -C $(LIBFT_DIR)

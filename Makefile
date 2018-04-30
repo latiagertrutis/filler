@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/04/30 16:20:09 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/04/30 16:30:31 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ $(OBJ_DIR)%.o : $(MAIN_DIR)%.c $(HEADER_PATH)
 	mkdir -p $(OBJ_DIR)
 	mv -f $(@F) $(OBJ_DIR)
 
-$(OBJ_DIR)%.o : $(GRAPHIC_DIR)%.c
+$(OBJ_DIR)%.o : $(GRAPHIC_DIR)%.c $(HEADER_PATH)
 	gcc $(CFLAGS) -c -I $(INCLUDES_DIR) $<
 	mkdir -p $(OBJ_DIR)
 	mv -f $(@F) $(OBJ_DIR)

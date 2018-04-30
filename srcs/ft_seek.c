@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 13:09:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/28 13:19:10 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/04/30 17:10:00 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	ft_seek(int fd, int cuant)
 	char *buff;
 
 	if (!(buff = (char *)malloc(sizeof(char) * cuant)))
-		return ; //poner el error
+		ft_error(NULL);
 	if (read(fd, buff, cuant) < 0)
-		return ; //poner error
+		ft_error(NULL);
 	free(buff);
 }

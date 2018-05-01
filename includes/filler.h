@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 11:55:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/04/30 18:17:16 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/01 10:49:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,5 @@ typedef struct		s_data
 }					t_data;
 void		ft_seek(int fd, int cuant);
 void		*map_reader(void);
-int			get_next_line(const int fd, char **line);
-int			ndigits(int n);
+int			ft_ndigits(int n);
 #endif

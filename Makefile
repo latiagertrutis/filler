@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/04/30 16:30:31 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/05/01 10:48:02 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ GRAF_NAME = interface
 
 CFLAGS = -Wall -Wextra -Werror
 
-MAIN_FUNCS = ft_seek.c
+MAIN_FUNCS = ft_seek.c \
+			ft_ndigits.c
 
 GRAPHIC_FUNCS = main_graphic.c
 

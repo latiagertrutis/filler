@@ -6,13 +6,13 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/01 13:18:09 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:55:20 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static int		read_map_row(char **line, char **line2,  int dim[2], int row)
+static int		read_map_row(char **line,  int dim[2], int row)
 {
 	int	read_cuant;
 	int	a;
@@ -25,24 +25,38 @@ static int		read_map_row(char **line, char **line2,  int dim[2], int row)
 	if ((a = read(0, *line, read_cuant)) < 0)
 		ft_error(NULL);
 	(*line)[read_cuant - 1] = 0;
-	if (!a)
-		return (a);
-	if (row + 1 < 1000)
-		read_cuant = dim[1] + 3 + 1 + 1;
-	else
-		read_cuant = dim[1] + ft_ndigits(row + 1) + 1 + 1;
-		*line2 = ft_strnew(read_cuant);
-	if ((a = read(0, *line2, read_cuant)) < 0)
-		ft_error(NULL);
-	(*line2)[read_cuant - 1] = 0;
-
 	return (a);
+}
+
+static int		keys(int code, void *mlx)
+{
+	if (code == ESC)
+		exit(1);
+}
+
+static int		loop(void *mlx)
+{
+	
+}
+
+int				main(void)
+{
+	t_mlx *mlx;
+
+	mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx));
+	mlx->ptr = mlx_init();
+	ft_first_map(&(mlx->params));
+	if (!(mlx->win = mlx_new_window(mlx->ptr, ), dim[0] + MARGEN_X, dim[1] + MARGEN_Y * 2, "FILLER"))
+		ft_error(NULL);
+	mlx_key_hook(mlx->win, keys, mlx);
+	mlx_loop_hook(mlx->ptr, loop, mlx);
+	mlx_loop(mlx->ptr);
+	return (0);
 }
 
 int		main(void)
 {
 	char	*line;
-	char	*line2;
 	int		dim[2];
 	int		row;
 
@@ -71,20 +85,13 @@ int		main(void)
 	** Imprimir mapa
 	*/
 	row = 0;
-	while (read_map_row(&line, &line2, dim, row) && row < dim[0])
+	
+	while (read_map_row(&line, dim, row) && row < dim[0])
 	{
-		ft_putchar('<');
-		ft_putstr(line /*+ ft_ndigits(row) + (row < 100 ? 4 - ft_ndigits(row) : 1)*/);
-		ft_putchar('>');
+		ft_putstr(line + ft_ndigits(row) + (row < 100 ? 4 - ft_ndigits(row) : 1));
 		ft_putchar('\n');
-		ft_putchar('<');
-		ft_putstr(line2 /*+ ft_ndigits(row) + (row < 100 ? 4 - ft_ndigits(row) : 1)*/);
-		ft_putchar('>');
-	//	ft_printf("columna numero %i", row);
-		ft_putchar('\n');
-		row += 2;
+		row += 1;
 		ft_strdel(&line);
-		ft_strdel(&line2);
 	}
 	return (0);
 }

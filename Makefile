@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/05/01 10:48:02 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/05/01 13:37:18 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = jagarcia.filler
 
 GRAF_NAME = interface
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = 
 
 MAIN_FUNCS = ft_seek.c \
 			ft_ndigits.c
@@ -48,7 +48,7 @@ $(NAME) : $(MAIN_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
 	gcc $(OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(FLAGS) -o $(NAME)
 
 $(GRAF_NAME): $(MAIN_OBJ) $(GRAPHIC_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
-	gcc $(MAIN_OBJ) $(GRAPHIC_OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(FLAGS) -o $(GRAF_NAME)
+	gcc $(MAIN_OBJ) $(GRAPHIC_OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(CFLAGS) -o $(GRAF_NAME)
 
 $(LIBFT_DIR)$(LIBFT_NAME):
 	$(MAKE) -C $(LIBFT_DIR)

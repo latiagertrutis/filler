@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ndigits.c                                       :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/28 13:30:31 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/01 20:25:27 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/05/01 20:36:39 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/05/01 22:26:30 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-int		ft_ndigits(int n)
+int 	main(int argc, char **argv)
 {
-	int i;
+	(void)argc;
 
-	i = 1;
-	while (n >= 10)
+	int i;
+	char *buff = NULL;
+	t_data	data;
+
+	if ((data.fd = open(argv[1], O_RDONLY)) < 0)
+		ft_error(NULL);
+	i = 0;
+	while (i < 10)
 	{
-		n /= 10;
+		if (buff)
+			free(buff);
+		get_next_line(data.fd, &buff);
 		i++;
 	}
-	return (i);
+	data.map_height = ft_atoi(buff + 8);
+	data.map_width = ft_atoi(buff + 8 + ft_ndigits(data.map_height));
+	free (buff);
+	map_reader(&data);
+	return (0);
 }

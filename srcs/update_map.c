@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ndigits.c                                       :+:      :+:    :+:   */
+/*   update_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/28 13:30:31 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/01 20:25:27 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/05/01 20:11:57 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/05/01 23:05:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-int		ft_ndigits(int n)
+void	update_map(t_data *data, int i, char *buff)
 {
-	int i;
+	int j;
 
-	i = 1;
-	while (n >= 10)
+	j = 0;
+	while (j < data->map_width)
 	{
-		n /= 10;
-		i++;
+
 	}
-	return (i);
 }

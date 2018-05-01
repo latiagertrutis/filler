@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_graphic.c                                    :+:      :+:    :+:   */
+/*   main_graphic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/01 19:55:20 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/01 22:50:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static int		read_map_row(char **line,  int dim[2], int row)
+int		ft_read_map(char **line,  int dim[2], int row)
 {
 	int	read_cuant;
 	int	a;
@@ -32,11 +32,13 @@ static int		keys(int code, void *mlx)
 {
 	if (code == ESC)
 		exit(1);
+	return (0);
 }
 
 static int		loop(void *mlx)
 {
-	
+	ft_draw((t_mlx *)mlx);
+	return (0);
 }
 
 int				main(void)
@@ -46,7 +48,10 @@ int				main(void)
 	mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx));
 	mlx->ptr = mlx_init();
 	ft_first_map(&(mlx->params));
+	
 	if (!(mlx->win = mlx_new_window(mlx->ptr, ), dim[0] + MARGEN_X, dim[1] + MARGEN_Y * 2, "FILLER"))
+		ft_error(NULL);
+	if (!(mlx->img = mlx_new_image(mlx->ptr, dim[0] + MARGEN_X, dim[1] + MARGEN_Y)))
 		ft_error(NULL);
 	mlx_key_hook(mlx->win, keys, mlx);
 	mlx_loop_hook(mlx->ptr, loop, mlx);
@@ -60,18 +65,6 @@ int		main(void)
 	int		dim[2];
 	int		row;
 
-	ft_seek(0, 49 * 5); // saltar cabezera de mapa
-	/*
-	** Obtener dimension
-	*/
-	if (get_next_line(0, &line) < 0)
-		ft_error(NULL);
-	dim[0] = ft_atoi(ft_strchr(line, ' ') + 1);
-	dim[1] = ft_atoi(ft_strrchr(line, ' ') + 1);
-	ft_strdel(&line);
-	ft_printf("%i filas y %i columnas\n", dim[0], dim[1]);
-
-	
 	/*
 	** saltar numeracion de columnas
 	*/

@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/01 19:55:18 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/01 22:50:44 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ typedef struct	s_mlx
 	void		*img;
 	void		*addrs;
 	t_params	*params;
-}				t_mlx;
+b}				t_mlx;
 
 #endif

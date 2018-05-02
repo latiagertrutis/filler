@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/05/01 21:58:29 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/05/02 20:45:25 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ TEST = srcs/test.c
 MAIN_FUNCS = ft_seek.c \
 			 ft_ndigits.c \
 			 map_reader.c \
-			 update_map.c
+			 update_map.c \
+			 write_test.c \
+			 update_piece.c
 
 GRAPHIC_FUNCS = main_graphic.c
 

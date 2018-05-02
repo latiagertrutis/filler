@@ -1,41 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphics.h                                         :+:      :+:    :+:   */
+/*   ft_print_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/02 12:18:32 by jagarcia         ###   ########.fr       */
+/*   Created: 2018/05/02 07:51:31 by jagarcia          #+#    #+#             */
+/*   Updated: 2018/05/02 12:36:20 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GRAPHICS_H
-#define GRAPHICS_H
-
-#include <mlx.h>
-
-# define MARGEN_X 50
-# define MARGEN_Y 100
-# define RESOLUTION_X 1920
-# define RESOLUTION_Y 1080
-# define ESC 53
-
-typedef struct	s_params
-{
-	int			dim[2];
-	char		**players;
-	int			square[2];
-}				t_params;
-
-typedef struct	s_mlx
-{
-	void		*ptr;
-	void		*win;
-	void		*img;
-	t_params	*params;
-}				t_mlx;
-
-void	ft_initialice(t_params **params);
-
-#endif
+#include "filler.h"

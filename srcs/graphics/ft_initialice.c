@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_first_map.c                                     :+:      :+:    :+:   */
+/*   ft_initialice.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/01 20:59:51 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/02 12:17:18 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,22 @@ static char		*take_name(char *line)
 	return (ft_strrchr(line, '/'));
 }
 
-static void		take_dim(char *line, int dim[2])
+static void		take_dim(char *line, int dim[2], int square[2])
 {
 	dim[0] = ft_atoi(ft_strchr(line, ' ') + 1);
 	dim[1] = ft_atoi(ft_strrchr(line, ' ') + 1);
+	square[0] = (RESOLUTION_Y - MARGEN_Y * 2) / dim[0];
+	square[1] = (RESOLUTION_X - MARGEN_X * 2) / dim[1];
 }
 
-void	ft_first_map(**params)
+void	ft_initialice(**params)
 {
 	char		*line;
 	int			flag;
 	int			i;
 	ft_seek(0, 49 * 5); // saltar cabezera de mapa
 	i = 0;
+	*params = (t_params *)ft_memalloc(sizeof(t_params));
 	(*params)->players = (char **)ft_memalloc(sizeof(char *) * 2);
 	while ((flag = get_next_line(STDIN_FILEO, &line)) > 0)
 	{
@@ -42,7 +45,7 @@ void	ft_first_map(**params)
 			(*params)->players[i++] = take_name(line);
 		else if (line[0] = 'P')
 		{
-			take_dim(line, (*params)->dim);
+			take_dim(line, (*params)->dim, (*params)->square);
 			ft_strdel(&line);
 			break ;
 		}

@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/01 22:50:16 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/02 12:36:12 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ static int		loop(void *mlx)
 int				main(void)
 {
 	t_mlx *mlx;
-
+	
 	mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx));
 	mlx->ptr = mlx_init();
-	ft_first_map(&(mlx->params));
-	
-	if (!(mlx->win = mlx_new_window(mlx->ptr, ), dim[0] + MARGEN_X, dim[1] + MARGEN_Y * 2, "FILLER"))
+	ft_initialice(&(mlx->params));
+	if (!(mlx->win = mlx_new_window(mlx->ptr,mlx->params->win_size[0], mlx->params->win_size[1], "FILLER"))
 		ft_error(NULL);
 	if (!(mlx->img = mlx_new_image(mlx->ptr, dim[0] + MARGEN_X, dim[1] + MARGEN_Y)))
 		ft_error(NULL);
+	ft_print_map(mlx);
 	mlx_key_hook(mlx->win, keys, mlx);
 	mlx_loop_hook(mlx->ptr, loop, mlx);
 	mlx_loop(mlx->ptr);

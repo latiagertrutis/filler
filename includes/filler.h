@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 11:55:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/02 20:45:11 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/03 16:04:28 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ int			ft_ndigits(int n);
 void		update_map(t_data *data, int i, char *buff);
 void		update_piece(t_data *data, int i, char *buff);
 void 		write_test(char *str);
+int			ft_roundup(double d);
 
 #endif

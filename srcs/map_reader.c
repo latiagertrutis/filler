@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 11:58:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/02 20:53:24 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/03 16:17:54 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,8 @@ void				map_reader(t_data *data)
 	data->piece_height = ft_atoi(buff + 2);
 	data->piece_width = ft_atoi(buff + 2 + ft_ndigits(data->piece_height));
 	free(buff);
+	if (!(data->piece = (char *)ft_memalloc(sizeof(char) *
+		ft_roundup((double)(data->piece_width * data->piece_height) / 8.0))))
+		ft_error(NULL);
 	read_piece(data);
 }

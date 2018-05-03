@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/02 12:18:32 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:56:19 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 # define MARGEN_X 50
 # define MARGEN_Y 100
-# define RESOLUTION_X 1920
-# define RESOLUTION_Y 1080
+# define RESOLUTION_X 1366
+# define RESOLUTION_Y 768
 # define ESC 53
 
 typedef struct	s_params

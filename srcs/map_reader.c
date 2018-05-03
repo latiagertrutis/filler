@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 11:58:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/03 16:17:54 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/03 17:12:12 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,16 @@ void				map_reader(t_data *data)
 		ft_roundup((double)(data->piece_width * data->piece_height) / 8.0))))
 		ft_error(NULL);
 	read_piece(data);
+	for(int i = 0; i < ft_roundup((double)(data->piece_width * data->piece_height) / 8.0); i++)
+	{
+		for(int j = 0; j < 8; j++)
+		{
+			if (data->piece[i] & (0x80 >> j))
+				write_test("*");
+			else
+				write_test(".");
+			if (!((j) % data->piece_width) && j)
+				write_test("\n");
+		}
+	}
 }

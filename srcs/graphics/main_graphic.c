@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/02 12:36:12 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/05/03 11:58:42 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ static int		keys(int code, void *mlx)
 
 static int		loop(void *mlx)
 {
-	ft_draw((t_mlx *)mlx);
+	int piece;
+
+	ft_search_piece((t_mlx *)mlx);
+	ft_place_piece((t_mlx *)mlx);
+	
 	return (0);
 }
 

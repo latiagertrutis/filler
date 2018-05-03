@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/03 11:58:42 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/05/03 14:56:32 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int				main(void)
 	mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx));
 	mlx->ptr = mlx_init();
 	ft_initialice(&(mlx->params));
-	if (!(mlx->win = mlx_new_window(mlx->ptr,mlx->params->win_size[0], mlx->params->win_size[1], "FILLER"))
+	if (!(mlx->win = mlx_new_window(mlx->ptr,mlx->params->win_size[0], mlx->params->win_size[1], "FILLER")))
 		ft_error(NULL);
 	if (!(mlx->img = mlx_new_image(mlx->ptr, dim[0] + MARGEN_X, dim[1] + MARGEN_Y)))
 		ft_error(NULL);

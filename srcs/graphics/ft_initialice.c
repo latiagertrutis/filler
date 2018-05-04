@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/02 12:17:18 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/05/03 18:58:41 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		take_dim(char *line, int dim[2], int square[2])
 	square[1] = (RESOLUTION_X - MARGEN_X * 2) / dim[1];
 }
 
-void	ft_initialice(**params)
+void	ft_initialice(t_params **params)
 {
 	char		*line;
 	int			flag;
@@ -35,7 +35,7 @@ void	ft_initialice(**params)
 	i = 0;
 	*params = (t_params *)ft_memalloc(sizeof(t_params));
 	(*params)->players = (char **)ft_memalloc(sizeof(char *) * 2);
-	while ((flag = get_next_line(STDIN_FILEO, &line)) > 0)
+	while ((flag = get_next_line(STDIN_FILENO , &line)) > 0)
 	{
 		if (flag < 0)
 			ft_error(NULL);
@@ -43,7 +43,7 @@ void	ft_initialice(**params)
 			ft_error("Your Filler doesn't work very well");
 		if (line[0] == '$')
 			(*params)->players[i++] = take_name(line);
-		else if (line[0] = 'P')
+		else if (line[0] == 'P')
 		{
 			take_dim(line, (*params)->dim, (*params)->square);
 			ft_strdel(&line);

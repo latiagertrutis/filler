@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/05/03 16:04:37 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/05/04 17:44:02 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ GRAF_NAME = interface
 
 CFLAGS = 
 
+MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
+
 TEST = srcs/test.c
 
 MAIN_FUNCS = ft_seek.c \
@@ -28,10 +30,13 @@ MAIN_FUNCS = ft_seek.c \
 			 update_piece.c \
 			 ft_roundup.c
 
-GRAPHIC_FUNCS = main_graphic.c
+GRAPHIC_FUNCS = main_graphic.c \
+				ft_print_map.c \
+				ft_get_addrs.c \
+				ft_initialice.c
 
 OBJ_DIR = objects/
-LIBFT_DIR = ./libft/
+LIBFT_DIR = libft/
 MAIN_DIR = srcs/
 INCLUDES_DIR = includes/
 GRAPHIC_DIR = srcs/graphics/
@@ -55,7 +60,7 @@ $(NAME) : $(MAIN_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
 	gcc $(OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(FLAGS) -o $(NAME)
 
 $(GRAF_NAME): $(MAIN_OBJ) $(GRAPHIC_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
-	gcc $(MAIN_OBJ) $(GRAPHIC_OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(CFLAGS) -o $(GRAF_NAME)
+	gcc $(MAIN_OBJ) $(GRAPHIC_OBJ) $(MLXFLAGS) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(CFLAGS) -o $(GRAF_NAME)
 
 $(LIBFT_DIR)$(LIBFT_NAME):
 	$(MAKE) -C $(LIBFT_DIR)

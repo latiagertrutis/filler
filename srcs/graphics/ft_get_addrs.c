@@ -6,21 +6,19 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 14:41:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/03 14:45:24 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/04 17:31:14 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-char	*ft_get_addrs(t_mlx *mlx)
+char	*ft_get_addrs(void *img, int sizeline)
 {
-	int sizeline;
 	int bits;
 	int endian;
 
-	sizeline = RESOLUTION_X - MARGEN_X * 2;
 	bits = BITS;
 	endian = ENDIAN;
 
-	return (mlx_get_data_addrs(mlx->img, sizeline, bits, endian));
+	return (mlx_get_data_addr(img, &sizeline, &bits, &endian));
 }

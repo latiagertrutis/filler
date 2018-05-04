@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_piece.c                                     :+:      :+:    :+:   */
+/*   piece_point.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/02 20:43:35 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/04 16:26:11 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/05/04 17:27:20 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/05/04 17:35:09 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-static void	put_element(t_data *data, int i, int j)
+int		piece_point(t_data *data)
 {
-	int		aux;
+	int pp;
+	int i;
 
-	aux = (i * j) / 8;
-	write_test(ft_itoa(aux));
-	data->piece[aux] = data->piece[aux] | (0x80 >> (((i * data->piece_width) + j) % 8));
-}
-
-void		update_piece(t_data *data, int i, char *buff)
-{
-	int		j;
-
-	j = 0;
-	while (j < data->piece_width)
+	i = 0;
+	while (i < (data->piece_height * data->piece_width))
 	{
-		if (buff[j] == '*')
-			put_element(data, i, j);
-		j++;
+		if (data->piece[i / 8] & 0x80 >> (i % 8))
+			pp = i;
+		i++;
 	}
+	return (pp);
 }

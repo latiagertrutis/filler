@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/05/06 22:33:39 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/05/07 00:16:33 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = jagarcia.filler
 
 GRAF_NAME = interface
 
-CFLAGS = 
+CFLAGS =
 
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 

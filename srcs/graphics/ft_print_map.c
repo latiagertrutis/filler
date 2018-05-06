@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 07:51:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/04 20:09:23 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/06 23:40:49 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,26 @@ void			ft_print_map(t_mlx *mlx)
 	**hay 2 valores que manejar el tamanyo real de la imagen que tiene una fila y una columna mas de pixeles
 	**y el tamanyo del campo que es el logico columnas por lado y filas por lado (es decir 1 menos que el real)
 	*/
-	img_dim[0] = mlx->params->dim[1] * mlx->params->square[1] + 1;
-	img_dim[1] = mlx->params->dim[0] * mlx->params->square[0] + 1;
-	addrs = (int *)ft_get_addrs(mlx->img, RESOLUTION_X - MARGEN_X * 2);
-	line(addrs, 0, img_dim[0], 1);
-	line(addrs, 0, img_dim[1], img_dim[0]);
-	line(addrs, img_dim[0] - 1, img_dim[1] - 1 , img_dim[0]);
-	line(addrs, img_dim[0] * (img_dim[1] - 1), (img_dim[0] - 1), 1);
+	img_dim[0] = mlx->params->dim[1] * mlx->params->square[1];
+	img_dim[1] = mlx->params->dim[0] * mlx->params->square[0];
+	addrs = (int *)ft_get_addrs(mlx->img, mlx->params->dim[1] * mlx->params->square[1]);
+//	line(addrs, 0, img_dim[0], 1);
+//	line(addrs, 0, img_dim[1], img_dim[0]);
+//	line(addrs, img_dim[0], img_dim[1], img_dim[0] + 1);
+//	line(addrs, (img_dim[0] + 1) * (img_dim[1]), (img_dim[0]), 1);
 //	addrs[1366 * 700] = 0x0000FF;
 	i = 0;
- 	while (i < mlx->params->dim[0])
+	while (i <= mlx->params->dim[0])
 	{
-		point = img_dim[0] * (i++ * (mlx->params->square[0]));
-		line(addrs, point, img_dim[0] - 1, 1);
+		point = (img_dim[0] + 1) * i++ * mlx->params->square[0];
+		line(addrs, point, img_dim[0], 1);
 	}
 	i = 0;
-	while (i < mlx->params->dim[1])
+	while (i <= mlx->params->dim[1])
 	{
-		point = i++ * (mlx->params->square[1]);
-		line(addrs, point, img_dim[1] - 1, img_dim[0]);
-		}
+		point = i++ * mlx->params->square[1];
+		line(addrs, point, img_dim[1], img_dim[0] + 1);
+	}
 //	ft_place_starts(mlx, addrs);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, MARGEN_X, MARGEN_Y);
 }

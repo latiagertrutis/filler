@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/04 19:50:36 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/06 23:47:04 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 #define GRAPHICS_H
 
 #include <mlx.h>
+#include <math.h>
 
-# define MARGEN_X 0
-# define MARGEN_Y 0
+# define MARGEN_X 300
+# define MARGEN_Y 1
 # define RESOLUTION_X 1366
 # define RESOLUTION_Y 768
 # define ESC 53

@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   print_solution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/01 20:36:39 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/07 00:07:49 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/05/06 21:36:08 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/05/06 23:59:40 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-int 	main(int argc, char **argv)
+int 	print_solution(t_data *data, int i, int pp)
 {
-	(void)argc;
-	(void)argv;
-	int		ret;
-	t_data	data = {0, 0, 0, 0, 0, 0, NULL, NULL, 0};
-//	remove("datos.txt");
-	while ((ret = map_reader(&data)))
-	{
-		if (ret == 1)
-		{
-			put_piece(&data);
-		}
-		if (ret == 2)
-			continue ;
-	}
-	return (0);
+//	int fd = open("datos.txt", O_RDWR | O_APPEND);
+	int pos = i + (-(pp / data->piece_width) * data->map_width) - (pp % data->piece_width);
+//	dprintf(fd, "\nsoy el jugador: %d\n[%d %d]\n",data->player, pos / data->map_width, pos % data->map_width);
+	ft_printf("%d %d\n", pos / data->map_width, pos % data->map_width);
+//	close(fd);
+	return (1);
 }

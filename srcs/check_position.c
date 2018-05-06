@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 17:23:15 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/04 20:08:29 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/06 22:53:52 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static int	check_limits(t_data *data, int i, int pp)
 	map_col = i % data->map_width;
 	if ((map_file - piece_file) < 0)
 		return (1);
-	else if (map_file + (data->piece_height - piece_file - 1) >= data->map_height)
+	else if (map_file + (data->piece_height - piece_file) >= data->map_height)
 		return (1);
 	else if ((map_col - piece_col) < 0)
 		return (1);
-	else if (map_col + (data->piece_width - piece_col - 1) >= data->map_height)
+	else if (map_col + (data->piece_width - piece_col) >= data->map_width)
 		return (1);
 	return (0);
 }
@@ -56,6 +56,8 @@ int			check_position(t_data *data, int i, int pp)
 {
 	int j;
 
+	if (check_limits(data, i, pp))
+		return (0);
 	j = pp + 1;
 	while (j < (data->piece_width * data->piece_height))
 	{
@@ -76,7 +78,5 @@ int			check_position(t_data *data, int i, int pp)
 		}
 		j--;
 	}
-	if (check_limits(data, i, pp))
-		return (0);
 	return (1);
 }

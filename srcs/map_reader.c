@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 11:58:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/04 16:45:31 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/07 00:12:12 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static t_mapel		*ini_mapel(int map_width, int map_height)
 	int		size;
 
 	size = map_width * map_height;
+	write_test(ft_itoa(size));
+	write_test("\n");
 	if(!(aux = (t_mapel *)malloc(sizeof(t_mapel) * size)))
 		return (NULL);
 	i = 0;
@@ -37,7 +39,7 @@ static void			read_map(t_data *data)
 	char	*buff;
 
 	if (!(buff = (char *)malloc(sizeof(char) * (data->map_width + 1))))
-	    ft_error(NULL);
+		ft_error(NULL);
 	buff[data->map_width] = 0;
 	i = 0;
 	ft_seek(data->fd, data->map_width + 9);
@@ -70,16 +72,22 @@ static void			read_piece(t_data *data)
 	free(buff);
 }
 
-void				map_reader(t_data *data)
+int					map_reader(t_data *data)
 {
 	char	*buff;
 
-	get_next_line(data->fd, &buff);
-	data->player = ((buff[10] == 2) ? 1 : 0);
+	if (get_next_line(data->fd, &buff) < 0)
+		return (0);
+	if (!buff)
+		return (2);
+	data->player = ((buff[10] == '2') ? 1 : 0);
 	free(buff);
 	get_next_line(data->fd, &buff);
-	data->map_height = ft_atoi(buff + 8);
-	data->map_width = ft_atoi(buff + 8 + ft_ndigits(data->map_height));
+//	if (!data->vez)
+//	{
+		data->map_height = ft_atoi(buff + 8);
+		data->map_width = ft_atoi(buff + 8 + ft_ndigits(data->map_height));
+//	}
 	free(buff);
 	if (!(data->map = ini_mapel(data->map_width, data->map_height)))
 		ft_error(NULL);
@@ -109,4 +117,6 @@ void				map_reader(t_data *data)
 		}
 		i++;
 	}
+	data->vez = 1;
+	return (1);
 }

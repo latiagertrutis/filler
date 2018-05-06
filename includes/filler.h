@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 11:55:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/04 17:35:32 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/07 00:07:14 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ typedef struct		s_data
 	int				player : 1;
 	t_mapel			*map;
 	char			*piece;
+	int				vez;
 }					t_data;
 
 void		ft_seek(int fd, int cuant);
-void		map_reader(t_data *data);
+int			map_reader(t_data *data);
 int			ft_ndigits(int n);
 void		update_map(t_data *data, int i, char *buff);
 void		update_piece(t_data *data, int i, char *buff);
@@ -46,5 +47,6 @@ int			ft_roundup(double d);
 int			put_piece(t_data *data);
 int			check_position(t_data *data, int i, int pp);
 int			piece_point(t_data *data);
+int		 	print_solution(t_data *data, int i, int pp);
 
 #endif

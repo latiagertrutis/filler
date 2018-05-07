@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 11:55:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/07 00:07:14 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/07 17:39:42 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct		s_data
 	int				player : 1;
 	t_mapel			*map;
 	char			*piece;
-	int				vez;
 }					t_data;
 
 void		ft_seek(int fd, int cuant);

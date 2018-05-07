@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/05/07 00:16:33 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/05/07 19:17:33 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,4 +97,4 @@ test: $(MAIN_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
 	gcc $(CFLAGS) $(TEST) $(MAIN_OBJ) -l$(LIBFT_ABREV) -L$(LIBFT_DIR)
 	rm datos.txt
 	touch datos.txt
-	resources/filler_vm -f resources/maps/map04 -p1 resources/players/carli.filler -p2 ./a.out
+	resources/filler_vm -f resources/maps/map00 -p1 resources/players/carli.filler -p2 ./a.out

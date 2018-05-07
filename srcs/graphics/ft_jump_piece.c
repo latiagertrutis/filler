@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 19:21:23 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/07 23:01:46 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/07 23:28:00 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	ft_jump_piece(void)
 	char	*line;
 	int		piece_dim[2];
 
-	ft_putchar('B');
 	a = get_next_line(STDIN_FILENO, &line);
 	if (a < 0)
 		ft_error(NULL);

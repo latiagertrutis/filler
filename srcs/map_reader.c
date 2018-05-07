@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 11:58:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/07 00:12:12 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/07 22:52:43 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static t_mapel		*ini_mapel(int map_width, int map_height)
 	int		size;
 
 	size = map_width * map_height;
-	write_test(ft_itoa(size));
-	write_test("\n");
 	if(!(aux = (t_mapel *)malloc(sizeof(t_mapel) * size)))
 		return (NULL);
 	i = 0;
@@ -38,15 +36,19 @@ static void			read_map(t_data *data)
 	int 	i;
 	char	*buff;
 
-	if (!(buff = (char *)malloc(sizeof(char) * (data->map_width + 1))))
-		ft_error(NULL);
-	buff[data->map_width] = 0;
+	get_next_line(data->fd, &buff);
+//		write_test("#\n");
+//		write_test(buff);
+//		write_test("\n#\n");
+	free(buff);
+//	if (!(buff = (char *)malloc(sizeof(char) * (data->map_width + 6))))
+//		ft_error(NULL);
+//	buff[data->map_width + 5] = 0;
 	i = 0;
-	ft_seek(data->fd, data->map_width + 9);
 	while (i < data->map_height)
 	{
-		read(data->fd, buff, data->map_width);
-		ft_seek(data->fd, 5);
+		get_next_line(data->fd, &buff);
+//		read(data->fd, buff, data->map_width + 5);
 		update_map(data, i, buff);
 		i++;
 	}
@@ -58,14 +60,14 @@ static void			read_piece(t_data *data)
 	int		i;
 	char	*buff;
 
-	if(!(buff = (char *)malloc(sizeof(char) * (data->piece_width + 1))))
-		ft_error(NULL);
-	buff[data->piece_width] = 0;
+//	if(!(buff = (char *)malloc(sizeof(char) * (data->piece_width + 2))))
+//		ft_error(NULL);
+//	buff[data->piece_width + 1] = 0;
 	i = 0;
 	while (i < data->piece_height)
 	{
-		read(data->fd, buff, data->piece_width);
-		ft_seek(data->fd, 1);
+		get_next_line(data->fd, &buff);
+//		read(data->fd, buff, data->piece_width + 1);
 		update_piece(data, i, buff);
 		i++;
 	}
@@ -80,43 +82,44 @@ int					map_reader(t_data *data)
 		return (0);
 	if (!buff)
 		return (2);
-	data->player = ((buff[10] == '2') ? 1 : 0);
-	free(buff);
-	get_next_line(data->fd, &buff);
-//	if (!data->vez)
-//	{
+	if (!data->map_width || !data->map_height)
+	{
 		data->map_height = ft_atoi(buff + 8);
 		data->map_width = ft_atoi(buff + 8 + ft_ndigits(data->map_height));
-//	}
+		if (!(data->map = ini_mapel(data->map_width, data->map_height)))
+			ft_error(NULL);
+	}
+//		write_test("#\n");
+//		write_test(buff);
+//		write_test("\n#\n");
 	free(buff);
-	if (!(data->map = ini_mapel(data->map_width, data->map_height)))
-		ft_error(NULL);
 	read_map(data);
 	get_next_line(data->fd, &buff);
-	data->piece_height = ft_atoi(buff + 2);
-	data->piece_width = ft_atoi(buff + 2 + ft_ndigits(data->piece_height));
+		write_test(buff);
+		write_test("\n");
+	data->piece_height = ft_atoi(buff + 6);
+	data->piece_width = ft_atoi(buff + 6 + ft_ndigits(data->piece_height));
 	free(buff);
 	if (!(data->piece = (char *)ft_memalloc(sizeof(char) *
 		ft_roundup((double)(data->piece_width * data->piece_height) / 8.0))))
 		ft_error(NULL);
+	write_test("&");
+	write_test(ft_itoa(data->piece_height));
+	write_test(", ");
+	write_test(ft_itoa(data->piece_width));
+	write_test("&\n");
 	read_piece(data);
 	int i = 0;
-	int j = 0;
-	while (i < ft_roundup((double)(data->piece_width * data->piece_height) / 8.0))
+	write_test("\n");
+	while (i < (data->piece_width * data->piece_height))
 	{
-		j = 0;
-		while (j < 8)
-		{
-			if (!((j) % data->piece_width))
-				write_test("\n");
-			if (data->piece[i] & (0x80 >> j))
-				write_test("*");
-			else
-				write_test(".");
-			j++;
-		}
+		if (data->piece[i / 8] & (0x80 >> (i % 8)))
+			write_test("*");
+		else
+			write_test(".");
+		if ((i % data->piece_width) == (data->piece_width - 1))
+			write_test("\n");
 		i++;
 	}
-	data->vez = 1;
 	return (1);
 }

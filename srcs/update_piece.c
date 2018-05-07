@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 20:43:35 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/04 16:26:11 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/07 22:33:39 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	put_element(t_data *data, int i, int j)
 {
 	int		aux;
 
-	aux = (i * j) / 8;
+	aux = ((i * data->piece_width) + j) / 8;
 	write_test(ft_itoa(aux));
 	data->piece[aux] = data->piece[aux] | (0x80 >> (((i * data->piece_width) + j) % 8));
 }

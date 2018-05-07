@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/06 23:14:00 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/07 16:50:07 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ void	ft_initialice(t_params **params)
 	char		*line;
 	int			flag;
 	int			i;
-	ft_seek(0, 49 * 5); // saltar cabezera de mapa
+	
+	ft_seek(0, 49 * 5);
 	i = 0;
 	*params = (t_params *)ft_memalloc(sizeof(t_params));
 	(*params)->players = (char **)ft_memalloc(sizeof(char *) * 2);
-	while ((flag = get_next_line(STDIN_FILENO , &line)) > 0)
+	while ((flag = get_next_line(STDIN_FILENO ,&line)) > 0)
 	{
 		if (flag < 0)
 			ft_error(NULL);

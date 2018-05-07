@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/06 23:27:11 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/07 22:31:10 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ static int		keys(int code, void *mlx)
 	return (0);
 }
 
-/*static int		loop(void *mlx)
+static int		loop(void *mlx)
 {
-	int piece;
-
-	ft_search_piece((t_mlx *)mlx);
-	ft_place_piece((t_mlx *)mlx);
+	int piece_pos[2];
+	
+	ft_search_piece((t_mlx *)mlx, piece_pos);	
+	ft_printf("pieza en %i - %i\n", piece_pos[0], piece_pos[1]);
+//	ft_place_piece((t_mlx *)mlx);
 	
 	return (0);
-	}*/
+	}
 
 	void			set_bricks(t_mlx *mlx)
 {
@@ -94,49 +95,14 @@ int				main(void)
 	if (!(mlx->win = mlx_new_window(mlx->ptr, RESOLUTION_X, RESOLUTION_Y, "FILLER")))
 		ft_error(NULL);
 	par = mlx->params;
-	//par->square[1]++;
-	//par->square[0]++;
 	if (!(mlx->img = mlx_new_image(mlx->ptr, par->dim[1] * par->square[1] + 1, par->dim[0] * par->square[0] + 1)))
 		ft_error(NULL);
-	ft_printf("filas %i columnas %i\n", par->dim[0], par->dim[1]);
-	ft_printf("square mide %f x %f\n", par->square[0], par->square[1]);
 	marco(mlx);
 	set_bricks(mlx);
 	ft_print_map(mlx);
-	mlx_put_image_to_window(mlx->ptr, mlx->win, (mlx->bricks)[0],MARGEN_X + 1, MARGEN_Y + 1);
-	mlx_put_image_to_window(mlx->ptr, mlx->win, (mlx->bricks)[0],MARGEN_X + 1 + mlx->params->square[1], MARGEN_Y + 1);
-	mlx_put_image_to_window(mlx->ptr, mlx->win, (mlx->bricks)[0],MARGEN_X + 1 + mlx->params->square[1] * (mlx->params->dim[1] - 1), MARGEN_Y + 1);
-	mlx_put_image_to_window(mlx->ptr, mlx->win, (mlx->bricks)[0],MARGEN_X + 1, MARGEN_Y + 1 + mlx->params->square[0]);
-	mlx_put_image_to_window(mlx->ptr, mlx->win, (mlx->bricks)[1],MARGEN_X + 1, MARGEN_Y + 1 + mlx->params->square[0] * (mlx->params->dim[0] - 1));
-	mlx_put_image_to_window(mlx->ptr, mlx->win, (mlx->bricks)[0],MARGEN_X + 1 + mlx->params->square[1], MARGEN_Y + 1 + mlx->params->square[0] * (mlx->params->dim[0] - 1));
-	mlx_put_image_to_window(mlx->ptr, mlx->win, (mlx->bricks)[1],MARGEN_X + 1 + mlx->params->square[1] * 5, MARGEN_Y + 1 + mlx->params->square[0] * (5));
-	mlx_put_image_to_window(mlx->ptr, mlx->win, (mlx->bricks)[1],MARGEN_X + 1 + mlx->params->square[1] * (mlx->params->dim[1] - 1), MARGEN_Y + 1 + mlx->params->square[0] * (mlx->params->dim[0] - 1));
 	mlx_key_hook(mlx->win, keys, mlx);
-//	mlx_loop_hook(mlx->ptr, loop, mlx);
+	mlx_loop_hook(mlx->ptr, loop, mlx);
 	mlx_loop(mlx->ptr);
 	return (0);
 }
 
-/*int		main(void)
-{
-	char	*line;
-	int		dim[2];
-	int		row;
-
-	
-	** saltar numeracion de columnas
-	
-	if (dim[0] < 1000)
-		ft_seek(0, dim[1] + ft_ndigits(dim[0]) + (dim[0] < 100 ? 3 : 2));
-	else
-		ft_seek(0, dim[1] + 5);
-	
-	
-	
-	** Imprimir mapa
-	
-	row = 0;
-	
-
-	return (0);
-}*/

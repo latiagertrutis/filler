@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/05/08 22:23:05 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/05/08 23:47:39 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ MAIN_FUNCS = ft_seek.c \
 			 put_piece.c \
 			 check_position.c \
 			 piece_point.c \
-			 print_solution.c
+			 print_solution.c \
+			 cord_piece_to_map.c
 
 GRAPHIC_FUNCS = main_graphic.c \
 				ft_print_map.c \
@@ -105,4 +106,4 @@ test: $(MAIN_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
 	gcc $(CFLAGS) $(TEST) $(MAIN_OBJ) -l$(LIBFT_ABREV) -L$(LIBFT_DIR)
 	rm datos.txt
 	touch datos.txt
-	resources/filler_vm -f resources/maps/map02 -p1 resources/players/carli.filler -p2 ./a.out
+	resources/filler_vm -f resources/maps/map00 -p1 resources/players/carli.filler -p2 ./a.out

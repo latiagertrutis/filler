@@ -1,48 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_piece.c                                        :+:      :+:    :+:   */
+/*   choose_point.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/04 16:59:58 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/08 18:56:15 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/05/08 18:29:24 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/05/08 18:55:38 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-int		put_piece(t_data *data)
+static void	search_ini_point(t_data *data)
 {
-	int		mp; //punto del mapa
-	int		pp; //punto de la pieza
+	int i;
 
-	mp = 0;
-
-	pp = piece_point(data);
+	i = 0;
 	if (data->player)
 	{
-		while (mp < (data->map_width * data->map_height))
+		while (i < (data->map_width * data->map_height))
 		{
-			if (data->map[mp].is_x)
+			if (data->map[i].is_x)
 			{
-				if (check_position(data, mp, pp))
-					return(print_solution(data, mp, pp));
+				data->last_piece_point = i;
+				return ;
 			}
-			mp++;
+			i++;
 		}
 	}
 	else
 	{
-		while (mp < (data->map_width * data->map_height))
+		while (i < (data->map_width * data->map_height))
 		{
-			if (data->map[mp].is_o)
+			if (data->map[i].is_o)
 			{
-				if (check_position(data, mp, pp))
-					return(print_solution(data, mp, pp));
+				data->last_piece_point = i;
+				return ;
 			}
-			mp++;
 		}
+		i++;
 	}
-	return (0);
+}
+
+void		choose_point(t_data *data, int *mp, int *pp)
+{
+	if (!data->last_piece)
+		search_ini_point(data);
+
 }

@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/05/08 22:55:24 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/05/08 23:27:52 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ GRAPHIC_FUNCS = main_graphic.c \
 				ft_place_image.c \
 				ft_place_starts.c \
 				ft_jump_piece.c \
-				ft_search_piece.c
+				ft_search_piece.c \
+				ft_place_piece.c
 
 OBJ_DIR = objects/
 LIBFT_DIR = libft/

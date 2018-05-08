@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/07 22:31:10 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/07 23:40:10 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,16 @@ static int		keys(int code, void *mlx)
 
 static int		loop(void *mlx)
 {
-	int piece_pos[2];
-	
-	ft_search_piece((t_mlx *)mlx, piece_pos);	
-	ft_printf("pieza en %i - %i\n", piece_pos[0], piece_pos[1]);
-//	ft_place_piece((t_mlx *)mlx);
-	
-	return (0);
+	int		piece_pos[2];
+	char	player;
+
+	if (ft_search_piece((t_mlx *)mlx, piece_pos, &player))
+	{
+		ft_printf("jugador %c\n", player);
+		ft_place_piece((t_mlx *)mlx, piece_pos, player);
 	}
+	return (0);
+}
 
 	void			set_bricks(t_mlx *mlx)
 {

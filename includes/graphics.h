@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/07 20:09:39 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/07 23:38:17 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_print_map(t_mlx *mlx);
 char	*ft_get_addrs(void *img, int sizeline);
 void	ft_place_image(t_mlx *mlx, int img_dim[2]);
 void	ft_place_starts(t_mlx *mlx);
-void	ft_search_piece(t_mlx *mlx, int piece_pos[2]);
+int		ft_search_piece(t_mlx *mlx, int piece_pos[2], char *player);
 void	ft_jump_piece(void);
+void	ft_place_piece(t_mlx *mlx, int piece_pos[2], char player);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 07:51:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/07 21:48:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/08 22:09:41 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ void			ft_print_map(t_mlx *mlx)
 	}
 	ft_place_image(mlx, img_dim);
 	ft_place_starts(mlx);
-	ft_jump_piece();
+	ft_jump_piece(mlx);
 }

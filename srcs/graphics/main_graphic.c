@@ -6,13 +6,11 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/07 23:40:10 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/08 22:33:58 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-
-
 
 static int		keys(int code, void *mlx)
 {
@@ -23,13 +21,27 @@ static int		keys(int code, void *mlx)
 
 static int		loop(void *mlx)
 {
-	int		piece_pos[2];
-	char	player;
-
-	if (ft_search_piece((t_mlx *)mlx, piece_pos, &player))
+	int			piece_pos[2];
+	char		player;
+	static int	end = 1;
+	static int	start = 0;
+	
+	if (end)
 	{
-		ft_printf("jugador %c\n", player);
-		ft_place_piece((t_mlx *)mlx, piece_pos, player);
+		if (!start)
+		{
+			if (!(ft_search_piece((t_mlx *)mlx, piece_pos, &player)))
+				ft_error("Y los jugadores?\n");
+			ft_place_piece((t_mlx *)mlx, piece_pos, 'O');
+			ft_next_piece(mlx);
+			
+			start = 1;
+		}
+		else if ((end = ft_search_piece((t_mlx *)mlx, piece_pos, &player)))
+		{
+			ft_place_piece((t_mlx *)mlx, piece_pos, player);
+			ft_next_piece(mlx);
+		}
 	}
 	return (0);
 }

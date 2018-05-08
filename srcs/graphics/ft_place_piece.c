@@ -5,26 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/07 23:10:32 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/07 23:21:39 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/05/08 20:21:00 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/05/08 23:37:57 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void		ft_place_piece(t_mlx *mlx, int piece_pos[2], char player)
+void	ft_place_piece(t_mlx *mlx, int piece_pos[2], char player)
 {
-	int		pos_x;
-	int		pos_y;
-	void	*brick;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < (mlx->params->piece_dim[0] * mlx->params->piece_dim[1]))
+	{
+		if (mlx->params->piece[i / 8] & (0x80 >> (i % 8)))
+		{
+			ft_place_brick(mlx, i / mlx->params->piece_dim[1] + piece_pos[0], (i % mlx->params->piece_dim[1])
+				+ piece_pos[1], player);
+		}
+		i++;
+		
+	}
 	
-	pos_x = MARGEN_X + mlx->params->img_pos[0] + 1 + mlx->params->square[1] * piece_pos[1];
-	pos_y = MARGEN_Y + mlx->params->img_pos[1] + 1 + mlx->params->square[0] * piece_pos[0];
-	if (player == 'O')
-		brick = (mlx->bricks)[0];
-	else if (player == 'X')
-		brick = (mlx->bricks)[1];
-	else
-		ft_error("Ese jugador no existe primo\n");
-		mlx_put_image_to_window(mlx->ptr, mlx->win, brick, pos_x, pos_y);
 }

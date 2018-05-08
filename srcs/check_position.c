@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 17:23:15 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/07 21:49:34 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/08 22:15:08 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	check_limits(t_data *data, int i, int pp)
 static int	check_overlap(t_data *data, int i, int pp, int j)
 {
 	int pos;
-	int j_file;
+/*	int j_file;
 	int pp_file;
 	int j_col;
 	int pp_col;
@@ -46,7 +46,8 @@ static int	check_overlap(t_data *data, int i, int pp, int j)
 	pp_file = (pp / data->piece_width);
 	j_col = j % data->piece_width;
 	pp_col = pp % data->piece_width;
-	pos = i + ((j_file - pp_file) * data->map_width) + (j_col - pp_col);
+	pos = i + ((j_file - pp_file) * data->map_width) + (j_col - pp_col);*/
+	pos = cord_piece_to_map(data->piece_width, data->map_width, i, pp, j);
 	if (data->map[pos].is_x || data->map[pos].is_o)
 		return (1);
 	return (0);
@@ -61,7 +62,7 @@ int			check_position(t_data *data, int i, int pp)
 	j = pp + 1;
 	while (j < (data->piece_width * data->piece_height))
 	{
-		if (data->piece[j / 8] & 0x80 >> (j % 8))
+		if (data->piece[j / 8] & (0x80 >> (j % 8)))
 		{
 			if (check_overlap(data, i, pp, j))
 				return (0);
@@ -71,7 +72,7 @@ int			check_position(t_data *data, int i, int pp)
 	j = pp - 1;
 	while (j >= 0)
 	{
-		if (data->piece[j / 8] & 0x80 >> (j % 8))
+		if (data->piece[j / 8] & (0x80 >> (j % 8)))
 		{
 			if (check_overlap(data, i, pp, j))
 				return(0);

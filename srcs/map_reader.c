@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 11:58:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/07 22:52:43 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/08 22:56:27 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static void			read_piece(t_data *data)
 	while (i < data->piece_height)
 	{
 		get_next_line(data->fd, &buff);
+		write_test(buff);
+		write_test("\n");
 //		read(data->fd, buff, data->piece_width + 1);
 		update_piece(data, i, buff);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:36:39 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/07 18:44:27 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/08 20:44:58 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int 			main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	int		ret;
-	t_data	data = {0, 0, 0, 0, 0, 0, NULL, NULL};
+	t_data	data = {0, 0, 0, 0, 0, 0, -1, 0, 0, 0, NULL, NULL, NULL};
 	if (ini_player(&data))
 		return(0);
 	while ((ret = map_reader(&data)))

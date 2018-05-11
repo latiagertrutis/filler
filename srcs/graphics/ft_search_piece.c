@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 18:28:55 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/08 23:33:46 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/11 16:34:00 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,10 @@ int				ft_search_piece(t_mlx *mlx, int piece_pos[2], char *player)
 		ft_error(NULL);
 	else if (!a)
 		return (0);
-//	ft_putstr(line);
 	if (*line == '<')
 	{
 		take_pos_player(piece_pos, player, line);
 		ft_strdel(&line);
-//		if (ft_jump_piece(mlx))
-//		{
-//			jump_map(mlx->params->dim);
-//			ft_jump_piece(mlx);
-//		}
 		return (1);
 	}
 	ft_strdel(&line);

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/07 16:50:07 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/11 19:40:29 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 static char		*take_name(char *line)
 {
+	char *name;
+	
 	line[ft_strlen(line) - 1] = 0;
-	return (ft_strrchr(line, '/'));
+	name = ft_strdup(ft_strrchr(line, '/') + 1);
+	name[ft_strlen(name) - 1] = 0;
+	return (name);
 }
 
 static void		take_dim(char *line, int dim[2], int square[2])

@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_place_piece.c                                   :+:      :+:    :+:   */
+/*   ft_info.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/08 20:21:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/08 23:37:57 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/05/11 19:22:00 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/05/11 19:42:42 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	ft_place_piece(t_mlx *mlx, int piece_pos[2], char player)
+void		ft_info(t_mlx *mlx)
 {
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (i < (mlx->params->piece_dim[0] * mlx->params->piece_dim[1]))
-	{
-		if (mlx->params->piece[i / 8] & (0x80 >> (i % 8)))
-		{
-			ft_place_brick(mlx, i / mlx->params->piece_dim[1] + piece_pos[0], (i % mlx->params->piece_dim[1])
-				+ piece_pos[1], player);
-		}
-		i++;
-		
-	}
-	
+	mlx_string_put(mlx->ptr, mlx->win, 50, RESOLUTION_Y - MARGEN_Y - 50, 0xFF0000, mlx->params->players[0]);
+	mlx_string_put(mlx->ptr, mlx->win, RESOLUTION_X - MARGEN_X + 50 , RESOLUTION_Y - MARGEN_Y - 50, 0x00FF00, mlx->params->players[1]);
 }

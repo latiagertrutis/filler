@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 07:51:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/08 22:09:41 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/11 19:09:53 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,52 @@ static void		line(int *addrs, int point, int end, int vertical)
 		addrs[point + (j++ * vertical)] = LINE_COLOR;
 }
 
-/*
-**La imagen mide 1 pixel mas de lo logico es decir (columnas * lado cuadrado
-**+ 1) x (filas * lado cuadrado + 1)
-**para asi meter el campo de col*l_cuad x fil * l_cuad y que los ladrillos
-**encagen
-**quizas seria recomendable que midiese 2 pixeles mas para asi centrar el
-**campo en la imagen y esta en la pantalla
-**hay 2 valores que manejar el tamanyo real de la imagen que tiene una fila y
-**una columna mas de pixeles
-**y el tamanyo del campo que es el logico columnas por lado y filas por lado
-**(es decir 1 menos que el real)
-*/
+static char		*read_map(char **line, int dim[2], int row)
+{
+	int	read_cuant;
+	int	a;
+
+	if (row < 1000)
+		read_cuant = dim[1] + 3 + 1 + 1;
+	else
+		read_cuant = dim[1] + ft_ndigits(row) + 1 + 1;
+	*line = ft_strnew(read_cuant);
+	if ((a = read(0, *line, read_cuant)) < 0)
+		ft_error(NULL);
+	if (!a)
+		ft_error("There is nothing to read :/");
+	(*line)[read_cuant - 1] = 0;
+	return ((*line) + (row < 1000 ? 4 : ft_ndigits(row) + 1));
+}
+
+static void			place_starts(t_mlx *mlx)
+{
+	int		starts;
+	char	*line;
+	int		row;
+	char	*tmp[2];
+
+	ft_seek(STDIN_FILENO, mlx->params->dim[1] + 5);
+	starts = 2;
+	row = -1;
+	while (++row < mlx->params->dim[0])
+	{
+		tmp[0] = read_map(&line, mlx->params->dim, row);
+		if ((tmp[1] = ft_strchr(tmp[0], 'X')))
+		{
+			ft_place_brick(mlx, row, tmp[1] - tmp[0], 'X');
+			starts--;
+		}
+		else if ((tmp[1] = ft_strchr(tmp[0], 'O')))
+		{
+			ft_place_brick(mlx, row, tmp[1] - tmp[0], 'O');
+			starts--;
+		}
+		ft_strdel(&line);
+	}
+	if (starts < 0 || starts)
+		ft_error("This map is not very well writen");
+}
 
 void			ft_print_map(t_mlx *mlx)
 {
@@ -58,6 +92,6 @@ void			ft_print_map(t_mlx *mlx)
 		line(addrs, point, img_dim[1], img_dim[0] + 1);
 	}
 	ft_place_image(mlx, img_dim);
-	ft_place_starts(mlx);
+	place_starts(mlx);
 	ft_jump_piece(mlx);
 }

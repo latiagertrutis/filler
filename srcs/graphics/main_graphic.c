@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/12 15:24:26 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/12 23:34:10 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,16 @@ static int		loop(void *mlx)
 
 	if (end >= 0)
 	{
-		ft_search_piece((t_mlx *)mlx, piece_pos, &player);
+		ft_search_piece((t_mlx *)mlx, &player);
+//			ft_putchar('(');
 		if (!(end = ft_jump_piece(mlx)))
 		{
-//			ft_place_piece((t_mlx *)mlx, piece_pos, 0);
-			ft_place_piece((t_mlx *)mlx, piece_pos, player);
+//			ft_putchar(')');
+			ft_place_piece((t_mlx *)mlx, player);
 			ft_jump_map(((t_mlx *)mlx)->params->dim);
+//			ft_putchar('A');
 			ft_jump_piece(mlx);
+//				ft_putchar('C');
 		}
 		else if (end < 0)
 			mlx_string_put(((t_mlx *)mlx)->ptr, ((t_mlx *)mlx)->win, RESOLUTION_X / 2 - 30,
@@ -75,7 +78,7 @@ int				main(void)
 	// dim[1] son las columnas scuare 1 es el lado horizontal 
 	mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx));
 	mlx->ptr = mlx_init();
-	ft_initialice(&(mlx->params));
+	ft_initialice(mlx);
 //	ft_printf("un jugador es %s y el otro %s\n", mlx->params->players[0], mlx->params->players[1]);
 	if (!(mlx->win = mlx_new_window(mlx->ptr, RESOLUTION_X, RESOLUTION_Y, "FILLER")))
 		ft_error(NULL);
@@ -83,11 +86,10 @@ int				main(void)
 	if (!(mlx->img = mlx_new_image(mlx->ptr, par->dim[1] * par->square[1] + 1, par->dim[0] * par->square[0] + 1)))
 		ft_error(NULL);
 	set_bricks(mlx);
-	ft_print_map(mlx);
+	ft_print_map(mlx);	
 	ft_info(mlx);
 	mlx_key_hook(mlx->win, keys, mlx);
 	mlx_loop_hook(mlx->ptr, loop, mlx);
 	mlx_loop(mlx->ptr);
 	return (0);
 }
-

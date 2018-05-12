@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 20:43:35 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/12 15:24:16 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/12 23:32:30 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	put_element(t_mlx *mlx, int i, int j, int piece_dim[2])
 	int		aux;
 
 	aux = ((i * piece_dim[1]) + j) / 8;
-	mlx->params->piece[aux] = mlx->params->piece[aux] |
+	mlx->pieces[0]->piece[aux] = mlx->pieces[0]->piece[aux] |
 		(0x80 >> (((i * piece_dim[1]) + j) % 8));
 }
 
@@ -29,16 +29,17 @@ void		ft_get_piece(t_mlx *mlx, int piece_dim[2])
 	int		i;
 	
 	i = 0;
-//	ft_printf("pieza de dimensioens %i y %i\n", piece_dim[0], piece_dim[1]);
 	while (i < piece_dim[0])
 	{
+//	ft_printf("pieza de dimensioens %i y %i\n", piece_dim[0], piece_dim[1]);
 		line = ft_strnew(piece_dim[1] + 1);
 		j = 0;
 		if ((flag = read(STDIN_FILENO, line, piece_dim[1] + 1)) < 0)
 			ft_error(NULL);
 		if (!flag)
 			ft_error("Where is the piece?\n");
-			line[piece_dim[1]] = 0;
+		line[piece_dim[1]] = 0;
+//		ft_printf("LA PIEZA ES @%s@\n",line);
 			//		ft_printf("fila %i pieza <%s>\n", i , line);
 		while (j < piece_dim[1])
 		{

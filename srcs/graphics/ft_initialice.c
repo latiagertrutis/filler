@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/12 14:27:12 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/12 21:29:24 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,21 @@ static void		take_dim(char *line, int dim[2], int square[2])
 	square[1] = (RESOLUTION_X - MARGEN_X * 2) / dim[1];
 }
 
-void			ft_initialice(t_params **params)
+void			ft_initialice(t_mlx *mlx)
 {
 	char		*line;
 	int			flag;
 	int			i;
+	t_params	*par;
 	
 	ft_seek(0, 49 * 5);
 	i = 0;
-	*params = (t_params *)ft_memalloc(sizeof(t_params));
-	(*params)->players = (char **)ft_memalloc(sizeof(char *) * 2);
+	mlx->params = (t_params *)ft_memalloc(sizeof(t_params));
+	mlx->params->players = (char **)ft_memalloc(sizeof(char *) * 2);
+	mlx->pieces = (t_piece **)ft_memalloc(sizeof(t_piece *) * 2);
+	(mlx->pieces)[0] = (t_piece *)ft_memalloc(sizeof(t_piece));
+	(mlx->pieces)[1] = (t_piece *)ft_memalloc(sizeof(t_piece));
+	par = mlx->params;
 	while ((flag = get_next_line(STDIN_FILENO ,&line)) > 0)
 	{
 		if (flag < 0)
@@ -47,10 +52,10 @@ void			ft_initialice(t_params **params)
 		else if (!flag)
 			ft_error("Your Filler doesn't work very well");
 		if (line[0] == '$')
-			(*params)->players[i++] = take_name(line);
+			par->players[i++] = take_name(line);
 		else if (line[0] == 'P')
 		{
-			take_dim(line, (*params)->dim, (*params)->square);
+			take_dim(line, par->dim, par->square);
 			ft_strdel(&line);
 			break ;
 		}

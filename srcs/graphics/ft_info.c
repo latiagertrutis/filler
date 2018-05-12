@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_seek.c                                          :+:      :+:    :+:   */
+/*   ft_info.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/28 13:09:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/08 18:59:49 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/05/11 19:22:00 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/05/11 19:42:42 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/filler.h"
+#include "filler.h"
 
-void	ft_seek(int fd, int cuant)
+void		ft_info(t_mlx *mlx)
 {
-	char *buff;
-	int	flag;
-	int realcuant;
-
-	realcuant = cuant;
-	if (!(buff = (char *)ft_memalloc(sizeof(char) * cuant)))
-		ft_error(NULL);
-	while (cuant)
-	{
-		if ((flag = read(fd, buff, cuant)) < 0)
-			ft_error(NULL);
-		else if (!flag)
-			return ;
-		buff[cuant] = 0;
-		ft_bzero(buff, realcuant);
-		cuant -= flag;
-	}
-	free(buff);
+	mlx_string_put(mlx->ptr, mlx->win, 50, RESOLUTION_Y - MARGEN_Y - 50, 0xFF0000, mlx->params->players[0]);
+	mlx_string_put(mlx->ptr, mlx->win, RESOLUTION_X - MARGEN_X + 50 , RESOLUTION_Y - MARGEN_Y - 50, 0x00FF00, mlx->params->players[1]);
 }

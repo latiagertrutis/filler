@@ -6,13 +6,11 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/07 23:40:10 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/11 19:35:23 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-
-
 
 static int		keys(int code, void *mlx)
 {
@@ -23,13 +21,22 @@ static int		keys(int code, void *mlx)
 
 static int		loop(void *mlx)
 {
-	int		piece_pos[2];
-	char	player;
-
-	if (ft_search_piece((t_mlx *)mlx, piece_pos, &player))
+	int			piece_pos[2];
+	char		player;
+	static int	end = 1;
+	
+	if (end >= 0)
 	{
-		ft_printf("jugador %c\n", player);
-		ft_place_piece((t_mlx *)mlx, piece_pos, player);
+		ft_search_piece((t_mlx *)mlx, piece_pos, &player);
+		if (!(end = ft_jump_piece(mlx)))
+		{
+			ft_place_piece((t_mlx *)mlx, piece_pos, player);
+			ft_jump_map(((t_mlx *)mlx)->params->dim);
+			ft_jump_piece(mlx);
+		}
+		else if (end < 0)
+			mlx_string_put(((t_mlx *)mlx)->ptr, ((t_mlx *)mlx)->win, RESOLUTION_X / 2 - 30,
+					RESOLUTION_Y / 2, 0x000000, "FINISH");
 	}
 	return (0);
 }
@@ -48,40 +55,8 @@ static int		loop(void *mlx)
 		addrs[i++] = 0xFF0000;
 	addrs = (int *)ft_get_addrs((mlx->bricks)[1], (int)mlx->params->square[1] - 1);
 	i = 0;
-while (i < (int)(mlx->params->square[1] - 1) * (int)(mlx->params->square[0] - 1))
+	while (i < (int)(mlx->params->square[1] - 1) * (int)(mlx->params->square[0] - 1))
 		addrs[i++] = 0x00FF00;
-}
-
-void	marco(t_mlx *mlx)
-{
-	int *addrs;
-	void *img;
-	int i;
-	int techo;
-	int start;
-	
-	i = 0;
-	techo = RESOLUTION_X - MARGEN_X * 2 + 2;
-	img = mlx_new_image(mlx->ptr, RESOLUTION_X, RESOLUTION_Y);
-	addrs = (int *)ft_get_addrs(img, RESOLUTION_X);
-	start = RESOLUTION_X * (MARGEN_Y-1) + MARGEN_X - 1;
-	while (i < techo)
-		addrs[start + i++] = 0x0000FF;
-	i = 0;
-	techo = RESOLUTION_Y - MARGEN_Y * 2 + 2;
-	while (i < techo)
-		addrs[start + (i++ * RESOLUTION_X)] = 0x0000FF;
-	i = 0;
-	start = start + RESOLUTION_X - MARGEN_X * 2 + 1;
-	while (i < techo)
-		addrs[start + (i++ * RESOLUTION_X)] = 0x0000FF;
-	start = (RESOLUTION_X * (MARGEN_Y-1) + MARGEN_X - 1) + RESOLUTION_X * (RESOLUTION_Y - MARGEN_Y * 2 + 1);
-	i = 0;
-	techo = RESOLUTION_X - MARGEN_X * 2 + 2;
-	while (i < techo)
-		addrs[start + i++] = 0x0000FF;
-	mlx_put_image_to_window(mlx->ptr, mlx->win, img, 0, 0);
-	return ;
 }
 
 int				main(void)
@@ -94,14 +69,15 @@ int				main(void)
 	mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx));
 	mlx->ptr = mlx_init();
 	ft_initialice(&(mlx->params));
+	ft_printf("un jugador es %s y el otro %s\n", mlx->params->players[0], mlx->params->players[1]);
 	if (!(mlx->win = mlx_new_window(mlx->ptr, RESOLUTION_X, RESOLUTION_Y, "FILLER")))
 		ft_error(NULL);
 	par = mlx->params;
 	if (!(mlx->img = mlx_new_image(mlx->ptr, par->dim[1] * par->square[1] + 1, par->dim[0] * par->square[0] + 1)))
 		ft_error(NULL);
-	marco(mlx);
 	set_bricks(mlx);
 	ft_print_map(mlx);
+	ft_info(mlx);
 	mlx_key_hook(mlx->win, keys, mlx);
 	mlx_loop_hook(mlx->ptr, loop, mlx);
 	mlx_loop(mlx->ptr);

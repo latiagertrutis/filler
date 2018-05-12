@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/05/08 23:27:52 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/05/12 14:53:59 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ MAIN_FUNCS = ft_seek.c \
 			 check_position.c \
 			 piece_point.c \
 			 print_solution.c \
-			 cord_piece_to_map.c
+			 cord_piece_to_map.c \
+			 aproach_strat.c
 
 GRAPHIC_FUNCS = main_graphic.c \
 				ft_print_map.c \

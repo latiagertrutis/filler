@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 18:29:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/08 18:55:38 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/12 14:36:21 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	search_ini_point(t_data *data)
 		{
 			if (data->map[i].is_x)
 			{
-				data->last_piece_point = i;
+				data->last_piece_mp = i;
 				return ;
 			}
 			i++;
@@ -35,7 +35,7 @@ static void	search_ini_point(t_data *data)
 		{
 			if (data->map[i].is_o)
 			{
-				data->last_piece_point = i;
+				data->last_piece_mp = i;
 				return ;
 			}
 		}

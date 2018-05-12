@@ -6,13 +6,13 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 17:23:15 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/08 22:15:08 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:04:17 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-static int	check_limits(t_data *data, int i, int pp)
+static int	check_limits(t_data *data, int mp, int pp)
 {
 	int piece_file;
 	int map_file;
@@ -20,9 +20,9 @@ static int	check_limits(t_data *data, int i, int pp)
 	int	map_col;
 
 	piece_file = pp / data->piece_width;
-	map_file = i / data->map_width;
+	map_file = mp / data->map_width;
 	piece_col = pp % data->piece_width;
-	map_col = i % data->map_width;
+	map_col = mp % data->map_width;
 	if ((map_file - piece_file) < 0)
 		return (1);
 	else if (map_file + (data->piece_height - piece_file - 1) >= data->map_height)
@@ -53,18 +53,18 @@ static int	check_overlap(t_data *data, int i, int pp, int j)
 	return (0);
 }
 
-int			check_position(t_data *data, int i, int pp)
+int			check_position(t_data *data, int mp, int pp)
 {
 	int j;
 
-	if (check_limits(data, i, pp))
+	if (check_limits(data, mp, pp))
 		return (0);
 	j = pp + 1;
 	while (j < (data->piece_width * data->piece_height))
 	{
 		if (data->piece[j / 8] & (0x80 >> (j % 8)))
 		{
-			if (check_overlap(data, i, pp, j))
+			if (check_overlap(data, mp, pp, j))
 				return (0);
 		}
 		j++;
@@ -74,10 +74,11 @@ int			check_position(t_data *data, int i, int pp)
 	{
 		if (data->piece[j / 8] & (0x80 >> (j % 8)))
 		{
-			if (check_overlap(data, i, pp, j))
+			if (check_overlap(data, mp, pp, j))
 				return(0);
 		}
 		j--;
 	}
 	return (1);
+
 }

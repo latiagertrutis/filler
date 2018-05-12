@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/11 19:40:29 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/12 14:27:12 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		take_dim(char *line, int dim[2], int square[2])
 	square[1] = (RESOLUTION_X - MARGEN_X * 2) / dim[1];
 }
 
-void	ft_initialice(t_params **params)
+void			ft_initialice(t_params **params)
 {
 	char		*line;
 	int			flag;

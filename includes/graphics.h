@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/11 19:27:45 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:17:19 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct	s_params
 	char		**players;
 	int			square[2];
 	int			img_pos[2];
-	char		*piece;
+	char		**piece;
 	int			piece_dim[2];
 }				t_params;
 

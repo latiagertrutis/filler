@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 20:43:35 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/08 23:09:20 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:24:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		ft_get_piece(t_mlx *mlx, int piece_dim[2])
 	int		flag;
 	char	*line;
 	int		i;
-
+	
 	i = 0;
 //	ft_printf("pieza de dimensioens %i y %i\n", piece_dim[0], piece_dim[1]);
 	while (i < piece_dim[0])

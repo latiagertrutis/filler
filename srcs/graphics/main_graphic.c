@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/11 19:35:23 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:24:26 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ static int		loop(void *mlx)
 	int			piece_pos[2];
 	char		player;
 	static int	end = 1;
-	
+
 	if (end >= 0)
 	{
 		ft_search_piece((t_mlx *)mlx, piece_pos, &player);
 		if (!(end = ft_jump_piece(mlx)))
 		{
+//			ft_place_piece((t_mlx *)mlx, piece_pos, 0);
 			ft_place_piece((t_mlx *)mlx, piece_pos, player);
 			ft_jump_map(((t_mlx *)mlx)->params->dim);
 			ft_jump_piece(mlx);
@@ -46,9 +47,10 @@ static int		loop(void *mlx)
 	int	*addrs;
 	int i;
 	
-	mlx->bricks = (void **)malloc(sizeof(void *) * 2);
+	mlx->bricks = (void **)malloc(sizeof(void *) * 3);
 	(mlx->bricks)[0] = mlx_new_image(mlx->ptr, (int)mlx->params->square[1] - 1, (int)mlx->params->square[0] - 1);
 	(mlx->bricks)[1] = mlx_new_image(mlx->ptr, (int)mlx->params->square[1] - 1, (int)mlx->params->square[0] - 1);
+	(mlx->bricks)[2] = mlx_new_image(mlx->ptr, (int)mlx->params->square[1] - 1, (int)mlx->params->square[0] - 1);
 	addrs = (int *)ft_get_addrs((mlx->bricks)[0], (int)mlx->params->square[1] - 1);
 	i = 0;
 	while (i < (int)(mlx->params->square[1] - 1) * (int)(mlx->params->square[0] - 1))
@@ -57,19 +59,24 @@ static int		loop(void *mlx)
 	i = 0;
 	while (i < (int)(mlx->params->square[1] - 1) * (int)(mlx->params->square[0] - 1))
 		addrs[i++] = 0x00FF00;
+	addrs = (int *)ft_get_addrs((mlx->bricks)[2], (int)mlx->params->square[1] - 1);
+	i = 0;
+	while (i < (int)(mlx->params->square[1] - 1) * (int)(mlx->params->square[0] - 1))
+		addrs[i++] = 0xFFFFFF;
 }
 
 int				main(void)
 {
-	t_mlx *mlx;
-	t_params *par;
-
+	t_mlx		*mlx;
+	t_params	*par;
+	int			mode;
+	
 	// dim[0] son las filas square 0 es el lado vertical
 	// dim[1] son las columnas scuare 1 es el lado horizontal 
 	mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx));
 	mlx->ptr = mlx_init();
 	ft_initialice(&(mlx->params));
-	ft_printf("un jugador es %s y el otro %s\n", mlx->params->players[0], mlx->params->players[1]);
+//	ft_printf("un jugador es %s y el otro %s\n", mlx->params->players[0], mlx->params->players[1]);
 	if (!(mlx->win = mlx_new_window(mlx->ptr, RESOLUTION_X, RESOLUTION_Y, "FILLER")))
 		ft_error(NULL);
 	par = mlx->params;

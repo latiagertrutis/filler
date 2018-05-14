@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/12 23:34:10 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/14 21:03:41 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,57 @@ static int		keys(int code, void *mlx)
 	return (0);
 }
 
+static int		size_array(t_piece *pieces)
+{
+	int a;
+
+	a = (pieces->piece_dim[0] * pieces->piece_dim[1]) / 8 +
+	        ((pieces->piece_dim[0] * pieces->piece_dim[1]) % 8 ? 1 : 0);
+//	ft_printf("a vale %i\n", a);
+	return (a);
+}
+
+static void copy_piece(t_mlx *mlx)
+{
+	mlx->pieces[1]->piece_dim[0] = mlx->pieces[0]->piece_dim[0];
+	mlx->pieces[1]->piece_dim[1] = mlx->pieces[0]->piece_dim[1];
+	mlx->pieces[1]->piece_pos[0] = mlx->pieces[0]->piece_pos[0];
+	mlx->pieces[1]->piece_pos[1] = mlx->pieces[0]->piece_pos[1];
+	mlx->pieces[1]->player = mlx->pieces[0]->player;
+	mlx->pieces[1]->piece = ft_strnew(size_array(mlx->pieces[1]));
+	ft_memcpy(mlx->pieces[1]->piece, mlx->pieces[0]->piece, size_array(mlx->pieces[1]));
+}
+
 static int		loop(void *mlx)
 {
-	int			piece_pos[2];
-	char		player;
 	static int	end = 1;
+	t_mlx		*mmlx;
 
+	mmlx = (t_mlx *)mlx;
 	if (end >= 0)
 	{
-		ft_search_piece((t_mlx *)mlx, &player);
-//			ft_putchar('(');
+		ft_search_piece(mmlx);
 		if (!(end = ft_jump_piece(mlx)))
 		{
-//			ft_putchar(')');
-			ft_place_piece((t_mlx *)mlx, player);
-			ft_jump_map(((t_mlx *)mlx)->params->dim);
-//			ft_putchar('A');
+			ft_place_piece(mmlx, 0, 0);
+			if (mmlx->pieces[1]->piece)
+				ft_place_piece(mmlx, 1, mmlx->pieces[1]->player);
+			copy_piece(mmlx);
+			ft_jump_map((mmlx)->params->dim);
 			ft_jump_piece(mlx);
-//				ft_putchar('C');
 		}
 		else if (end < 0)
-			mlx_string_put(((t_mlx *)mlx)->ptr, ((t_mlx *)mlx)->win, RESOLUTION_X / 2 - 30,
+		{
+			ft_place_piece(mmlx, 1, mmlx->pieces[1]->player);
+			mlx_string_put((mmlx)->ptr, (mmlx)->win, RESOLUTION_X / 2 - 30,
 					RESOLUTION_Y / 2, 0x000000, "FINISH");
+		}
+		else
+		{
+			if (mmlx->pieces[1]->piece)
+				ft_place_piece(mmlx, 1, mmlx->pieces[1]->player);
+			ft_strdel(&((mmlx)->pieces[1]->piece));
+		}
 	}
 	return (0);
 }

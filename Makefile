@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/05/12 15:18:09 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/05/14 18:05:34 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ GRAPHIC_FUNCS = main_graphic.c \
 				ft_search_piece.c \
 				ft_get_piece.c \
 				ft_next_piece.c \
-				ft_info.c
+				ft_info.c \
+				gnltest.c
 
 OBJ_DIR = objects/
 LIBFT_DIR = libft/

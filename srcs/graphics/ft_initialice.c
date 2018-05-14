@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/12 21:29:24 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/14 17:44:51 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void			ft_initialice(t_mlx *mlx)
 	mlx->pieces = (t_piece **)ft_memalloc(sizeof(t_piece *) * 2);
 	(mlx->pieces)[0] = (t_piece *)ft_memalloc(sizeof(t_piece));
 	(mlx->pieces)[1] = (t_piece *)ft_memalloc(sizeof(t_piece));
+	mlx->pieces[1]->piece = NULL;
 	par = mlx->params;
 	while ((flag = get_next_line(STDIN_FILENO ,&line)) > 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 18:38:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/13 21:47:12 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/14 21:59:23 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void		ft_place_brick(t_mlx *mlx, int row, int col, char player)
 	int		pos_y;
 	void	*brick;
 	
-	pos_x = MARGEN_X + mlx->params->img_pos[0] + 1 + mlx->params->square[1] * col;
-	pos_y = MARGEN_Y + mlx->params->img_pos[1] + 1 + mlx->params->square[0] * row;
+	pos_x = MARGEN_X + mlx->map->img_pos[0] + 1 + mlx->map->square[1] * col;
+	pos_y = MARGEN_Y + mlx->map->img_pos[1] + 1 + mlx->map->square[0] * row;
 	if (player == 'O')
 		brick = (mlx->bricks)[0];
 	else if (player == 'X')
@@ -44,8 +44,8 @@ void	ft_place_image(t_mlx *mlx, int img_dim[2])
 		dist_y++;
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, MARGEN_X + dist_x,
 							MARGEN_Y + dist_y);
-	mlx->params->img_pos[0] = dist_x;
-	mlx->params->img_pos[1] = dist_y;
+	mlx->map->img_pos[0] = dist_x;
+	mlx->map->img_pos[1] = dist_y;
 }
 
 void	ft_place_piece(t_mlx *mlx, int pieza, char player)
@@ -56,33 +56,15 @@ void	ft_place_piece(t_mlx *mlx, int pieza, char player)
 	
 	i = 0;
 	j = 0;
-//	ft_printf("En blanco la pieza de dimension [%i, %i] y en la posicion (%i, %i)\n En color la pieza de dimension [%i, %i] y en la posicion (%i, %i)\n", ((mlx->pieces)[0]->piece_dim)[0],((mlx->pieces)[0]->piece_dim)[1],mlx->pieces[0]->piece_pos[0],mlx->pieces[0]->piece_pos[1],mlx->pieces[1]->piece_dim[0],mlx->pieces[1]->piece_dim[1],mlx->pieces[1]->piece_pos[0],mlx->pieces[1]->piece_pos[1]);
-/* 	if (player) */
-/* 		ft_printf("PIEZA BLANCA\n"); */
-/* 	else */
-/* 		ft_printf("PIEZA COLOR\n"); */
-/* //	while (!read(1,buff,1)); */
-	while (i < (mlx->pieces[pieza]->piece_dim[0] * mlx->pieces[pieza]->piece_dim[1]))
+	while (i < (mlx->piece[pieza]->dim[0] * mlx->piece[pieza]->dim[1]))
 	{
-		if (mlx->pieces[pieza]->piece[i / 8] & (0x80 >> (i % 8)))
+		if (mlx->piece[pieza]->shape[i / 8] & (0x80 >> (i % 8)))
 		{
-			ft_place_brick(mlx, i / mlx->pieces[pieza]->piece_dim[1] + mlx->pieces[pieza]->piece_pos[0], (i % mlx->pieces[pieza]->piece_dim[1])
-					+ mlx->pieces[pieza]->piece_pos[1], player);
+			ft_place_brick(mlx, i / mlx->piece[pieza]->dim[1] +
+				mlx->piece[pieza]->pos[0], (i % mlx->piece[pieza]->dim[1])
+				+ mlx->piece[pieza]->pos[1], player);
 		}
 		i++;
 	}
-	/* if (!(mlx->pieces[1]->piece)) */
-	/* 	return ; */
-	/* i = 0; */
-	/* j = 0; */
-	/* while (i < (mlx->pieces[1]->piece_dim[0] * mlx->pieces[1]->piece_dim[1])) */
-	/* { */
-	/* 	if (mlx->pieces[1]->piece[i / 8] & (0x80 >> (i % 8))) */
-	/* 	{ */
-	/* 		ft_place_brick(mlx, i / mlx->pieces[1]->piece_dim[1] + mlx->pieces[1]->piece_pos[0], (i % mlx->pieces[1]->piece_dim[1]) */
-	/* 		+ mlx->pieces[1]->piece_pos[1], mlx->pieces[1]->player); */
-	/* 	} */
-	/* 	i++; */
-	/* } */
 }
 

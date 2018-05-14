@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/14 17:44:51 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/14 22:02:49 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static char		*take_name(char *line)
 	
 	line[ft_strlen(line) - 1] = 0;
 	name = ft_strdup(ft_strrchr(line, '/') + 1);
-	name[ft_strlen(name) - 1] = 0;
 	return (name);
 }
 
@@ -35,17 +34,15 @@ void			ft_initialice(t_mlx *mlx)
 	char		*line;
 	int			flag;
 	int			i;
-	t_params	*par;
 	
 	ft_seek(0, 49 * 5);
 	i = 0;
-	mlx->params = (t_params *)ft_memalloc(sizeof(t_params));
-	mlx->params->players = (char **)ft_memalloc(sizeof(char *) * 2);
-	mlx->pieces = (t_piece **)ft_memalloc(sizeof(t_piece *) * 2);
-	(mlx->pieces)[0] = (t_piece *)ft_memalloc(sizeof(t_piece));
-	(mlx->pieces)[1] = (t_piece *)ft_memalloc(sizeof(t_piece));
-	mlx->pieces[1]->piece = NULL;
-	par = mlx->params;
+	mlx->map = (t_map *)ft_memalloc(sizeof(t_map));
+	mlx->map->players = (char **)ft_memalloc(sizeof(char *) * 2);
+	mlx->piece = (t_piece **)ft_memalloc(sizeof(t_piece *) * 2);
+	(mlx->piece)[0] = (t_piece *)ft_memalloc(sizeof(t_piece));
+	(mlx->piece)[1] = (t_piece *)ft_memalloc(sizeof(t_piece));
+	mlx->piece[1]->shape = NULL;
 	while ((flag = get_next_line(STDIN_FILENO ,&line)) > 0)
 	{
 		if (flag < 0)
@@ -53,10 +50,10 @@ void			ft_initialice(t_mlx *mlx)
 		else if (!flag)
 			ft_error("Your Filler doesn't work very well");
 		if (line[0] == '$')
-			par->players[i++] = take_name(line);
+			mlx->map->players[i++] = take_name(line);
 		else if (line[0] == 'P')
 		{
-			take_dim(line, par->dim, par->square);
+			take_dim(line, mlx->map->dim, mlx->map->square);
 			ft_strdel(&line);
 			break ;
 		}

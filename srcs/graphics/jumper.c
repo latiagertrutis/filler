@@ -6,34 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 18:31:17 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/14 17:37:14 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/14 21:57:55 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-
-void	seek2(int fd, int cuant)
-{
-	char *buff;
-	int	flag;
-	int realcuant;
-
-	realcuant = cuant;
-	if (!(buff = (char *)ft_memalloc(sizeof(char) * cuant)))
-		ft_error(NULL);
-	while (cuant)
-	{
-		if ((flag = read(fd, buff, cuant)) < 0)
-			ft_error(NULL);
-		else if (!flag)
-			return ;
-		buff[cuant] = 0;
-//		ft_printf("@%s@",buff);
-		ft_bzero(buff, realcuant);
-		cuant -= flag;
-	}
-	free(buff);
-}
 
 void			ft_jump_map(int dim[2])
 {
@@ -42,17 +19,13 @@ void			ft_jump_map(int dim[2])
 	map = (dim[0] + 1) * (dim[1] + 5);
 	if (dim[0] > 1000)
 		map += dim[0] - 1000;
-	seek2(STDIN_FILENO, map);
+	ft_seek(STDIN_FILENO, map);
 }
 
-static int		size_array(t_piece *pieces)
+static int		size_piece(t_piece *piece)
 {
-	int a;
-
-	a = (pieces->piece_dim[0] * pieces->piece_dim[1]) / 8 +
-	        ((pieces->piece_dim[0] * pieces->piece_dim[1]) % 8 ? 1 : 0);
-//	ft_printf("a vale %i\n", a);
-	return (a);
+	return (piece->dim[0] * piece->dim[1]) / 8 +
+	        ((piece->dim[0] * piece->dim[1]) % 8 ? 1 : 0);
 }
 
 int				ft_jump_piece(t_mlx *mlx)
@@ -64,18 +37,16 @@ int				ft_jump_piece(t_mlx *mlx)
 	if (a < 0)
 		ft_error(NULL);
 	else if (!a)
-		ft_error("ERROR\n");
+		ft_error("ERROR no estan las dimensiones\n");
 	if (*(line + 1) == 'l')
-	{
 		return (0);
-	}
 	if (*line == '=')
 		return (-1);
-	mlx->pieces[0]->piece_dim[0] = ft_atoi(ft_strchr(line, ' ') + 1);
-	mlx->pieces[0]->piece_dim[1] = ft_atoi(ft_strrchr(line, ' ') + 1);
-	free(line);	
-	ft_strdel(&(mlx->pieces[0]->piece));
-	mlx->pieces[0]->piece = ft_strnew(size_array(mlx->pieces[0]));
-	ft_get_piece(mlx, mlx->pieces[0]->piece_dim);
+	mlx->piece[0]->dim[0] = ft_atoi(ft_strchr(line, ' ') + 1);
+	mlx->piece[0]->dim[1] = ft_atoi(ft_strrchr(line, ' ') + 1);
+	free(line);
+	ft_strdel(&(mlx->piece[0]->shape));
+	mlx->piece[0]->shape = ft_strnew(size_piece(mlx->piece[0]));
+	ft_get_piece(mlx, mlx->piece[0]->dim);
 	return (1);
 }

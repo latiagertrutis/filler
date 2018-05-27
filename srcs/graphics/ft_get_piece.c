@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 20:43:35 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/14 21:53:52 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/26 19:00:20 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		ft_get_piece(t_mlx *mlx, int piece_dim[2])
 	int		flag;
 	char	*line;
 	int		i;
-	
+
 	i = 0;
 	while (i < piece_dim[0])
 	{

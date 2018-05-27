@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/14 21:55:26 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/27 02:50:14 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_mlx
 	void		*win;
 	void		*img;
 	void		**bricks;
+	void		**info;
 	t_map		*map;
 	t_piece		**piece;
 }				t_mlx;
@@ -63,4 +64,5 @@ void	ft_place_brick(t_mlx *mlx, int row, int col, char player);
 void	ft_place_piece(t_mlx *mlx, int pieza, char player);
 void	ft_info(t_mlx *mlx);
 void	ft_copy_piece(t_mlx *mlx);
+void	ft_update_info(t_mlx *mlx, char player);
 #endif

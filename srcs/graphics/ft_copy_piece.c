@@ -6,17 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 21:11:39 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/14 22:01:00 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/26 19:23:23 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-
-static int	size_piece(t_piece *piece)
-{
-	return (piece->dim[0] * piece->dim[1]) / 8 +
-		((piece->dim[0] * piece->dim[1]) % 8 ? 1 : 0);
-}
 
 void		ft_copy_piece(t_mlx *mlx)
 {
@@ -28,5 +22,5 @@ void		ft_copy_piece(t_mlx *mlx)
 	ft_strdel(&(mlx->piece[1]->shape));
 	mlx->piece[1]->shape = ft_strnew(size_piece(mlx->piece[1]));
 	ft_memcpy(mlx->piece[1]->shape, mlx->piece[0]->shape,
-	          size_piece(mlx->piece[1]));
+				size_piece(mlx->piece[1]));
 }

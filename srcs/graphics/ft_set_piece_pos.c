@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 18:28:55 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/14 21:48:49 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/26 23:59:40 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void			ft_set_piece_pos(t_mlx *mlx)
 		mlx->piece[0]->player = *(ft_strchr(line, '(') + 1);
 		mlx->piece[0]->pos[0] = ft_atoi(ft_strchr(line, '[') + 1);
 		mlx->piece[0]->pos[1] = ft_atoi(ft_strrchr(line, ' ') + 1);
-		ft_strdel(&line);
 	}
-	ft_strdel(&line);
+	free(line);
 }

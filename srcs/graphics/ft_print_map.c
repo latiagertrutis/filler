@@ -6,13 +6,13 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 07:51:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/14 21:42:56 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/27 03:50:52 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static void		line(int *addrs, int point, int end, int vertical)
+static void			line(int *addrs, int point, int end, int vertical)
 {
 	int j;
 
@@ -21,7 +21,7 @@ static void		line(int *addrs, int point, int end, int vertical)
 		addrs[point + (j++ * vertical)] = LINE_COLOR;
 }
 
-static char		*read_map(char **line, int dim[2], int row)
+static char			*read_map(char **line, int dim[2], int row)
 {
 	int	read_cuant;
 	int	a;
@@ -68,7 +68,7 @@ static void			place_starts(t_mlx *mlx)
 		ft_error("ERROR searching starts\n");
 }
 
-void			ft_print_map(t_mlx *mlx)
+void				ft_print_map(t_mlx *mlx)
 {
 	int		*addrs;
 	int		i;

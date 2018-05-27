@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/27 03:52:03 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/27 19:11:22 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,13 @@ static void		take_dim(char *line, int dim[2], int square[2])
 {
 	dim[0] = ft_atoi(ft_strchr(line, ' ') + 1);
 	dim[1] = ft_atoi(ft_strrchr(line, ' ') + 1);
-	square[0] = (RESOLUTION_Y - MARGEN_Y * 2) / dim[0];
 	square[1] = (RESOLUTION_X - MARGEN_X * 2) / dim[1];
+	square[0] = square[1] * BRICK_HEIGHT / BRICK_LONG;
+	if (square[0] * dim[0] > RESOLUTION_Y - MARGEN_Y * 2)
+	{
+		square[0] = (RESOLUTION_Y - MARGEN_Y * 2) / dim[0];
+		square[1] = square[0] * BRICK_LONG / BRICK_HEIGHT;
+	}
 }
 
 static void		allocate_data(t_mlx *mlx)

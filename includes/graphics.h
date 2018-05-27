@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/27 02:50:14 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/27 21:57:03 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <mlx.h>
 #include <math.h>
 
+# define BRICK_LONG 2
+# define BRICK_HEIGHT 1
 # define MARGEN_X 300
 # define MARGEN_Y 100
 # define RESOLUTION_X 1920

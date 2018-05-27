@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/27 03:58:39 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/27 22:28:12 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,25 @@ void			set_bricks(t_mlx *mlx)
 	int	*addrs;
 	int i;
 
+	int x;
+	int y;
+	
+	ft_printf("suqare[0] = %i y square[1] = %i\n",mlx->map->square[1], mlx->map->square[0]);
+	
 	mlx->bricks = (void **)malloc(sizeof(void *) * 3);
-	(mlx->bricks)[0] = mlx_new_image(mlx->ptr, (int)mlx->map->square[1] - 1, (int)mlx->map->square[0] - 1);
-	(mlx->bricks)[1] = mlx_new_image(mlx->ptr, (int)mlx->map->square[1] - 1, (int)mlx->map->square[0] - 1);
+	/* (mlx->bricks)[0] = mlx_new_image(mlx->ptr, (int)mlx->map->square[1] - 1, (int)mlx->map->square[0] - 1); */
+	//(mlx->bricks)[1] = mlx_new_image(mlx->ptr, (int)mlx->map->square[1] - 1, (int)mlx->map->square[0] - 1);
+	(mlx->bricks)[0] = mlx_xpm_file_to_image(mlx->ptr, "LADRILLOB.xpm", &x,&y);
+	(mlx->bricks)[1] = mlx_xpm_file_to_image(mlx->ptr, "LADRILLOA1.xpm", &x,&y);
 	(mlx->bricks)[2] = mlx_new_image(mlx->ptr, (int)mlx->map->square[1] - 1, (int)mlx->map->square[0] - 1);
-	addrs = (int *)ft_get_addrs((mlx->bricks)[0], (int)mlx->map->square[1] - 1);
-	i = 0;
-	while (i < (int)(mlx->map->square[1] - 1) * (int)(mlx->map->square[0] - 1))
-		addrs[i++] = 0xFF0000;
-	addrs = (int *)ft_get_addrs((mlx->bricks)[1], (int)mlx->map->square[1] - 1);
-	i = 0;
-	while (i < (int)(mlx->map->square[1] - 1) * (int)(mlx->map->square[0] - 1))
-		addrs[i++] = 0x00FF00;
+	/* addrs = (int *)ft_get_addrs((mlx->bricks)[0], (int)mlx->map->square[1] - 1); */
+	/* i = 0; */
+	/* while (i < (int)(mlx->map->square[1] - 1) * (int)(mlx->map->square[0] - 1)) */
+	/* 	addrs[i++] = 0xFF0000; */
+	/* addrs = (int *)ft_get_addrs((mlx->bricks)[1], (int)mlx->map->square[1] - 1); */
+	/* i = 0; */
+	/* while (i < (int)(mlx->map->square[1] - 1) * (int)(mlx->map->square[0] - 1)) */
+	/* 	addrs[i++] = 0x00FF00; */
 	addrs = (int *)ft_get_addrs((mlx->bricks)[2], (int)mlx->map->square[1] - 1);
 	i = 0;
 	while (i < (int)(mlx->map->square[1] - 1) * (int)(mlx->map->square[0] - 1))

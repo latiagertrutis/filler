@@ -6,20 +6,11 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 07:51:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/28 02:54:57 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/28 17:49:40 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-
-static void			line(int *addrs, int point, int end, int vertical)
-{
-	int j;
-
-	j = 0;
-	while (j < end)
-		addrs[point + (j++ * vertical)] = LINE_COLOR;
-}
 
 static char			*read_map(char **line, int dim[2], int row)
 {
@@ -68,30 +59,48 @@ static void			place_starts(t_mlx *mlx)
 		ft_error("ERROR searching starts\n");
 }
 
-void				ft_print_map(t_mlx *mlx)
+static void			center_image(t_mlx *mlx)
 {
-	int		*addrs;
-	int		i;
-	int		img_dim[2];
-	int		point;
+	int dist_x;
+	int dist_y;
+	int	img_dim[2];
 
 	img_dim[0] = mlx->map->dim[1] * mlx->map->square[1];
 	img_dim[1] = mlx->map->dim[0] * mlx->map->square[0];
-	addrs = (int *)ft_get_addrs(mlx->img, mlx->map->dim[1] *
-			mlx->map->square[1]);
+	dist_x = 0;
+	dist_y = 0;
+	while (img_dim[0] + 1 + dist_x < RESOLUTION_X - MARGEN_X * 2 - dist_x)
+		dist_x++;
+	while (img_dim[1] + 1 + dist_y < RESOLUTION_Y - MARGEN_Y * 2 - dist_y)
+		dist_y++;
+	mlx->map->img_pos[0] = dist_x;
+	mlx->map->img_pos[1] = dist_y;
+}
+
+void				ft_print_map(t_mlx *mlx)
+{
+	void	*line;
+	int		i;
+
+	center_image(mlx);
+	line = mlx_new_image(mlx->ptr, mlx->map->dim[1] * mlx->map->square[1], 1);
 	i = 0;
 	while (i <= mlx->map->dim[0])
 	{
-		point = (img_dim[0] + 1) * i++ * mlx->map->square[0];
-		line(addrs, point, img_dim[0], 1);
+		mlx_put_image_to_window(mlx->ptr, mlx->win, line, MARGEN_X +
+				mlx->map->img_pos[0], MARGEN_Y + mlx->map->img_pos[1] +
+				mlx->map->square[0] * i++);
 	}
 	i = 0;
+	mlx_destroy_image(mlx->ptr, line);
+	line = mlx_new_image(mlx->ptr, 1, mlx->map->dim[0] * mlx->map->square[0]);
 	while (i <= mlx->map->dim[1])
 	{
-		point = i++ * mlx->map->square[1];
-		line(addrs, point, img_dim[1], img_dim[0] + 1);
+		mlx_put_image_to_window(mlx->ptr, mlx->win, line, MARGEN_X +
+				mlx->map->img_pos[0] + mlx->map->square[1] * i++, MARGEN_Y +
+				mlx->map->img_pos[1]);
 	}
-	ft_place_image(mlx, img_dim);
+	mlx_destroy_image(mlx->ptr, line);
 	place_starts(mlx);
 	ft_jump_piece(mlx);
 }

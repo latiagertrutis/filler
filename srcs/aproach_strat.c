@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 19:00:35 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/12 15:09:40 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/28 19:30:02 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,46 +19,68 @@ static int	check_enemy_points(t_data *data, int pos)
 	int aux_diff;
 
 	i = 0;
-	diff = data->map_width + data->map_height;
+	diff = data->map_width * data->map_height;
 	while (i < (data->map_width * data->map_height))
 	{
 		if (data->player ? data->map[i].is_o : data->map[i].is_x)
 		{
-			if ((aux_diff = ft_abs(i / data->map_width - pos / data->map_width) + ft_abs(i % data->map_width - pos % data->map_width)) < diff)
+			if ((aux_diff = (int)sqrt(pow(i / data->map_width - pos / data->map_width, 2) + pow(i % data->map_width - pos % data->map_width, 2))) < diff)
 				diff = aux_diff;
 		}
+		i++;
 	}
 	return (diff);
 }
 
 int			aproach_strat(t_data *data, int *mp, int *pp)
 {
-	int i;
+	int i, j, k;
 	int diff;
 	int aux_diff;
 	int	pos;
 
-	i = 0;
-	diff = -1;
-	while (i < (data->last_piece_width * data->last_piece_height))
+	diff = data->map_width * data->map_height;
+	k = 0;
+	while (k < (data->map_width * data->map_height))
 	{
-		pos = cord_piece_to_map(data->last_piece_width, data->map_width,
-								data->last_piece_mp, data->last_piece_pp, i);
-		if (data->player ? data->map[pos].is_x : data->map[pos].is_o)
+		i = 0;
+		if (data->player ? data->map[k].is_x : data->map[k].is_o)
 		{
-			if (diff < 0 || (aux_diff = check_enemy_points(data, pos)) < diff)
+			while (i < (data->piece_width * data->piece_height))
 			{
-				if (check_position(data, pos, i))
+				if (data->piece[i / 8] & (0x80 >> (i % 8)))
 				{
-					diff = aux_diff;
-					*mp = pos;
-					*pp = i;
+					j = 0;
+					while (j < (data->piece_width * data->piece_height))
+					{
+						if (data->piece[j / 8] & (0x80 >> (j % 8)))
+						{
+							pos = cord_piece_to_map(data->piece_width, data->map_width,
+							                        k, i, j);
+							if (data->player ? data->map[pos].is_x : data->map[pos].is_o)
+							{
+								if ((aux_diff = check_enemy_points(data, pos)) < diff)
+								{
+									write_test("pos: ");
+									write_test(ft_itoa(pos));
+									if (check_position(data, pos, i))
+									{
+										diff = aux_diff;
+										*mp = pos;
+										*pp = i;
+									}
+								}
+							}
+						}
+						j++;
+					}
 				}
+				i++;
 			}
 		}
-		i++;
+		k++;
 	}
-	if (diff < 0)
+	if (diff == data->map_width * data->map_height)
 		return (0);
 	return (1);
 }

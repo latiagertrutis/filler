@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/05/27 01:42:23 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/05/28 01:32:44 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ GRAPHIC_FUNCS = main_graphic.c \
 				ft_set_piece_pos.c \
 				ft_get_piece.c \
 				ft_info.c \
-				ft_update_info.c
+				ft_update_info.c \
+				ft_set_bricks.c
 
 OBJ_DIR = objects/
 LIBFT_DIR = libft/

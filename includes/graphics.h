@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/27 21:57:03 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/28 02:42:12 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct	s_mlx
 	t_piece		**piece;
 }				t_mlx;
 
+void	ft_set_bricks(t_mlx *mlx);
 void	ft_initialice(t_mlx *mlx);
 void	ft_print_map(t_mlx *mlx);
 char	*ft_get_addrs(void *img, int sizeline);

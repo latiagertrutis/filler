@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 18:38:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/27 22:17:50 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/28 02:55:39 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ft_place_brick(t_mlx *mlx, int row, int col, char player)
 	int		pos_y;
 	void	*brick;
 
-	pos_x = MARGEN_X + mlx->map->img_pos[0] /* + 1 */ + mlx->map->square[1] * col;
-	pos_y = MARGEN_Y + mlx->map->img_pos[1] /* + 1 */ + mlx->map->square[0] * row;
+	pos_x = MARGEN_X + mlx->map->img_pos[0] + mlx->map->square[1] * col;
+	pos_y = MARGEN_Y + mlx->map->img_pos[1] + mlx->map->square[0] * row;
 	if (player == 'O')
 		brick = (mlx->bricks)[0];
 	else if (player == 'X')

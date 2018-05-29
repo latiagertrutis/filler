@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:36:39 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/28 19:33:10 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/29 16:55:25 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int 			main(int argc, char **argv)
 		}
 //		if (ret == 2)
 //			continue ;
-		sleep (3);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 19:00:35 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/28 19:30:02 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/29 19:23:35 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_enemy_points(t_data *data, int pos)
 	return (diff);
 }
 
-int			aproach_strat(t_data *data, int *mp, int *pp)
+int			aproach_strat(t_data *data, int *mp, int *pp, t_quad quad)
 {
 	int i, j, k;
 	int diff;
@@ -40,8 +40,8 @@ int			aproach_strat(t_data *data, int *mp, int *pp)
 	int	pos;
 
 	diff = data->map_width * data->map_height;
-	k = 0;
-	while (k < (data->map_width * data->map_height))
+	k = quad.quad_start;
+	while (k < (quad.quad_width * quad.quad_height))
 	{
 		i = 0;
 		if (data->player ? data->map[k].is_x : data->map[k].is_o)
@@ -59,12 +59,12 @@ int			aproach_strat(t_data *data, int *mp, int *pp)
 							                        k, i, j);
 							if (data->player ? data->map[pos].is_x : data->map[pos].is_o)
 							{
-								if ((aux_diff = check_enemy_points(data, pos)) < diff)
+								if (check_position(data, pos, i))
 								{
-									write_test("pos: ");
-									write_test(ft_itoa(pos));
-									if (check_position(data, pos, i))
+									if ((aux_diff = check_enemy_points(data, pos)) < diff)
 									{
+										write_test("pos: ");
+										write_test(ft_itoa(pos));
 										diff = aux_diff;
 										*mp = pos;
 										*pp = i;
@@ -79,8 +79,10 @@ int			aproach_strat(t_data *data, int *mp, int *pp)
 			}
 		}
 		k++;
+		if ((k % data->map_width) >= quad.quad_width)
+			k = k + (data->map_width - quad.quad_width);
 	}
 	if (diff == data->map_width * data->map_height)
 		return (0);
-	return (1);
+	return (diff);
 }

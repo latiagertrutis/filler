@@ -1,5 +1,4 @@
-seed = 2500
-O: error on input
-./lcharvol.filler won
+seed = 5206
+./a.out won
 Score:
-38AGAINST38
+279AGAINST59

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 11:55:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/12 15:06:32 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/29 18:02:36 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct		s_mapel
 {
 	unsigned int	is_x : 1;
 	unsigned int	is_o : 1;
+	unsigned int	is_last : 1;
 }					t_mapel;
 
 typedef struct		s_data
@@ -41,6 +42,13 @@ typedef struct		s_data
 	char			*last_piece;
 }					t_data;
 
+typedef struct		s_quad
+{
+	int				quad_start;
+	int				quad_width;
+	int				quad_height;
+}					t_quad;
+
 void		ft_seek(int fd, int cuant);
 int			map_reader(t_data *data);
 int			ft_ndigits(int n);
@@ -53,6 +61,6 @@ int			check_position(t_data *data, int i, int pp);
 int			piece_point(t_data *data);
 int		 	print_solution(t_data *data, int i, int pp);
 int			cord_piece_to_map(int p_width, int m_width, int mp, int pp, int p);
-int			aproach_strat(t_data *data, int *mp, int *pp);
+int			aproach_strat(t_data *data, int *mp, int *pp, t_quad quad);
 
 #endif

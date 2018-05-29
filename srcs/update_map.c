@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:11:57 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/07 21:38:26 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/29 17:49:15 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	update_map(t_data *data, int i, char *buff)
 	aux = buff + 4;
 	while (j < data->map_width)
 	{
+		if (data->player && aux[j] == 'x')
+			data->map[i * data->map_width + j].is_last = -1;
+		else if (!data->player && aux[j] == 'o')
+			data->map[i * data->map_width + j].is_last = -1;
 		if (aux[j] == 'x' || aux[j] == 'X')
 			data->map[i * data->map_width + j].is_x = -1;
 		else if (aux[j] == 'o' || aux[j] == 'O')

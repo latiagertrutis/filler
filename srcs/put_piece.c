@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 16:59:58 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/30 17:18:42 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/30 19:23:55 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int				put_piece(t_data *data)
 
 	mp = 0;
 	pp = 0;
-	if (!data->last_piece)
+	if (!data->last_piece_width)
 		search_ini_point(data);
 	if (aproach_strat(data, &mp, &pp, search_quad(data)))
 	{

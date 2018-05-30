@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 17:23:15 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/12 15:04:17 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/30 18:43:56 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static int	check_limits(t_data *data, int mp, int pp)
 	map_col = mp % data->map_width;
 	if ((map_file - piece_file) < 0)
 		return (1);
-	else if (map_file + (data->piece_height - piece_file - 1) >= data->map_height)
+	else if (map_file + (data->piece_height - piece_file - 1)
+							>= data->map_height)
 		return (1);
 	else if ((map_col - piece_col) < 0)
 		return (1);
@@ -34,20 +35,26 @@ static int	check_limits(t_data *data, int mp, int pp)
 	return (0);
 }
 
+/*
+**  for better vision:
+**	int j_file;
+**	int pp_file;
+**	int j_col;
+**	int pp_col;
+**
+**	j_file = (j / data->piece_width);
+**	pp_file = (pp / data->piece_width);
+**	j_col = j % data->piece_width;
+**	pp_col = pp % data->piece_width;
+**	pos = i + ((j_file - pp_file) * data->map_width) + (j_col - pp_col);
+*/
+
 static int	check_overlap(t_data *data, int i, int pp, int j)
 {
 	int pos;
-/*	int j_file;
-	int pp_file;
-	int j_col;
-	int pp_col;
 
-	j_file = (j / data->piece_width);
-	pp_file = (pp / data->piece_width);
-	j_col = j % data->piece_width;
-	pp_col = pp % data->piece_width;
-	pos = i + ((j_file - pp_file) * data->map_width) + (j_col - pp_col);*/
-	pos = cord_piece_to_map(data->piece_width, data->map_width, i, pp, j);
+	pos = cord_piece_to_map(data->piece_width, data->map_width,
+							(t_piece_point){i, pp, j});
 	if (data->map[pos].is_x || data->map[pos].is_o)
 		return (1);
 	return (0);
@@ -75,10 +82,9 @@ int			check_position(t_data *data, int mp, int pp)
 		if (data->piece[j / 8] & (0x80 >> (j % 8)))
 		{
 			if (check_overlap(data, mp, pp, j))
-				return(0);
+				return (0);
 		}
 		j--;
 	}
 	return (1);
-
 }

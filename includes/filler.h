@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 11:55:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/29 18:02:36 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:43:10 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,18 @@ typedef struct		s_quad
 	int				quad_width;
 	int				quad_height;
 }					t_quad;
+
+typedef struct		s_aproach
+{
+	int				i;
+	int				j;
+	int				k;
+	int				mp;
+	int				pp;
+	int 			pos;
+	int				diff;
+	int				aux_diff;
+}					t_aproach;
 
 void		ft_seek(int fd, int cuant);
 int			map_reader(t_data *data);

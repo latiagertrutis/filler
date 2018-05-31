@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/27 03:58:39 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/28 16:27:14 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,62 +45,39 @@ static int		keys(int code, void *mlx)
 static int		loop(void *mlx)
 {
 	static int	end = 1;
-	t_mlx		*mmlx;
 
-	mmlx = (t_mlx *)mlx;
 	if (end >= 0)
 	{
-		ft_set_piece_pos(mmlx);
+		ft_set_piece_pos(mlx);
 		if (!(end = ft_jump_piece(mlx)))
 		{
-			ft_place_piece(mmlx, 0, 0);
-			if (mmlx->piece[1]->shape)
-				ft_place_piece(mmlx, 1, mmlx->piece[1]->player);
-			ft_copy_piece(mmlx);
-			ft_jump_map((mmlx)->map->dim);
+			ft_place_piece(mlx, 0, 0);
+			if (((t_mlx *)mlx)->piece[1]->shape)
+				ft_place_piece(mlx, 1, ((t_mlx *)mlx)->piece[1]->player);
+			ft_copy_piece(mlx);
+			ft_jump_map(((t_mlx *)mlx)->map->dim);
 			ft_jump_piece(mlx);
 		}
 		else if (end < 0)
 		{
-			ft_place_piece(mmlx, -1, mmlx->piece[1]->player);
-			mlx_string_put((mmlx)->ptr, (mmlx)->win, RESOLUTION_X / 2 - 30,
-					RESOLUTION_Y / 2, 0x000000, "FINISH");
+			ft_place_piece(mlx, -1, ((t_mlx *)mlx)->piece[1]->player);
+			mlx_string_put(((t_mlx *)mlx)->ptr, ((t_mlx *)mlx)->win,
+					RESOLUTION_X / 2 - 30, RESOLUTION_Y / 2, 0, "FINISH");
 		}
 		else
-			ft_place_piece(mmlx, 1, mmlx->piece[1]->player);
+			ft_place_piece(mlx, 1, ((t_mlx *)mlx)->piece[1]->player);
 	}
 	return (0);
-}
-
-void			set_bricks(t_mlx *mlx)
-{
-	int	*addrs;
-	int i;
-
-	mlx->bricks = (void **)malloc(sizeof(void *) * 3);
-	(mlx->bricks)[0] = mlx_new_image(mlx->ptr, (int)mlx->map->square[1] - 1, (int)mlx->map->square[0] - 1);
-	(mlx->bricks)[1] = mlx_new_image(mlx->ptr, (int)mlx->map->square[1] - 1, (int)mlx->map->square[0] - 1);
-	(mlx->bricks)[2] = mlx_new_image(mlx->ptr, (int)mlx->map->square[1] - 1, (int)mlx->map->square[0] - 1);
-	addrs = (int *)ft_get_addrs((mlx->bricks)[0], (int)mlx->map->square[1] - 1);
-	i = 0;
-	while (i < (int)(mlx->map->square[1] - 1) * (int)(mlx->map->square[0] - 1))
-		addrs[i++] = 0xFF0000;
-	addrs = (int *)ft_get_addrs((mlx->bricks)[1], (int)mlx->map->square[1] - 1);
-	i = 0;
-	while (i < (int)(mlx->map->square[1] - 1) * (int)(mlx->map->square[0] - 1))
-		addrs[i++] = 0x00FF00;
-	addrs = (int *)ft_get_addrs((mlx->bricks)[2], (int)mlx->map->square[1] - 1);
-	i = 0;
-	while (i < (int)(mlx->map->square[1] - 1) * (int)(mlx->map->square[0] - 1))
-		addrs[i++] = 0xFFFFFF;
 }
 
 int				main(void)
 {
 	t_mlx		*mlx;
 	t_map		*map;
-	int			mode;
-
+	void		*titulo;
+	int			x;
+	int			y;
+	
 	mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx));
 	mlx->ptr = mlx_init();
 	ft_initialice(mlx);
@@ -111,7 +88,11 @@ int				main(void)
 	if (!(mlx->img = mlx_new_image(mlx->ptr, map->dim[1] * map->square[1] + 1,
 			map->dim[0] * map->square[0] + 1)))
 		ft_error(NULL);
-	set_bricks(mlx);
+	titulo = mlx_xpm_file_to_image(mlx->ptr, "TITULO.xpm", &x, &y);
+	mlx->wallpaper = mlx_xpm_file_to_image(mlx->ptr, "FONDOFILLER2.xpm", &x, &y);
+	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->wallpaper, 0, 0);
+	mlx_put_image_to_window(mlx->ptr, mlx->win, titulo, RESOLUTION_X / 2 - 141, 0);
+	ft_set_bricks(mlx);
 	ft_print_map(mlx);
 	ft_info(mlx);
 	mlx_key_hook(mlx->win, keys, mlx);

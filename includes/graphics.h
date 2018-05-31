@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/27 02:50:14 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/28 17:46:05 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <mlx.h>
 #include <math.h>
 
+# define BRICK_LONG 2
+# define BRICK_HEIGHT 1
 # define MARGEN_X 300
 # define MARGEN_Y 100
 # define RESOLUTION_X 1920
@@ -46,16 +48,17 @@ typedef struct	s_mlx
 	void		*ptr;
 	void		*win;
 	void		*img;
+	void		*wallpaper;
 	void		**bricks;
 	void		**info;
 	t_map		*map;
 	t_piece		**piece;
 }				t_mlx;
 
+void	ft_set_bricks(t_mlx *mlx);
 void	ft_initialice(t_mlx *mlx);
 void	ft_print_map(t_mlx *mlx);
 char	*ft_get_addrs(void *img, int sizeline);
-void	ft_place_image(t_mlx *mlx, int img_dim[2]);
 void	ft_set_piece_pos(t_mlx *mlx);
 int		ft_jump_piece(t_mlx *mlx);
 void	ft_jump_map(int dim[2]);

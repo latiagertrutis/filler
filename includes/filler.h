@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 11:55:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/12 15:06:32 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/30 19:23:27 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct		s_mapel
 {
 	unsigned int	is_x : 1;
 	unsigned int	is_o : 1;
+	unsigned int	is_last : 1;
 }					t_mapel;
 
 typedef struct		s_data
@@ -38,8 +39,33 @@ typedef struct		s_data
 	int				last_piece_height;
 	t_mapel			*map;
 	char			*piece;
-	char			*last_piece;
 }					t_data;
+
+typedef struct		s_quad
+{
+	int				quad_start;
+	int				quad_width;
+	int				quad_height;
+}					t_quad;
+
+typedef struct		s_aproach
+{
+	int				i;
+	int				j;
+	int				k;
+	int				mp;
+	int				pp;
+	int 			pos;
+	int				diff;
+	int				aux_diff;
+}					t_aproach;
+
+typedef struct		s_piece_point
+{
+	int				mp;
+	int				pp;
+	int				p;
+}					t_piece_point;
 
 void		ft_seek(int fd, int cuant);
 int			map_reader(t_data *data);
@@ -52,7 +78,7 @@ int			put_piece(t_data *data);
 int			check_position(t_data *data, int i, int pp);
 int			piece_point(t_data *data);
 int		 	print_solution(t_data *data, int i, int pp);
-int			cord_piece_to_map(int p_width, int m_width, int mp, int pp, int p);
-int			aproach_strat(t_data *data, int *mp, int *pp);
+int			cord_piece_to_map(int p_width, int m_width, t_piece_point piec);
+int			aproach_strat(t_data *data, int *mp, int *pp, t_quad quad);
 
 #endif

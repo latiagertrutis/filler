@@ -6,83 +6,87 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 16:59:58 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/12 15:09:40 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/05/30 19:23:55 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-static void	search_ini_point(t_data *data)
+static void		search_ini_point(t_data *data)
 {
 	int i;
 
 	i = 0;
-	if (data->player)
+	data->last_piece_width = 1;
+	data->last_piece_height = 1;
+	while (i < (data->map_width * data->map_height))
 	{
-		while (i < (data->map_width * data->map_height))
+		if (data->player ? data->map[i].is_x : data->map[i].is_o)
 		{
-			if (data->map[i].is_x)
-			{
-				data->last_piece_mp = i;
-				return ;
-			}
-			i++;
-		}
-	}
-	else
-	{
-		while (i < (data->map_width * data->map_height))
-		{
-			if (data->map[i].is_o)
-			{
-				data->last_piece_mp = i;
-				return ;
-			}
+			data->last_piece_mp = i;
+			return ;
 		}
 		i++;
 	}
 }
 
-int		put_piece(t_data *data)
+static t_quad	search_quad(t_data *data)
 {
-	int		mp; //punto del mapa
-	int		pp; //punto de la pieza
+	int		i;
+	t_quad	q;
+
+	i = -1;
+	q = (t_quad){0, data->map_width, data->map_height};
+	while ((++i) < (data->map_width * data->map_height))
+	{
+		if (data->map[i].is_last)
+		{
+			if ((i % data->map_width) < (data->map_width / 2))
+				q.quad_width = data->map_width / 2;
+			else
+				q.quad_start = data->map_width / 2;
+			if ((i / data->map_height) < (data->map_height / 2))
+				q.quad_height = data->map_height / 2;
+			else
+			{
+				q.quad_height = data->map_height / 2;
+				q.quad_start = q.quad_start +
+				((data->map_height / 2) * data->map_width);
+			}
+			break ;
+		}
+	}
+	return (q);
+}
+
+int				put_piece(t_data *data)
+{
+	int		mp;
+	int		pp;
 
 	mp = 0;
-
-	if (!data->last_piece)
+	pp = 0;
+	if (!data->last_piece_width)
 		search_ini_point(data);
-	if (aproach_strat(data, &mp, &pp))
+	if (aproach_strat(data, &mp, &pp, search_quad(data)))
 	{
 		data->last_piece_mp = mp;
 		data->last_piece_pp = pp;
 		return (print_solution(data, mp, pp));
 	}
-	return (0);
-/*	pp = piece_point(data);
-	if (data->player)
+	else if (aproach_strat(data, &mp, &pp,
+				(t_quad){0, data->map_width, data->map_height}))
 	{
-	while (mp < (data->map_width * data->map_height))
-	{
-	if (data->map[mp].is_x)
-	{
-	if (check_position(data, mp, pp))
-	return(print_solution(data, mp, pp));
-	}
-	mp++;
-	}
+		data->last_piece_mp = mp;
+		data->last_piece_pp = pp;
+		return (print_solution(data, mp, pp));
 	}
 	else
-	{
-	while (mp < (data->map_width * data->map_height))
-	{
-	if (data->map[mp].is_o)
-	{
-	if (check_position(data, mp, pp))
-	return(print_solution(data, mp, pp));
-	}
-	mp++;
-	}
-	}
-	return (0);*/
+		ft_printf("0 0\n");
+	return (0);
 }
+
+/*
+** mp = map point
+** pp = piece point
+*/

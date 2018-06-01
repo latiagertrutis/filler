@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 19:00:35 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/30 19:49:47 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/01 18:05:53 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ static int		check_enemy_points(t_data *data, int pos)
 	{
 		if (data->player ? data->map[i].is_o : data->map[i].is_x)
 		{
-			if ((aux_diff = (int)sqrt(pow(i / data->map_width -
-				pos / data->map_width, 2) + pow(i % data->map_width -
-				pos % data->map_width, 2))) < diff)
+//			if ((aux_diff = (int)sqrt(pow(i / data->map_width -
+//				pos / data->map_width, 2) + pow(i % data->map_width -
+//				pos % data->map_width, 2))) < diff)
+			if ((aux_diff = abs(i / data->map_width - pos / data->map_width) + abs(i % data->map_width - pos % data->map_width)) <= diff)
 				diff = aux_diff;
 		}
 		i++;
@@ -42,20 +43,13 @@ static void		check_piece_pos(t_data *data, t_aproach *apr)
 		{
 			apr->pos = cord_piece_to_map(data->piece_width, data->map_width,
 									(t_piece_point){apr->k, apr->i, apr->j});
-			if (data->player ? data->map[apr->pos].is_x :
-				data->map[apr->pos].is_o)
-			{
-				if (check_position(data, apr->pos, apr->i))
-				{
 					if ((apr->aux_diff =
 						check_enemy_points(data, apr->pos)) < apr->diff)
 					{
 						apr->diff = apr->aux_diff;
-						apr->mp = apr->pos;
+						apr->mp = apr->k;
 						apr->pp = apr->i;
 					}
-				}
-			}
 		}
 		apr->j++;
 	}
@@ -72,8 +66,11 @@ static void		check_map(t_data *data, t_quad quad, t_aproach *apr)
 			{
 				if (data->piece[apr->i / 8] & (0x80 >> (apr->i % 8)))
 				{
-					apr->j = 0;
-					check_piece_pos(data, apr);
+					if (check_position(data, apr->k, apr->i))
+					{
+						apr->j = 0;
+						check_piece_pos(data, apr);
+					}
 				}
 				apr->i++;
 			}

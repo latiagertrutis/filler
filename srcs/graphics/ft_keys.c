@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 19:01:10 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/01 19:33:25 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/01 20:25:58 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,50 @@ static void		destroy_all(t_mlx *mlx)
 static void		hide_pause(t_mlx *mlx)
 {
 	void	*img;
+	int		*addrs_info;
+	int		*addrs_wall;
+	int		i;
+	int		j;
 
-	img = mlx_new_image(mlx->ptr, 10, 30);
+	img = mlx_new_image(mlx->ptr, 50, 30);
+	addrs_info = (int *)ft_get_addrs(img, 50);
+	addrs_wall = (int *)ft_get_addrs(mlx->wallpaper, RESOLUTION_X);
+	i = 0;
+	j = RESOLUTION_X * (MARGEN_Y + 100) + RESOLUTION_X / 2 - 30;
+	while (i < 1500)
+	{
+		addrs_info[i++] = addrs_wall[j];
+		if (!(i % (50)) && i)
+			j += RESOLUTION_X - 50 + 1;
+		else
+			j++;
+	}
+	mlx_put_image_to_window(mlx->ptr, mlx->win, img,
+			RESOLUTION_X / 2 - 30, MARGEN_Y + 100);
+	mlx_destroy_image(mlx->ptr, img);
+	return ;
 }
 
-int		ft_keys(int code, void *mlx)
+int				ft_keys(int code, void *mlx)
 {
 	t_mlx	*mmlx;
 	char	key[1];
 	int		flag;
-	
+
 	if (code == ESC)
 	{
-		//	destroy_all(mlx);
+		destroy_all(mlx);
 		exit(0);
 	}
 	else if (code == SPACE)
 	{
 		mmlx = (t_mlx *)mlx;
-		mlx_string_put(mmlx->ptr, mmlx->win, RESOLUTION_X / 2 - 30, MARGEN_Y + 100, 0, "PAUSE");
+		mlx_string_put(mmlx->ptr, mmlx->win, RESOLUTION_X / 2 - 30,
+				MARGEN_Y + 100, 0, "PAUSE");
 		if (mmlx->pause)
 		{
 			mmlx->pause = 0;
-			//hide_pause(mlx);
+			hide_pause(mlx);
 		}
 		else
 			mmlx->pause = 1;

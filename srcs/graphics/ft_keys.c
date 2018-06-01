@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 19:01:10 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/01 19:02:18 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/01 19:33:25 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ static void		destroy_all(t_mlx *mlx)
 	mlx_destroy_window(mlx->ptr, mlx->win);
 }
 
+static void		hide_pause(t_mlx *mlx)
+{
+	void	*img;
+
+	img = mlx_new_image(mlx->ptr, 10, 30);
+}
+
 int		ft_keys(int code, void *mlx)
 {
 	t_mlx	*mmlx;
@@ -50,7 +57,7 @@ int		ft_keys(int code, void *mlx)
 		if (mmlx->pause)
 		{
 			mmlx->pause = 0;
-			
+			//hide_pause(mlx);
 		}
 		else
 			mmlx->pause = 1;

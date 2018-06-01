@@ -6,54 +6,11 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/01 18:11:50 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/01 19:01:47 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-
-static void		destroy_all(t_mlx *mlx)
-{
-	mlx_destroy_image(mlx->ptr, mlx->img);
-	mlx_destroy_image(mlx->ptr, mlx->bricks[0]);
-	mlx_destroy_image(mlx->ptr, mlx->bricks[1]);
-	free(mlx->bricks);
-	mlx_destroy_image(mlx->ptr, mlx->info[0]);
-	mlx_destroy_image(mlx->ptr, mlx->info[1]);
-	free(mlx->info);
-	free(mlx->map->players[0]);
-	free(mlx->map->players[1]);
-	free(mlx->map->players);
-	free(mlx->piece[0]->shape);
-	free(mlx->piece[1]->shape);
-	free(mlx->piece[0]);
-	free(mlx->piece[1]);
-	free(mlx->piece);
-	mlx_destroy_window(mlx->ptr, mlx->win);
-}
-
-static int		keys(int code, void *mlx)
-{
-	t_mlx	*mmlx;
-	char	key[1];
-	int		flag;
-	
-	if (code == ESC)
-	{
-		destroy_all(mlx);
-		exit(1);
-	}
-	else if (code == SPACE)
-	{
-		mmlx = (t_mlx *)mlx;
-		mlx_string_put(mmlx->ptr, mmlx->win, RESOLUTION_X / 2 - 30, RESOLUTION_Y / 2, 0, "PAUSE");
-		if (mmlx->pause)
-			mmlx->pause = 0;
-		else
-			mmlx->pause = 1;
-	}
-	return (0);
-}
 
 static int		loop(void *mlx)
 {
@@ -105,7 +62,7 @@ int				main(void)
 	ft_set_bricks(mlx);
 	ft_print_map(mlx);
 	ft_info(mlx);
-	mlx_key_hook(mlx->win, keys, mlx);
+	mlx_key_hook(mlx->win, ft_keys, mlx);
 	mlx_loop_hook(mlx->ptr, loop, mlx);
 	mlx_loop(mlx->ptr);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 01:31:17 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/01 05:33:54 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/01 18:47:04 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void			ft_set_bricks(t_mlx *mlx)
 
 	mlx->bricks = (void **)ft_memalloc(sizeof(void *) * 3);
 	if (mlx->map->dim[0] == 15 && mlx->map->dim[1] == 17)
-		set_image_as_brick(mlx, "ladrillo_azul_1.xpm", "ladrillo_rosa_1.xpm");
+		set_image_as_brick(mlx, "BRICK3B_15x17.xpm", "BRICK3A_15x17.xpm");
 	else if (mlx->map->dim[0] == 24 && mlx->map->dim[1] == 40)
 		set_image_as_brick(mlx, "BRICKB_24x40.xpm", "BRICKA_24x40.xpm");
 	else if (mlx->map->dim[0] == 100 && mlx->map->dim[1] == 99)
-		set_image_as_brick(mlx, "ladrillo_azul_1_100x99.xpm", "ladrillo_rosa_1_100x99.xpm");
+		set_image_as_brick(mlx, "BRICK3B_100x99.xpm", "BRICK3A_100x99.xpm");
 	else
 		set_color_as_brick(mlx, 0xFF0000, 0x00FF00);
 	(mlx->bricks)[2] = mlx_new_image(mlx->ptr, mlx->map->square[1] + 1,

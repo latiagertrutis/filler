@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/01 05:07:32 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/01 19:04:02 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ void	ft_place_piece(t_mlx *mlx, int pieza, char player);
 void	ft_info(t_mlx *mlx);
 void	ft_copy_piece(t_mlx *mlx);
 void	ft_update_info(t_mlx *mlx, char player);
+int		ft_keys(int code, void *mlx);
 #endif

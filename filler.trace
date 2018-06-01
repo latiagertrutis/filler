@@ -1,5 +1,4 @@
-seed = 5090
-O: error on input
+seed = 7791
 ./a.out won
 Score:
-363AGAINST109
+255AGAINST91

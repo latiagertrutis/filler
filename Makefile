@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/05/31 19:55:07 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/05/31 23:37:58 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,6 +104,6 @@ graf: $(GRAF_NAME)
 
 test: $(MAIN_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
 	gcc $(CFLAGS) $(TEST) $(MAIN_OBJ) -l$(LIBFT_ABREV) -L$(LIBFT_DIR)
-	rm datos.txt
+	rm -f datos.txt
 	touch datos.txt
-	resources/filler_vm -f resources/maps/map02 -p2 ./resources/players/hcao.filler -p1 ./a.out
+	resources/filler_vm -f resources/maps/map01 -p2 ./resources/players/hcao.filler -p1 ./a.out

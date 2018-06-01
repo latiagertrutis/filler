@@ -6,11 +6,16 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 18:49:37 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/30 19:30:18 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/01 18:00:19 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
+
+/*
+** player with O = 0
+** player with X = 1
+*/
 
 static int		ini_player(t_data *data)
 {
@@ -18,7 +23,8 @@ static int		ini_player(t_data *data)
 
 	if (get_next_line(data->fd, &buff) < 0)
 		return (1);
-	data->player = ((buff[10] == '2') ? 1 : 0);
+	data->player = ((buff[10] == '2') ? -1 : 0);
+	write_test(buff);
 	free(buff);
 	return (0);
 }

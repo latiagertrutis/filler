@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/28 17:46:05 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/01 05:07:32 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define RESOLUTION_X 1920
 # define RESOLUTION_Y 1080
 # define ESC 53
+# define SPACE 49
 # define ENDIAN 0
 # define BITS 32
 # define LINE_COLOR 0xFFFFFF
@@ -53,6 +54,7 @@ typedef struct	s_mlx
 	void		**info;
 	t_map		*map;
 	t_piece		**piece;
+	int			pause;
 }				t_mlx;
 
 void	ft_set_bricks(t_mlx *mlx);

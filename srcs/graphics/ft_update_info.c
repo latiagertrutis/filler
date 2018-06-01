@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/27 01:16:18 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/28 15:53:39 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/01 01:26:32 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,35 +34,20 @@ static void		paint_image(t_mlx *mlx, int img)
 	int	*addrs_wall;
 	int	i;
 	int j;
-	
+
 	addrs_info = (int *)ft_get_addrs(mlx->info[img], MARGEN_X);
 	addrs_wall = (int *)ft_get_addrs(mlx->wallpaper, MARGEN_X);
 	i = 0;
-	if (img)
+	j = RESOLUTION_X * (RESOLUTION_Y - MARGEN_Y - 28) - MARGEN_X * img;
+	while (i < MARGEN_X * 20)
 	{
-		j = RESOLUTION_X * (RESOLUTION_Y - MARGEN_Y - 28) - MARGEN_X;
-		while (i < MARGEN_X * 20)
-		{
-			addrs_info[i++] = addrs_wall[j];
-			if (!(i % MARGEN_X))
-				j += RESOLUTION_X - MARGEN_X;
-			else
-				j++;
-		}
+		addrs_info[i++] = addrs_wall[j];
+		if (!(i % (MARGEN_X)) && i)
+			j += RESOLUTION_X - MARGEN_X + 1;
+		else
+			j++;
 	}
-	else
-	{
-		j = RESOLUTION_X * (RESOLUTION_Y - MARGEN_Y - 29) + 1;
-		while (i < MARGEN_X * 20)
-		{
-			addrs_info[i++] = addrs_wall[j];
-			if (!(i % MARGEN_X))
-				j += RESOLUTION_X - MARGEN_X;
-			else
-				j++;
-		}		
-	}
-		return ;
+	return ;
 }
 
 void			ft_update_info(t_mlx *mlx, char player)

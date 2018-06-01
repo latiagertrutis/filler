@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/05/28 16:27:14 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/01 18:11:50 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,23 @@ static void		destroy_all(t_mlx *mlx)
 
 static int		keys(int code, void *mlx)
 {
+	t_mlx	*mmlx;
+	char	key[1];
+	int		flag;
+	
 	if (code == ESC)
 	{
 		destroy_all(mlx);
 		exit(1);
+	}
+	else if (code == SPACE)
+	{
+		mmlx = (t_mlx *)mlx;
+		mlx_string_put(mmlx->ptr, mmlx->win, RESOLUTION_X / 2 - 30, RESOLUTION_Y / 2, 0, "PAUSE");
+		if (mmlx->pause)
+			mmlx->pause = 0;
+		else
+			mmlx->pause = 1;
 	}
 	return (0);
 }
@@ -46,7 +59,7 @@ static int		loop(void *mlx)
 {
 	static int	end = 1;
 
-	if (end >= 0)
+	if (end >= 0 && !(((t_mlx *)mlx)->pause))
 	{
 		ft_set_piece_pos(mlx);
 		if (!(end = ft_jump_piece(mlx)))
@@ -74,7 +87,6 @@ int				main(void)
 {
 	t_mlx		*mlx;
 	t_map		*map;
-	void		*titulo;
 	int			x;
 	int			y;
 	
@@ -88,10 +100,8 @@ int				main(void)
 	if (!(mlx->img = mlx_new_image(mlx->ptr, map->dim[1] * map->square[1] + 1,
 			map->dim[0] * map->square[0] + 1)))
 		ft_error(NULL);
-	titulo = mlx_xpm_file_to_image(mlx->ptr, "TITULO.xpm", &x, &y);
-	mlx->wallpaper = mlx_xpm_file_to_image(mlx->ptr, "FONDOFILLER2.xpm", &x, &y);
+	mlx->wallpaper = mlx_xpm_file_to_image(mlx->ptr, "hotline_filler.xpm", &x, &y);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->wallpaper, 0, 0);
-	mlx_put_image_to_window(mlx->ptr, mlx->win, titulo, RESOLUTION_X / 2 - 141, 0);
 	ft_set_bricks(mlx);
 	ft_print_map(mlx);
 	ft_info(mlx);

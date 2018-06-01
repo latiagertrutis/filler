@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/27 19:11:22 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/01 05:10:14 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void			ft_initialice(t_mlx *mlx)
 	allocate_data(mlx);
 	ft_seek(0, 49 * 5);
 	i = 0;
+	mlx->pause = 0;
 	while ((flag = get_next_line(STDIN_FILENO, &line)))
 	{
 		if (flag < 0)

@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/01 19:04:02 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/03 01:16:06 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct	s_mlx
 	void		*wallpaper;
 	void		**bricks;
 	void		**info;
+	void		*progress;
 	t_map		*map;
 	t_piece		**piece;
 	int			pause;
@@ -71,4 +72,5 @@ void	ft_info(t_mlx *mlx);
 void	ft_copy_piece(t_mlx *mlx);
 void	ft_update_info(t_mlx *mlx, char player);
 int		ft_keys(int code, void *mlx);
+void	ft_progress(t_mlx *mlx, int width, int p1, int p2);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/01 20:21:36 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/03 01:17:12 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int				main(void)
 	if (!(mlx->img = mlx_new_image(mlx->ptr, map->dim[1] * map->square[1] + 1,
 			map->dim[0] * map->square[0] + 1)))
 		ft_error(NULL);
-	mlx->wallpaper = mlx_xpm_file_to_image(mlx->ptr, "FONDOFILLER4.xpm", &x, &y);
+	mlx->wallpaper = mlx_xpm_file_to_image(mlx->ptr, "hotline_filler.xpm", &x, &y);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->wallpaper, 0, 0);
 	ft_set_bricks(mlx);
 	ft_print_map(mlx);

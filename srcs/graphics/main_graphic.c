@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/03 20:47:26 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/03 20:53:59 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		finish_game(t_mlx *mlx)
 	int		b;
 	
 	if (mlx->piece[1]->player == 'O')
-		img = mlx_xpm_file_to_image(mlx->ptr, "player1wins.xpm", &a, &b);
+		img = mlx_xpm_file_to_image(mlx->ptr, "meh.xpm", &a, &b);
 	else
 		img = mlx_xpm_file_to_image(mlx->ptr, "player2wins.xpm", &a, &b);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, img, RESOLUTION_X / 2 - a / 2, RESOLUTION_Y / 2 - b / 2);

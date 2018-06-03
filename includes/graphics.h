@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/03 19:52:19 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/03 20:34:57 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,20 @@
 # define BITS 32
 # define LINE_COLOR 0xFFFFFF
 
+/* typedef struct	s_img */
+/* { */
+/* 	void		*data; */
+/* 	int			width; */
+/* 	int			height; */
+/* }				t_img; */
+
 typedef struct	s_map
 {
 	int			dim[2];
 	char		**players;
 	int			square[2];
 	int			img_pos[2];
+//	t_img		*wallpaper;
 }				t_map;
 
 typedef struct	s_piece
@@ -43,6 +51,14 @@ typedef struct	s_piece
 	int			dim[2];
 	char		player;
 }				t_piece;
+
+/* typedef struct	s_info */
+/* { */
+/* 	char		**players; */
+/* 	int			pause; */
+/* 	t_img		*img_pause; */
+	
+/* }				 */
 
 typedef struct	s_mlx
 {

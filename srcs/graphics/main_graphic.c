@@ -6,11 +6,24 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/03 19:48:34 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/03 20:47:26 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+
+static void		finish_game(t_mlx *mlx)
+{
+	void	*img;
+	int		a;
+	int		b;
+	
+	if (mlx->piece[1]->player == 'O')
+		img = mlx_xpm_file_to_image(mlx->ptr, "player1wins.xpm", &a, &b);
+	else
+		img = mlx_xpm_file_to_image(mlx->ptr, "player2wins.xpm", &a, &b);
+	mlx_put_image_to_window(mlx->ptr, mlx->win, img, RESOLUTION_X / 2 - a / 2, RESOLUTION_Y / 2 - b / 2);
+}
 
 static int		loop(void *mlx)
 {
@@ -31,8 +44,9 @@ static int		loop(void *mlx)
 		else if (end < 0)
 		{
 			ft_place_piece(mlx, -1, ((t_mlx *)mlx)->piece[1]->player);
-			mlx_string_put(((t_mlx *)mlx)->ptr, ((t_mlx *)mlx)->win,
-					RESOLUTION_X / 2 - 30, RESOLUTION_Y / 2, 0, "FINISH");
+			/* mlx_string_put(((t_mlx *)mlx)->ptr, ((t_mlx *)mlx)->win, */
+			/* 		RESOLUTION_X / 2 - 30, RESOLUTION_Y / 2, 0, "FINISH"); */
+			finish_game(mlx);
 		}
 		else
 			ft_place_piece(mlx, 1, ((t_mlx *)mlx)->piece[1]->player);

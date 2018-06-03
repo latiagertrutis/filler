@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/03 20:03:34 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/03 20:34:50 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void		allocate_data(t_mlx *mlx)
 		ft_error(NULL);
 	if (!(mlx->info[1] = mlx_new_image(mlx->ptr, MARGEN_X, 20)))
 		ft_error(NULL);
-	mlx->img_pause = mlx_xpm_file_to_image(mlx->ptr, "player1wins.xpm", &a, &b);
+	mlx->img_pause = mlx_xpm_file_to_image(mlx->ptr, "pause.xpm", &a, &b);
 	if (!(mlx->img_pause))
 		ft_error(NULL);
 }

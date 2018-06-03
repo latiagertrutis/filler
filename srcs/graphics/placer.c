@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 18:38:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/03 01:54:14 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/03 17:46:37 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,12 @@ void	ft_place_piece(t_mlx *mlx, int pieza, char player)
 				mlx->piece[pieza]->pos[0], (i % mlx->piece[pieza]->dim[1])
 				+ mlx->piece[pieza]->pos[1], player);
 			bricks++;
+
 		}
 		i++;
 	}
-	if (player == 'O')
-		ft_progress(mlx, mlx->map->square[1] * mlx->map->dim[1], bricks, 0);
-	else if (player == 'X')
-		ft_progress(mlx, mlx->map->square[1] * mlx->map->dim[1], 0, bricks);
+		if (player == 'O')
+			ft_progress(mlx, mlx->map->square[1] * mlx->map->dim[1], bricks - 1, 0);
+		else if (player == 'X')
+			ft_progress(mlx, mlx->map->square[1] * mlx->map->dim[1], 0, bricks - 1);
 }

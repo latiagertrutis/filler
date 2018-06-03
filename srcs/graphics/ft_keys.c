@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 19:01:10 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/01 20:25:58 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/03 20:03:18 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ static void		hide_pause(t_mlx *mlx)
 	int		i;
 	int		j;
 
-	img = mlx_new_image(mlx->ptr, 50, 30);
-	addrs_info = (int *)ft_get_addrs(img, 50);
+	img = mlx_new_image(mlx->ptr, 204, 37);
+	addrs_info = (int *)ft_get_addrs(img, 204);
 	addrs_wall = (int *)ft_get_addrs(mlx->wallpaper, RESOLUTION_X);
 	i = 0;
 	j = RESOLUTION_X * (MARGEN_Y + 100) + RESOLUTION_X / 2 - 30;
-	while (i < 1500)
+	while (i < 7548)
 	{
 		addrs_info[i++] = addrs_wall[j];
-		if (!(i % (50)) && i)
-			j += RESOLUTION_X - 50 + 1;
+		if (!(i % (204)) && i)
+			j += RESOLUTION_X - 204 + 1;
 		else
 			j++;
 	}
@@ -73,8 +73,9 @@ int				ft_keys(int code, void *mlx)
 	else if (code == SPACE)
 	{
 		mmlx = (t_mlx *)mlx;
-		mlx_string_put(mmlx->ptr, mmlx->win, RESOLUTION_X / 2 - 30,
-				MARGEN_Y + 100, 0, "PAUSE");
+		/* mlx_string_put(mmlx->ptr, mmlx->win, RESOLUTION_X / 2 - 30, */
+		/* 		MARGEN_Y + 100, 0, "PAUSE"); */
+		mlx_put_image_to_window(mmlx->ptr, mmlx->win, mmlx->img_pause, RESOLUTION_X / 2 - 30, MARGEN_Y + 100);
 		if (mmlx->pause)
 		{
 			mmlx->pause = 0;

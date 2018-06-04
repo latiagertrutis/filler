@@ -6,27 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/03 21:02:08 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/04 05:58:25 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/04 05:59:33 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/filler.h"
-
-static void			center_image(t_mlx *mlx, int width)
-{
-	int dist_x;
-	int dist_y;
-	int	img_dim[2];
-
-	img_dim[0] = width;
-
-	dist_x = 0;
-	dist_y = 0;
-	while (img_dim[0] + 1 + dist_x < RESOLUTION_X - MARGEN_X * 2 - dist_x)
-		dist_x++;
-	mlx->map->img_pos[0] = dist_x;
-	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->progress, MARGEN_X + dist_x, RESOLUTION_Y - MARGEN_Y - 100);
-}
 
 static int	choose_color(int i, int p1)
 {
@@ -63,7 +47,7 @@ void		ft_progress(t_mlx *mlx, int width, int p1, int p2)
 		{
 			j = i * width;
 			while (j < percent + i * width)
-				img_addr[j++] = choose_color(i, p1);
+				addr[j++] = choose_color(i, p1);
 			i++;
 		}
 		lp[0]++;
@@ -76,7 +60,7 @@ void		ft_progress(t_mlx *mlx, int width, int p1, int p2)
 		{
 			j = (width - 1) + (i * width);
 			while (j > (width - percent + i * width))
-				img_addr[j--] = choose_color(i, p1);
+				addr[j--] = choose_color(i, p1);
 			i++;
 		}
 		lp[1]++;

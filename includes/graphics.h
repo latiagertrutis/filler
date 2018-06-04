@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/04 23:40:23 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/05 01:01:17 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@
 # define BRICK_PLAYER_TWO_2440 "images/BRICK3B_24x40.xpm"
 # define BRICK_PLAYER_ONE_10099 "images/BRICK3A_100x99.xpm"
 # define BRICK_PLAYER_TWO_10099 "images/BRICK3B_100x99.xpm"
-# define COLOR_ALWAYS 0
-# define COLOR_BRICK_PLAYER_ONE 0xFF0000
-# define COLOR_BRICK_PLAYER_TWO 0x00FF00
-# define COLOR_PLAYER_ONE_NFO 0xFF0000
-# define COLOR_PLAYER_TWO_NFO 0x00FF00
+# define COLOR_ALWAYS 1
+# define COLOR_BRICK_PLAYER_ONE 0xc00999
+# define COLOR_BRICK_PLAYER_TWO 0x068bff
+# define COLOR_PLAYER_ONE_NFO 0xc00999
+# define COLOR_PLAYER_TWO_NFO 0x068bff
 # define PLAYER_ONE_WINS "images/player1wins.xpm"
 # define PLAYER_TWO_WINS "images/player2wins.xpm"
 # define DRAW "images/meh.xpm"

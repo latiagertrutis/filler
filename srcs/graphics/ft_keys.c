@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 19:01:10 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/04 05:55:36 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/04 23:27:14 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,31 @@
 
 static void		destroy_all(t_mlx *mlx)
 {
-//	mlx_destroy_image(mlx->ptr, mlx->img);
-	mlx_destroy_image(mlx->ptr, mlx->map->bricks[0]);
-	mlx_destroy_image(mlx->ptr, mlx->map->bricks[1]);
-//	free(mlx->map->bricks[0]);
-//	free(mlx->map->bricks[1]);
-//	free(mlx->map->bricks[2]);
-//	free(mlx->map->bricks);
-	mlx_destroy_image(mlx->ptr, mlx->map->wallpaper);
-//	free(mlx->map);
+	mlx_destroy_image(mlx->ptr, mlx->map->bricks[0]->data);
+	mlx_destroy_image(mlx->ptr, mlx->map->bricks[1]->data);	
+	mlx_destroy_image(mlx->ptr, mlx->map->bricks[2]->data);
+	free(mlx->map->bricks[0]);
+	free(mlx->map->bricks[1]);
+	free(mlx->map->bricks[2]);
+	free(mlx->map->bricks);
+	mlx_destroy_image(mlx->ptr, mlx->map->wallpaper->data);
+	free(mlx->map->wallpaper);
+	free(mlx->map);
 	mlx_destroy_image(mlx->ptr, mlx->info->points_img[0]);
 	mlx_destroy_image(mlx->ptr, mlx->info->points_img[1]);
-//	free(mlx->info->points_img);
+	free(mlx->info->points_img);
 	mlx_destroy_image(mlx->ptr, mlx->info->progress);
-	mlx_destroy_image(mlx->ptr, mlx->info->img_pause);
-//	free(mlx->info->players[0]);
-//	free(mlx->info->players[1]);
-//	free(mlx->info->players);
-//	free(mlx->info);
-//	free(mlx->piece[0]->shape);
-//	free(mlx->piece[1]->shape);
-//	free(mlx->piece[0]);
-//	free(mlx->piece[1]);
-//	free(mlx->piece);
+	mlx_destroy_image(mlx->ptr, mlx->info->img_pause->data);
+	free(mlx->info->img_pause);
+	free(mlx->info->players[0]);
+	free(mlx->info->players[1]);
+	free(mlx->info->players);
+	free(mlx->info);
+	free(mlx->piece[0]->shape);
+	free(mlx->piece[1]->shape);
+	free(mlx->piece[0]);
+	free(mlx->piece[1]);
+	free(mlx->piece);
 	mlx_destroy_window(mlx->ptr, mlx->win);
 }
 
@@ -76,7 +78,7 @@ int				ft_keys(int code, void *mlx)
 
 	if (code == ESC)
 	{
-//		destroy_all(mlx);
+		destroy_all(mlx);
 		exit(0);
 	}
 	else if (code == SPACE)

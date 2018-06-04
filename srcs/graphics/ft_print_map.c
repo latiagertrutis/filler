@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 07:51:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/04 05:34:21 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/05 00:25:53 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,17 @@ static void			center_image(t_mlx *mlx)
 	mlx->map->map_pos[1] = dist_y;
 }
 
+static void			paint_line(void *img, int width, int height)
+{
+	int *addrs;
+	int	i;
+	
+	addrs = (int *)ft_get_addrs(img, width);
+	i = 0;
+	while (i < width * height)
+		addrs[i++] = 0xcb2007f;
+}
+
 void				ft_print_map(t_mlx *mlx)
 {
 	void	*line;
@@ -84,17 +95,19 @@ void				ft_print_map(t_mlx *mlx)
 
 	center_image(mlx);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->map->wallpaper->data, 0, 0);
-	line = mlx_new_image(mlx->ptr, mlx->map->dim[1] * mlx->map->square[1], 1);
 	i = 0;
+	line = mlx_new_image(mlx->ptr, mlx->map->dim[1] * mlx->map->square[1], 1);
+	paint_line(line, mlx->map->dim[1] * mlx->map->square[1], 1);
 	while (i <= mlx->map->dim[0])
 	{
 		mlx_put_image_to_window(mlx->ptr, mlx->win, line, MARGEN_X +
-				mlx->map->map_pos[0], MARGEN_Y + mlx->map-> map_pos[1] +
+				mlx->map->map_pos[0], MARGEN_Y + mlx->map->map_pos[1] +
 				mlx->map->square[0] * i++);
 	}
-	i = 0;
 	mlx_destroy_image(mlx->ptr, line);
+	i = 0;
 	line = mlx_new_image(mlx->ptr, 1, mlx->map->dim[0] * mlx->map->square[0]);
+	paint_line(line, 1, mlx->map->dim[0] * mlx->map->square[0]);
 	while (i <= mlx->map->dim[1])
 	{
 		mlx_put_image_to_window(mlx->ptr, mlx->win, line, MARGEN_X +

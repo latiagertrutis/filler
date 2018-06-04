@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/04 05:36:57 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/04 23:40:23 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@
 
 # define PLAYER_ONE 'O'
 # define PLAYER_TWO 'X'
-# define WALLPAPER "images/hotline_filler.XPM"
+# define WALLPAPER "images/hotline_filler.xpm"
 # define PAUSE "images/pause.xpm"
 # define BRICK_PLAYER_ONE_1517 "images/BRICK3A_15x17.xpm"
 # define BRICK_PLAYER_TWO_1517 "images/BRICK3B_15x17.xpm"
 # define BRICK_PLAYER_ONE_2440 "images/BRICK3A_24x40.xpm"
 # define BRICK_PLAYER_TWO_2440 "images/BRICK3B_24x40.xpm"
-# define BRICK_PLAYER_ONE_10099 "images/BRICK3A_24x40.xpm"
-# define BRICK_PLAYER_TWO_10099 "images/BRICK3B_24x40.xpm"
+# define BRICK_PLAYER_ONE_10099 "images/BRICK3A_100x99.xpm"
+# define BRICK_PLAYER_TWO_10099 "images/BRICK3B_100x99.xpm"
 # define COLOR_ALWAYS 0
 # define COLOR_BRICK_PLAYER_ONE 0xFF0000
 # define COLOR_BRICK_PLAYER_TWO 0x00FF00
@@ -107,5 +107,5 @@ void	ft_info(t_mlx *mlx);
 void	ft_copy_piece(t_mlx *mlx);
 void	ft_update_info(t_mlx *mlx, char player);
 int		ft_keys(int code, void *mlx);
-void	ft_progress(t_mlx *mlx, int width, int p1, int p2);
+void	ft_progress(t_mlx *mlx, int width, int p1);
 #endif

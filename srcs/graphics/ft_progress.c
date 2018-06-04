@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/03 21:02:08 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/04 05:59:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/04 23:40:47 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 static int	choose_color(int i, int p1)
 {
 	if (i < 10)
-		return (p1 ? 0x0273ff : 0x900272);
+		return (!p1 ? 0x0273ff : 0x900272);
 	else if (i < 20)
-		return (p1 ? 0x068bff : 0xaa0585);
+		return (!p1 ? 0x068bff : 0xaa0585);
 	else if (i < 30)
-		return (p1 ? 0x0aa3ff : 0xc00999);
+		return (!p1 ? 0x0aa3ff : 0xc00999);
 	else if (i < 70)
-		return (p1 ? 0x0fbcff : 0xda0ead);
+		return (!p1 ? 0x0fbcff : 0xda0ead);
 	else if (i < 80)
-		return (p1 ? 0x0aa3ff : 0xc00999);
+		return (!p1 ? 0x0aa3ff : 0xc00999);
 	else if (i < 90)
-		return (p1 ? 0x068bff : 0xaa0585);
+		return (!p1 ? 0x068bff : 0xaa0585);
 	else
-		return (p1 ? 0x0273ff : 0x900272);
+		return (!p1 ? 0x0273ff : 0x900272);
 }
 
-void		ft_progress(t_mlx *mlx, int width, int p1, int p2)
+void		ft_progress(t_mlx *mlx, int width, int p1)
 {
 	int i;
 	int j;

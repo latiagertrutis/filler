@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/04 05:54:43 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/04 23:30:13 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,6 @@ int				main(void)
 		ft_error(NULL);
 	ft_initialice(mlx);
 	map = mlx->map;
-//	if (!(mlx->img = mlx_new_image(mlx->ptr, map->dim[1] * map->square[1] + 1,
-//			map->dim[0] * map->square[0] + 1)))
-//		ft_error(NULL);	
-//	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->map->wallpaper, 0, 0);
 	ft_set_bricks(mlx);
 	ft_print_map(mlx);
 	ft_info(mlx);

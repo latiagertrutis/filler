@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/04 05:46:37 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/04 23:27:55 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ static void		allocate_data(t_mlx *mlx)
 	int a;
 	int b;
 
-	if (!(mlx->map = (t_map *)ft_memalloc(sizeof(char *))))
+	if (!(mlx->map = (t_map *)ft_memalloc(sizeof(t_map))))
 		ft_error(NULL);
-	mlx->map->wallpaper = ft_set_xpm(mlx, "hotline_filler.XPM");
+	mlx->map->wallpaper = ft_set_xpm(mlx, WALLPAPER);
 	if (!(mlx->map->bricks = (t_img **)ft_memalloc(sizeof(t_img *) * 3)))
 		ft_error(NULL);
 	if (!(mlx->piece = (t_piece **)ft_memalloc(sizeof(t_piece *) * 2)))

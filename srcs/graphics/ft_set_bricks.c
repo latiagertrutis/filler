@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 01:31:17 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/01 18:47:04 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/04 05:48:01 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "../../includes/filler.h"
 
 static void		build_brick(t_mlx *mlx, int brick, int color)
 {
@@ -18,7 +18,7 @@ static void		build_brick(t_mlx *mlx, int brick, int color)
 	int	*addrs;
 
 	i = 0;
-	addrs = (int *)ft_get_addrs((mlx->bricks)[brick], mlx->map->square[1] + 1);
+	addrs = (int *)ft_get_addrs((mlx->map->bricks)[brick]->data, mlx->map->square[1] + 1);
 	while (i < (mlx->map->square[1] + 1) * (mlx->map->square[0] + 1))
 	{
 		if (i <= (mlx->map->square[1] + 1) * 2)
@@ -36,51 +36,51 @@ static void		build_brick(t_mlx *mlx, int brick, int color)
 
 static void		set_color_as_brick(t_mlx *mlx, int color0, int color1)
 {
-	int *addrs;
-	int	i;
-
-	(mlx->bricks)[0] = mlx_new_image(mlx->ptr, mlx->map->square[1] + 1,
+	if (!(mlx->map->bricks[0] = (t_img *)ft_memalloc(sizeof(t_img))))
+		ft_error(NULL);
+	mlx->map->bricks[0]->data = mlx_new_image(mlx->ptr, mlx->map->square[1] + 1,
 			mlx->map->square[0] + 1);
 	build_brick(mlx, 0, color0);
-	(mlx->bricks)[1] = mlx_new_image(mlx->ptr, mlx->map->square[1] + 1,
+	if (!(mlx->map->bricks[1] = (t_img *)ft_memalloc(sizeof(t_img))))
+		ft_error(NULL);
+	mlx->map->bricks[1]->data = mlx_new_image(mlx->ptr, mlx->map->square[1] + 1,
 			mlx->map->square[0] + 1);
 	build_brick(mlx, 1, color1);
 }
 
-static void		set_image_as_brick(t_mlx *mlx, char *file0, char *file1)
+static void		set_wipe_brick(t_mlx *mlx)
 {
-	int		tmp1;
-	int		tmp2;
-	char	*file;
-
-	if (!(file = ft_strjoin("bricks/", file0)))
+	int	i;
+	int	*addrs;
+	
+	if (!(mlx->map->bricks[2] = (t_img *)ft_memalloc(sizeof(t_img))))
 		ft_error(NULL);
-	(mlx->bricks)[0] = mlx_xpm_file_to_image(mlx->ptr, file, &tmp1, &tmp2);
-	free(file);
-	if (!(file = ft_strjoin("bricks/", file1)))
-		ft_error(NULL);
-	(mlx->bricks)[1] = mlx_xpm_file_to_image(mlx->ptr, file, &tmp1, &tmp2);
-	free(file);
+	mlx->map->bricks[2]->data = mlx_new_image(mlx->ptr, mlx->map->square[1] + 1,
+			mlx->map->square[0] + 1);
+	addrs = (int *)ft_get_addrs(mlx->map->bricks[2]->data, mlx->map->square[1]);
+	i = 0;
+	while (i < (mlx->map->square[1] + 1) * (mlx->map->square[0] + 1))
+		addrs[i++] = 0xFFFFFF;
 }
 
 void			ft_set_bricks(t_mlx *mlx)
 {
-	int	i;
-	int	*addrs;
-
-	mlx->bricks = (void **)ft_memalloc(sizeof(void *) * 3);
-	if (mlx->map->dim[0] == 15 && mlx->map->dim[1] == 17)
-		set_image_as_brick(mlx, "BRICK3B_15x17.xpm", "BRICK3A_15x17.xpm");
-	else if (mlx->map->dim[0] == 24 && mlx->map->dim[1] == 40)
-		set_image_as_brick(mlx, "BRICKB_24x40.xpm", "BRICKA_24x40.xpm");
-	else if (mlx->map->dim[0] == 100 && mlx->map->dim[1] == 99)
-		set_image_as_brick(mlx, "BRICK3B_100x99.xpm", "BRICK3A_100x99.xpm");
+	if (mlx->map->dim[0] == 15 && mlx->map->dim[1] == 17 && !COLOR_ALWAYS)
+	{
+		(mlx->map->bricks)[0] = ft_set_xpm(mlx, BRICK_PLAYER_ONE_1517);
+		(mlx->map->bricks)[1] = ft_set_xpm(mlx, BRICK_PLAYER_TWO_1517);
+	}
+	else if (mlx->map->dim[0] == 24 && mlx->map->dim[1] == 40 && !COLOR_ALWAYS)
+	{	
+		(mlx->map->bricks)[0] = ft_set_xpm(mlx, BRICK_PLAYER_ONE_2440);
+		(mlx->map->bricks)[1] = ft_set_xpm(mlx, BRICK_PLAYER_TWO_2440);	
+	}
+	else if (mlx->map->dim[0] == 100 && mlx->map->dim[1] == 99 && !COLOR_ALWAYS)
+	{
+		(mlx->map->bricks)[0] = ft_set_xpm(mlx, BRICK_PLAYER_ONE_10099);
+		(mlx->map->bricks)[1] = ft_set_xpm(mlx, BRICK_PLAYER_TWO_10099);
+	}
 	else
-		set_color_as_brick(mlx, 0xFF0000, 0x00FF00);
-	(mlx->bricks)[2] = mlx_new_image(mlx->ptr, mlx->map->square[1] + 1,
-			mlx->map->square[0] + 1);
-	addrs = (int *)ft_get_addrs((mlx->bricks)[2], mlx->map->square[1]);
-	i = 0;
-	while (i < (mlx->map->square[1] + 1) * (mlx->map->square[0] + 1))
-		addrs[i++] = 0xFFFFFF;
+		set_color_as_brick(mlx, COLOR_BRICK_PLAYER_ONE, COLOR_BRICK_PLAYER_TWO);
+	set_wipe_brick(mlx);
 }

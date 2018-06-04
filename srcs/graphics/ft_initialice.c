@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/03 20:34:50 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/04 05:46:37 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,26 @@ static void		allocate_data(t_mlx *mlx)
 {
 	int a;
 	int b;
-	
-	mlx->map = (t_map *)ft_memalloc(sizeof(t_map));
-	mlx->map->players = (char **)ft_memalloc(sizeof(char *) * 2);
-	mlx->piece = (t_piece **)ft_memalloc(sizeof(t_piece *) * 2);
-	(mlx->piece)[0] = (t_piece *)ft_memalloc(sizeof(t_piece));
-	(mlx->piece)[1] = (t_piece *)ft_memalloc(sizeof(t_piece));
+
+	if (!(mlx->map = (t_map *)ft_memalloc(sizeof(char *))))
+		ft_error(NULL);
+	mlx->map->wallpaper = ft_set_xpm(mlx, "hotline_filler.XPM");
+	if (!(mlx->map->bricks = (t_img **)ft_memalloc(sizeof(t_img *) * 3)))
+		ft_error(NULL);
+	if (!(mlx->piece = (t_piece **)ft_memalloc(sizeof(t_piece *) * 2)))
+		ft_error(NULL);
+	if (!((mlx->piece)[0] = (t_piece *)ft_memalloc(sizeof(t_piece))))
+		ft_error(NULL);
+	if (!((mlx->piece)[1] = (t_piece *)ft_memalloc(sizeof(t_piece))))
+		ft_error(NULL);
 	mlx->piece[1]->shape = NULL;
-	mlx->info = (void **)ft_memalloc(sizeof(void *) * 2);
-	if (!(mlx->info[0] = mlx_new_image(mlx->ptr, MARGEN_X, 20)))
+	if (!(mlx->info = (t_info *)ft_memalloc(sizeof(t_info))))
 		ft_error(NULL);
-	if (!(mlx->info[1] = mlx_new_image(mlx->ptr, MARGEN_X, 20)))
+	if (!(mlx->info->players = (char **)ft_memalloc(sizeof(char *) * 2)))
 		ft_error(NULL);
-	mlx->img_pause = mlx_xpm_file_to_image(mlx->ptr, "pause.xpm", &a, &b);
-	if (!(mlx->img_pause))
+	if (!(mlx->info->points_img = (void **)ft_memalloc(sizeof(void *) * 2)))
 		ft_error(NULL);
+	mlx->info->img_pause = ft_set_xpm(mlx, PAUSE);
 }
 
 void			ft_initialice(t_mlx *mlx)
@@ -64,13 +69,12 @@ void			ft_initialice(t_mlx *mlx)
 	allocate_data(mlx);
 	ft_seek(0, 49 * 5);
 	i = 0;
-	mlx->pause = 0;
 	while ((flag = get_next_line(STDIN_FILENO, &line)))
 	{
 		if (flag < 0)
 			ft_error(NULL);
 		if (line[0] == '$')
-			mlx->map->players[i++] = take_name(line);
+			mlx->info->players[i++] = take_name(line);
 		else if (line[0] == 'P')
 		{
 			take_dim(line, mlx->map->dim, mlx->map->square);

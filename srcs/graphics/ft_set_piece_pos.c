@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 18:28:55 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/01 18:10:54 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/04 04:38:56 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "../../includes/filler.h"
 
 void			ft_set_piece_pos(t_mlx *mlx)
 {

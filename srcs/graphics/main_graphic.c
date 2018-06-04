@@ -6,30 +6,33 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/03 20:53:59 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/04 05:54:43 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "../../includes/filler.h"
 
 static void		finish_game(t_mlx *mlx)
 {
-	void	*img;
-	int		a;
-	int		b;
-	
-	if (mlx->piece[1]->player == 'O')
-		img = mlx_xpm_file_to_image(mlx->ptr, "meh.xpm", &a, &b);
+	t_img	*img;
+
+
+	if (mlx->info->puntuation[0] > mlx->info->puntuation[1])	
+		img = ft_set_xpm(mlx, PLAYER_ONE_WINS);
+	else if (mlx->info->puntuation[0] < mlx->info->puntuation[1])
+		img = ft_set_xpm(mlx, PLAYER_TWO_WINS);
 	else
-		img = mlx_xpm_file_to_image(mlx->ptr, "player2wins.xpm", &a, &b);
-	mlx_put_image_to_window(mlx->ptr, mlx->win, img, RESOLUTION_X / 2 - a / 2, RESOLUTION_Y / 2 - b / 2);
+		img = ft_set_xpm(mlx, DRAW);
+	mlx_put_image_to_window(mlx->ptr, mlx->win, img->data, RESOLUTION_X / 2 -
+			img->width / 2, RESOLUTION_Y / 2 - img->height / 2);
 }
+
 
 static int		loop(void *mlx)
 {
 	static int	end = 1;
 
-	if (end >= 0 && !(((t_mlx *)mlx)->pause))
+	if (end >= 0 && !(((t_mlx *)mlx)->info->pause))
 	{
 		ft_set_piece_pos(mlx);
 		if (!(end = ft_jump_piece(mlx)))
@@ -44,8 +47,6 @@ static int		loop(void *mlx)
 		else if (end < 0)
 		{
 			ft_place_piece(mlx, -1, ((t_mlx *)mlx)->piece[1]->player);
-			/* mlx_string_put(((t_mlx *)mlx)->ptr, ((t_mlx *)mlx)->win, */
-			/* 		RESOLUTION_X / 2 - 30, RESOLUTION_Y / 2, 0, "FINISH"); */
 			finish_game(mlx);
 		}
 		else
@@ -58,21 +59,20 @@ int				main(void)
 {
 	t_mlx		*mlx;
 	t_map		*map;
-	int			x;
-	int			y;
 	
-	mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx));
-	mlx->ptr = mlx_init();
-	ft_initialice(mlx);
+	if (!(mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx))))
+		ft_error(NULL);
+	if (!(mlx->ptr = mlx_init()))
+		ft_error(NULL);
 	if (!(mlx->win = mlx_new_window(mlx->ptr, RESOLUTION_X,
 			RESOLUTION_Y, "FILLER")))
 		ft_error(NULL);
+	ft_initialice(mlx);
 	map = mlx->map;
-	if (!(mlx->img = mlx_new_image(mlx->ptr, map->dim[1] * map->square[1] + 1,
-			map->dim[0] * map->square[0] + 1)))
-		ft_error(NULL);
-	mlx->wallpaper = mlx_xpm_file_to_image(mlx->ptr, "hotline_filler.xpm", &x, &y);
-	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->wallpaper, 0, 0);
+//	if (!(mlx->img = mlx_new_image(mlx->ptr, map->dim[1] * map->square[1] + 1,
+//			map->dim[0] * map->square[0] + 1)))
+//		ft_error(NULL);	
+//	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->map->wallpaper, 0, 0);
 	ft_set_bricks(mlx);
 	ft_print_map(mlx);
 	ft_info(mlx);

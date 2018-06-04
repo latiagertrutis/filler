@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 18:31:17 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/01 18:11:20 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/04 04:50:00 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "../../includes/filler.h"
 
 static int		size_piece(t_piece *piece)
 {
@@ -46,8 +46,7 @@ int				ft_jump_piece(t_mlx *mlx)
 	int		a;
 	char	*line;
 
-	a = get_next_line(STDIN_FILENO, &line);
-	if (a < 0)
+	if ((a = get_next_line(STDIN_FILENO, &line)) < 0)
 		ft_error(NULL);
 	else if (!a)
 		ft_error("ERROR no estan las dimensiones\n");

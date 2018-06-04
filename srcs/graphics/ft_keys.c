@@ -6,29 +6,37 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 19:01:10 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/03 20:32:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/04 05:55:36 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "../../includes/filler.h"
 
 static void		destroy_all(t_mlx *mlx)
 {
-	mlx_destroy_image(mlx->ptr, mlx->img);
-	mlx_destroy_image(mlx->ptr, mlx->bricks[0]);
-	mlx_destroy_image(mlx->ptr, mlx->bricks[1]);
-	free(mlx->bricks);
-	mlx_destroy_image(mlx->ptr, mlx->info[0]);
-	mlx_destroy_image(mlx->ptr, mlx->info[1]);
-	free(mlx->info);
-	free(mlx->map->players[0]);
-	free(mlx->map->players[1]);
-	free(mlx->map->players);
-	free(mlx->piece[0]->shape);
-	free(mlx->piece[1]->shape);
-	free(mlx->piece[0]);
-	free(mlx->piece[1]);
-	free(mlx->piece);
+//	mlx_destroy_image(mlx->ptr, mlx->img);
+	mlx_destroy_image(mlx->ptr, mlx->map->bricks[0]);
+	mlx_destroy_image(mlx->ptr, mlx->map->bricks[1]);
+//	free(mlx->map->bricks[0]);
+//	free(mlx->map->bricks[1]);
+//	free(mlx->map->bricks[2]);
+//	free(mlx->map->bricks);
+	mlx_destroy_image(mlx->ptr, mlx->map->wallpaper);
+//	free(mlx->map);
+	mlx_destroy_image(mlx->ptr, mlx->info->points_img[0]);
+	mlx_destroy_image(mlx->ptr, mlx->info->points_img[1]);
+//	free(mlx->info->points_img);
+	mlx_destroy_image(mlx->ptr, mlx->info->progress);
+	mlx_destroy_image(mlx->ptr, mlx->info->img_pause);
+//	free(mlx->info->players[0]);
+//	free(mlx->info->players[1]);
+//	free(mlx->info->players);
+//	free(mlx->info);
+//	free(mlx->piece[0]->shape);
+//	free(mlx->piece[1]->shape);
+//	free(mlx->piece[0]);
+//	free(mlx->piece[1]);
+//	free(mlx->piece);
 	mlx_destroy_window(mlx->ptr, mlx->win);
 }
 
@@ -40,21 +48,24 @@ static void		hide_pause(t_mlx *mlx)
 	int		i;
 	int		j;
 
-	img = mlx_new_image(mlx->ptr, 204, 37);
-	addrs_info = (int *)ft_get_addrs(img, 204);
-	addrs_wall = (int *)ft_get_addrs(mlx->wallpaper, RESOLUTION_X);
+	img = mlx_new_image(mlx->ptr, mlx->info->img_pause->width,
+			mlx->info->img_pause->height);
+	addrs_info = (int *)ft_get_addrs(img, mlx->info->img_pause->width);
+	addrs_wall = (int *)ft_get_addrs(mlx->map->wallpaper->data,
+			mlx->map->wallpaper->width);
 	i = 0;
-	j = RESOLUTION_X * (MARGEN_Y + 90) + RESOLUTION_X / 2 - 204;
-	while (i < 7548)
+	j = RESOLUTION_X * (MARGEN_Y + 90) + RESOLUTION_X / 2 -
+			mlx->info->img_pause->width;
+	while (i < mlx->info->img_pause->width * mlx->info->img_pause->height)
 	{
 		addrs_info[i++] = addrs_wall[j];
-		if (!(i % (204)) && i)
-			j += RESOLUTION_X - 204 + 1;
+		if (!(i % (mlx->info->img_pause->width)) && i)
+			j += RESOLUTION_X - mlx->info->img_pause->width + 1;
 		else
 			j++;
 	}
 	mlx_put_image_to_window(mlx->ptr, mlx->win, img,
-			RESOLUTION_X / 2 - 204 / 2, MARGEN_Y + 90);
+			RESOLUTION_X / 2 - mlx->info->img_pause->width / 2, MARGEN_Y + 90);
 	mlx_destroy_image(mlx->ptr, img);
 	return ;
 }
@@ -62,25 +73,24 @@ static void		hide_pause(t_mlx *mlx)
 int				ft_keys(int code, void *mlx)
 {
 	t_mlx	*mmlx;
-	char	key[1];
-	int		flag;
 
 	if (code == ESC)
 	{
-		destroy_all(mlx);
+//		destroy_all(mlx);
 		exit(0);
 	}
 	else if (code == SPACE)
 	{
 		mmlx = (t_mlx *)mlx;
-		mlx_put_image_to_window(mmlx->ptr, mmlx->win, mmlx->img_pause, RESOLUTION_X / 2 - 204 / 2, MARGEN_Y + 90);
-		if (mmlx->pause)
+		mlx_put_image_to_window(mmlx->ptr, mmlx->win, mmlx->info->img_pause->data,
+			RESOLUTION_X / 2 - mmlx->info->img_pause->width / 2, MARGEN_Y + 90);
+		if (mmlx->info->pause)
 		{
-			mmlx->pause = 0;
+			mmlx->info->pause = 0;
 			hide_pause(mlx);
 		}
 		else
-			mmlx->pause = 1;
+			mmlx->info->pause = 1;
 	}
 	return (0);
 }

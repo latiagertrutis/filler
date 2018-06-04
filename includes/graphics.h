@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/03 20:34:57 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/04 05:36:57 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,46 @@
 # define MARGEN_Y 100
 # define RESOLUTION_X 1920
 # define RESOLUTION_Y 1080
+
+# define PLAYER_ONE 'O'
+# define PLAYER_TWO 'X'
+# define WALLPAPER "images/hotline_filler.XPM"
+# define PAUSE "images/pause.xpm"
+# define BRICK_PLAYER_ONE_1517 "images/BRICK3A_15x17.xpm"
+# define BRICK_PLAYER_TWO_1517 "images/BRICK3B_15x17.xpm"
+# define BRICK_PLAYER_ONE_2440 "images/BRICK3A_24x40.xpm"
+# define BRICK_PLAYER_TWO_2440 "images/BRICK3B_24x40.xpm"
+# define BRICK_PLAYER_ONE_10099 "images/BRICK3A_24x40.xpm"
+# define BRICK_PLAYER_TWO_10099 "images/BRICK3B_24x40.xpm"
+# define COLOR_ALWAYS 0
+# define COLOR_BRICK_PLAYER_ONE 0xFF0000
+# define COLOR_BRICK_PLAYER_TWO 0x00FF00
+# define COLOR_PLAYER_ONE_NFO 0xFF0000
+# define COLOR_PLAYER_TWO_NFO 0x00FF00
+# define PLAYER_ONE_WINS "images/player1wins.xpm"
+# define PLAYER_TWO_WINS "images/player2wins.xpm"
+# define DRAW "images/meh.xpm"
+
 # define ESC 53
 # define SPACE 49
 # define ENDIAN 0
 # define BITS 32
 # define LINE_COLOR 0xFFFFFF
 
-/* typedef struct	s_img */
-/* { */
-/* 	void		*data; */
-/* 	int			width; */
-/* 	int			height; */
-/* }				t_img; */
+typedef struct	s_img
+{
+	void		*data;
+	int			width;
+	int			height;
+}				t_img;
 
 typedef struct	s_map
 {
 	int			dim[2];
-	char		**players;
 	int			square[2];
-	int			img_pos[2];
-//	t_img		*wallpaper;
+	int			map_pos[2];
+	t_img		*wallpaper;
+	t_img		**bricks;
 }				t_map;
 
 typedef struct	s_piece
@@ -52,30 +72,28 @@ typedef struct	s_piece
 	char		player;
 }				t_piece;
 
-/* typedef struct	s_info */
-/* { */
-/* 	char		**players; */
-/* 	int			pause; */
-/* 	t_img		*img_pause; */
-	
-/* }				 */
+typedef struct	s_info
+{
+	void		**points_img;
+	char		**players;
+	int			pause;
+	void		*progress;
+	t_img		*img_pause;
+	int			puntuation[2];
+}				t_info;
 
 typedef struct	s_mlx
 {
 	void		*ptr;
 	void		*win;
-	void		*img;
-	void		*wallpaper;
-	void		**bricks;
-	void		**info;
-	void		*progress;
+//	void		*img;
 	t_map		*map;
 	t_piece		**piece;
-	void		*img_pause;
-	int			pause;
+	t_info		*info;
 }				t_mlx;
 
 void	ft_set_bricks(t_mlx *mlx);
+t_img	*ft_set_xpm(t_mlx *mlx, char *file);
 void	ft_initialice(t_mlx *mlx);
 void	ft_print_map(t_mlx *mlx);
 char	*ft_get_addrs(void *img, int sizeline);

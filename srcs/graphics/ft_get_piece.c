@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 20:43:35 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/01 18:42:07 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/05 02:25:45 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char		*set_line(int size)
 			ft_error("ERROR There is no piece\n");
 		if (tmp)
 			line = ft_strjoinfree(tmp, line);
-		if (ft_strlen(line) != (size + 1))
+		if ((int)ft_strlen(line) != (size + 1))
 		{
 			tmp = ft_strdup(line);
 			free(line);

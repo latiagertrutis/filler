@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/04 23:27:55 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/05 02:13:31 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static void		take_dim(char *line, int dim[2], int square[2])
 
 static void		allocate_data(t_mlx *mlx)
 {
-	int a;
-	int b;
 
 	if (!(mlx->map = (t_map *)ft_memalloc(sizeof(t_map))))
 		ft_error(NULL);

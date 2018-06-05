@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/04 23:04:34 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/05 02:27:33 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,12 @@ NAME = jagarcia.filler
 
 GRAF_NAME = interface
 
-CFLAGS = -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
-TEST = srcs/main.c
-
-MAIN_FUNCS = ft_seek.c \
+MAIN_FUNCS = main.c \
+			 ft_seek.c \
 			 ft_ndigits.c \
 			 map_reader.c \
 			 update_map.c \
@@ -48,7 +47,9 @@ GRAPHIC_FUNCS = main_graphic.c \
 				ft_set_bricks.c \
 				ft_keys.c \
 				ft_progress.c \
-				ft_set_xpm.c
+				ft_set_xpm.c \
+				ft_seek.c \
+				ft_ndigits.c
 
 OBJ_DIR = objects/
 LIBFT_DIR = libft/
@@ -66,16 +67,16 @@ HEADER_PATH = $(patsubst %.h, $(INCLUDES_DIR)%.h,$(HEADERS))
 MAIN_OBJ = $(patsubst %.c, $(OBJ_DIR)%.o,$(MAIN_FUNCS))
 GRAPHIC_OBJ = $(patsubst %.c, $(OBJ_DIR)%.o,$(GRAPHIC_FUNCS))
 
-OBJ = $(MAIN_OBJ)
+OBJ = $(MAIN_OBJ) $(GRAPHIC_OBJ)
 
 
 all : $(NAME)
 
-$(NAME) : $(MAIN_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
-	gcc $(OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(FLAGS) -o $(NAME)
+$(NAME) : $(MAIN_OBJ) $(LIBFT_DIR)$(LIBFT_NAME) $(GRAF_NAME)
+	gcc $(MAIN_OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(CFLAGS) -o $(NAME)
 
-$(GRAF_NAME): $(MAIN_OBJ) $(GRAPHIC_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
-	gcc $(MAIN_OBJ) $(GRAPHIC_OBJ) $(MLXFLAGS) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(CFLAGS) -o $(GRAF_NAME)
+$(GRAF_NAME): $(GRAPHIC_OBJ)
+	gcc $(GRAPHIC_OBJ) $(MLXFLAGS) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INCLUDES_DIR) $(CFLAGS) -o $(GRAF_NAME)
 
 $(LIBFT_DIR)$(LIBFT_NAME):
 	$(MAKE) -C $(LIBFT_DIR)
@@ -96,16 +97,9 @@ clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
+	rm -f filler.trace
 	rm -f $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean
 	make
-
-graf: $(GRAF_NAME)
-
-test: $(MAIN_OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
-	gcc $(CFLAGS) $(TEST) $(MAIN_OBJ) -l$(LIBFT_ABREV) -L$(LIBFT_DIR)
-	-rm datos.txt
-	touch datos.txt
-	resources/filler_vm -f resources/maps/map01 -p2 ./resources/players/hcao.filler -p1 ./a.out

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 01:31:17 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/04 05:48:01 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/05 03:18:08 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void		build_brick(t_mlx *mlx, int brick, int color)
 	int	*addrs;
 
 	i = 0;
-	addrs = (int *)ft_get_addrs((mlx->map->bricks)[brick]->data, mlx->map->square[1] + 1);
+	addrs = (int *)ft_get_addrs((mlx->map->bricks)[brick]->data,
+									mlx->map->square[1] + 1);
 	while (i < (mlx->map->square[1] + 1) * (mlx->map->square[0] + 1))
 	{
 		if (i <= (mlx->map->square[1] + 1) * 2)
@@ -52,7 +53,7 @@ static void		set_wipe_brick(t_mlx *mlx)
 {
 	int	i;
 	int	*addrs;
-	
+
 	if (!(mlx->map->bricks[2] = (t_img *)ft_memalloc(sizeof(t_img))))
 		ft_error(NULL);
 	mlx->map->bricks[2]->data = mlx_new_image(mlx->ptr, mlx->map->square[1] + 1,
@@ -71,9 +72,9 @@ void			ft_set_bricks(t_mlx *mlx)
 		(mlx->map->bricks)[1] = ft_set_xpm(mlx, BRICK_PLAYER_TWO_1517);
 	}
 	else if (mlx->map->dim[0] == 24 && mlx->map->dim[1] == 40 && !COLOR_ALWAYS)
-	{	
+	{
 		(mlx->map->bricks)[0] = ft_set_xpm(mlx, BRICK_PLAYER_ONE_2440);
-		(mlx->map->bricks)[1] = ft_set_xpm(mlx, BRICK_PLAYER_TWO_2440);	
+		(mlx->map->bricks)[1] = ft_set_xpm(mlx, BRICK_PLAYER_TWO_2440);
 	}
 	else if (mlx->map->dim[0] == 100 && mlx->map->dim[1] == 99 && !COLOR_ALWAYS)
 	{

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 19:01:10 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/04 23:27:14 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/05 03:11:34 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void		destroy_all(t_mlx *mlx)
 {
 	mlx_destroy_image(mlx->ptr, mlx->map->bricks[0]->data);
-	mlx_destroy_image(mlx->ptr, mlx->map->bricks[1]->data);	
+	mlx_destroy_image(mlx->ptr, mlx->map->bricks[1]->data);
 	mlx_destroy_image(mlx->ptr, mlx->map->bricks[2]->data);
 	free(mlx->map->bricks[0]);
 	free(mlx->map->bricks[1]);
@@ -39,7 +39,6 @@ static void		destroy_all(t_mlx *mlx)
 	free(mlx->piece[0]);
 	free(mlx->piece[1]);
 	free(mlx->piece);
-	mlx_destroy_window(mlx->ptr, mlx->win);
 }
 
 static void		hide_pause(t_mlx *mlx)
@@ -69,7 +68,6 @@ static void		hide_pause(t_mlx *mlx)
 	mlx_put_image_to_window(mlx->ptr, mlx->win, img,
 			RESOLUTION_X / 2 - mlx->info->img_pause->width / 2, MARGEN_Y + 90);
 	mlx_destroy_image(mlx->ptr, img);
-	return ;
 }
 
 int				ft_keys(int code, void *mlx)
@@ -84,8 +82,8 @@ int				ft_keys(int code, void *mlx)
 	else if (code == SPACE)
 	{
 		mmlx = (t_mlx *)mlx;
-		mlx_put_image_to_window(mmlx->ptr, mmlx->win, mmlx->info->img_pause->data,
-			RESOLUTION_X / 2 - mmlx->info->img_pause->width / 2, MARGEN_Y + 90);
+		mlx_put_image_to_window(mmlx->ptr, mmlx->win, mmlx->info->img_pause->
+	data, RESOLUTION_X / 2 - mmlx->info->img_pause->width / 2, MARGEN_Y + 90);
 		if (mmlx->info->pause)
 		{
 			mmlx->info->pause = 0;

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 18:38:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/04 23:40:32 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/05 03:17:25 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,8 @@ void	ft_place_piece(t_mlx *mlx, int pieza, char player)
 		}
 		i++;
 	}
-		if (player == PLAYER_ONE)
-			ft_progress(mlx, mlx->map->square[1] * mlx->map->dim[1], 1);
-		else if (player == PLAYER_TWO)
-			ft_progress(mlx, mlx->map->square[1] * mlx->map->dim[1], 0);
+	if (player == PLAYER_ONE)
+		ft_progress(mlx, mlx->map->square[1] * mlx->map->dim[1], 1);
+	else if (player == PLAYER_TWO)
+		ft_progress(mlx, mlx->map->square[1] * mlx->map->dim[1], 0);
 }
-

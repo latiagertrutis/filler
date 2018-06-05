@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/03 21:02:08 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/04 23:40:47 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/05 03:09:07 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,42 +30,52 @@ static int	choose_color(int i, int p1)
 		return (!p1 ? 0x0273ff : 0x900272);
 }
 
-void		ft_progress(t_mlx *mlx, int width, int p1)
+static void	p1_progress(int *addr, int width, int *lp)
 {
-	int i;
-	int j;
-	static int lp[2] = {0, 0};
-	int percent;
-	int *addr;
+	int		percent;
+	int		i;
+	int		j;
 
 	i = 0;
+	percent = (width * (lp[0] + 1)) / (lp[0] + lp[1] + 1);
+	while (i < 100)
+	{
+		j = i * width;
+		while (j < percent + i * width)
+			addr[j++] = choose_color(i, 1);
+		i++;
+	}
+	lp[0]++;
+}
+
+static void	p2_progress(int *addr, int width, int *lp)
+{
+	int		percent;
+	int		i;
+	int		j;
+
+	i = 0;
+	percent = width - (width * (lp[0])) / (lp[0] + lp[1]);
+	while (i < 100)
+	{
+		j = (width - 1) + (i * width);
+		while (j > (width - percent + i * width))
+			addr[j--] = choose_color(i, 0);
+		i++;
+	}
+	lp[1]++;
+}
+
+void		ft_progress(t_mlx *mlx, int width, int p1)
+{
+	static int	lp[2] = {0, 0};
+	int			*addr;
+
 	addr = (int *)ft_get_addrs(mlx->info->progress, width);
 	if (p1)
-	{
-		percent = (width * (lp[0] + p1)) / (lp[0] + lp[1] + p1);
-		while (i < 100)
-		{
-			j = i * width;
-			while (j < percent + i * width)
-				addr[j++] = choose_color(i, p1);
-			i++;
-		}
-		lp[0]++;
-	}
+		p1_progress(addr, width, lp);
 	else
-	{
-		i = 0;
-		percent = width - (width * (lp[0] + p1)) / (lp[0] + lp[1] + p1);
-		while (i < 100)
-		{
-			j = (width - 1) + (i * width);
-			while (j > (width - percent + i * width))
-				addr[j--] = choose_color(i, p1);
-			i++;
-		}
-		lp[1]++;
-	}
+		p2_progress(addr, width, lp);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->info->progress,
-			MARGEN_X + mlx->map->map_pos[0], RESOLUTION_Y - MARGEN_Y - 100);
-
+	MARGEN_X + mlx->map->map_pos[0], RESOLUTION_Y - MARGEN_Y - 100);
 }

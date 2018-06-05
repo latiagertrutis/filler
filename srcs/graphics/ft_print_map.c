@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 07:51:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/05 00:25:53 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/05 03:16:18 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,16 @@ static void			center_image(t_mlx *mlx)
 		dist_y++;
 	mlx->map->map_pos[0] = dist_x;
 	mlx->map->map_pos[1] = dist_y;
+	mlx_put_image_to_window(mlx->ptr, mlx->win,
+							mlx->map->wallpaper->data, 0, 0);
+	place_starts(mlx);
 }
 
 static void			paint_line(void *img, int width, int height)
 {
 	int *addrs;
 	int	i;
-	
+
 	addrs = (int *)ft_get_addrs(img, width);
 	i = 0;
 	while (i < width * height)
@@ -94,7 +97,6 @@ void				ft_print_map(t_mlx *mlx)
 	int		i;
 
 	center_image(mlx);
-	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->map->wallpaper->data, 0, 0);
 	i = 0;
 	line = mlx_new_image(mlx->ptr, mlx->map->dim[1] * mlx->map->square[1], 1);
 	paint_line(line, mlx->map->dim[1] * mlx->map->square[1], 1);
@@ -115,6 +117,5 @@ void				ft_print_map(t_mlx *mlx)
 				mlx->map->map_pos[1]);
 	}
 	mlx_destroy_image(mlx->ptr, line);
-	place_starts(mlx);
 	ft_jump_piece(mlx);
 }

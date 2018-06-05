@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 03:57:58 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/05 01:43:50 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/05 02:57:32 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void			ft_update_info(t_mlx *mlx, char player)
 	{
 		mlx_put_image_to_window(mlx->ptr, mlx->win,
 			mlx->info->points_img[0], 0, RESOLUTION_Y - MARGEN_Y - 58);
-		mlx_string_put(mlx->ptr, mlx->win, MARGEN_X - 50, RESOLUTION_Y - MARGEN_Y - 60,
+		mlx_string_put(mlx->ptr, mlx->win, MARGEN_X - 50, RESOLUTION_Y -
+						MARGEN_Y - 60,
 			COLOR_PLAYER_ONE_NFO, (tmp = ft_itoa(mlx->info->puntuation[0]++)));
 	}
 	else
@@ -57,7 +58,7 @@ static void		paint_image(t_mlx *mlx, int img)
 	}
 }
 
-void		ft_info(t_mlx *mlx)
+void			ft_info(t_mlx *mlx)
 {
 	if (!(mlx->info->progress = mlx_new_image(mlx->ptr,
 			mlx->map->square[1] * mlx->map->dim[1], 100)))
@@ -68,10 +69,11 @@ void		ft_info(t_mlx *mlx)
 	paint_image(mlx, 1);
 	mlx_string_put(mlx->ptr, mlx->win, 70, RESOLUTION_Y - MARGEN_Y - 150,
 				COLOR_PLAYER_ONE_NFO, mlx->info->players[0]);
-	mlx_string_put(mlx->ptr, mlx->win, MARGEN_X + 50, RESOLUTION_Y - MARGEN_Y - 60,
-				COLOR_PLAYER_ONE_NFO, "0");
+	mlx_string_put(mlx->ptr, mlx->win, MARGEN_X + 50, RESOLUTION_Y - MARGEN_Y
+					- 60, COLOR_PLAYER_ONE_NFO, "0");
 	mlx_string_put(mlx->ptr, mlx->win, RESOLUTION_X - MARGEN_X + 70,
-				RESOLUTION_Y - MARGEN_Y - 150, COLOR_PLAYER_TWO_NFO, mlx->info->players[1]);
+				RESOLUTION_Y - MARGEN_Y - 150, COLOR_PLAYER_TWO_NFO,
+				mlx->info->players[1]);
 	mlx_string_put(mlx->ptr, mlx->win, RESOLUTION_X - MARGEN_X + 30,
 				RESOLUTION_Y - MARGEN_Y - 60, COLOR_PLAYER_TWO_NFO, "0");
 }

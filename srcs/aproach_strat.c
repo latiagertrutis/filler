@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 19:00:35 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/01 19:00:51 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/05 02:54:33 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 
 static int		is_front(t_data *data, int k)
 {
-	if (((k % data->map_width) && (data->map[k - 1].is_x || data->map[k - 1].is_o))
-	    && (((k % data->map_width) != (data->map_width - 1)) && (data->map[k + 1].is_x || data->map[k + 1].is_o))
-	    && ((k / data->map_width) && (data->map[k - data->map_width].is_x || data->map[k - data->map_width].is_o))
-	    && (((k / data->map_width) != (data->map_height - 1)) && (data->map[k + data->map_width].is_x || data->map[k + data->map_width].is_o)))
-		return(0);
+	if (((k % data->map_width) && (data->map[k - 1].is_x ||
+			data->map[k - 1].is_o)) && (((k % data->map_width) !=
+			(data->map_width - 1)) && (data->map[k + 1].is_x ||
+			data->map[k + 1].is_o)) && ((k / data->map_width) &&
+			(data->map[k - data->map_width].is_x ||
+			data->map[k - data->map_width].is_o)) && (((k / data->map_width) !=
+			(data->map_height - 1)) && (data->map[k + data->map_width].is_x ||
+			data->map[k + data->map_width].is_o)))
+		return (0);
 	return (1);
 }
 
@@ -34,12 +38,10 @@ static int		check_enemy_points(t_data *data, int pos)
 	{
 		if (data->player ? data->map[i].is_o : data->map[i].is_x)
 		{
-//			if ((aux_diff = (int)sqrt(pow(i / data->map_width -
-//				pos / data->map_width, 2) + pow(i % data->map_width -
-//				pos % data->map_width, 2))) < diff)
 			if (is_front(data, i))
 			{
-				if ((aux_diff = abs(i / data->map_width - pos / data->map_width) + abs(i % data->map_width - pos % data->map_width)) <= diff)
+				if ((aux_diff = abs(i / data->map_width - pos / data->map_width)
+					+ abs(i % data->map_width - pos % data->map_width)) <= diff)
 					diff = aux_diff;
 			}
 		}
@@ -55,9 +57,9 @@ static void		check_piece_pos(t_data *data, t_aproach *apr)
 		if (data->piece[apr->j / 8] & (0x80 >> (apr->j % 8)))
 		{
 			apr->pos = cord_piece_to_map(data->piece_width, data->map_width,
-			                             (t_piece_point){apr->k, apr->i, apr->j});
+									(t_piece_point){apr->k, apr->i, apr->j});
 			if ((apr->aux_diff =
-			     check_enemy_points(data, apr->pos)) < apr->diff)
+				check_enemy_points(data, apr->pos)) < apr->diff)
 			{
 				apr->diff = apr->aux_diff;
 				apr->mp = apr->k;
@@ -75,7 +77,7 @@ static void		check_map(t_data *data, t_quad quad, t_aproach *apr)
 		apr->i = 0;
 		if (data->player ? data->map[apr->k].is_x : data->map[apr->k].is_o)
 		{
-			if(is_front(data, apr->k))
+			if (is_front(data, apr->k))
 			{
 				while (apr->i < (data->piece_width * data->piece_height))
 				{
@@ -102,7 +104,7 @@ int				aproach_strat(t_data *data, int *mp, int *pp, t_quad quad)
 	t_aproach	apr;
 
 	apr = (t_aproach){0, 0, quad.quad_start, 0, 0, 0,
-	                  data->map_width * data->map_height, 0};
+						data->map_width * data->map_height, 0};
 	check_map(data, quad, &apr);
 	*mp = apr.mp;
 	*pp = apr.pp;

@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 22:41:08 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/04 23:30:13 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/05 03:15:38 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static void		finish_game(t_mlx *mlx)
 {
 	t_img	*img;
 
-
-	if (mlx->info->puntuation[0] > mlx->info->puntuation[1])	
+	if (mlx->info->puntuation[0] > mlx->info->puntuation[1])
 		img = ft_set_xpm(mlx, PLAYER_ONE_WINS);
 	else if (mlx->info->puntuation[0] < mlx->info->puntuation[1])
 		img = ft_set_xpm(mlx, PLAYER_TWO_WINS);
@@ -26,7 +25,6 @@ static void		finish_game(t_mlx *mlx)
 	mlx_put_image_to_window(mlx->ptr, mlx->win, img->data, RESOLUTION_X / 2 -
 			img->width / 2, RESOLUTION_Y / 2 - img->height / 2);
 }
-
 
 static int		loop(void *mlx)
 {
@@ -59,7 +57,7 @@ int				main(void)
 {
 	t_mlx		*mlx;
 	t_map		*map;
-	
+
 	if (!(mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx))))
 		ft_error(NULL);
 	if (!(mlx->ptr = mlx_init()))

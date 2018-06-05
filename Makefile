@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/05 02:27:33 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/05 02:30:10 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,6 +99,7 @@ clean:
 fclean: clean
 	rm -f filler.trace
 	rm -f $(NAME)
+	rm -f $(GRAF_NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean

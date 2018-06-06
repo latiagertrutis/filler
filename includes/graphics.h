@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/05 02:26:24 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/06 01:09:43 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ typedef struct	s_mlx
 {
 	void		*ptr;
 	void		*win;
-//	void		*img;
 	t_map		*map;
 	t_piece		**piece;
 	t_info		*info;
+//	int			mode;
 }				t_mlx;
 
 void	ft_set_bricks(t_mlx *mlx);

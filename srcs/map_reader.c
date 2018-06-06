@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 11:58:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/06 01:54:13 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/06 02:09:25 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,14 @@ static int			read_piece(t_data *data)
 	return (1);
 }
 
+static void			allocate_map(t_data *data, char *buff)
+{
+	data->map_height = ft_atoi(buff + 8);
+	data->map_width = ft_atoi(buff + 8 + ft_ndigits(data->map_height));
+	if (!(data->map = ini_mapel(data->map_width, data->map_height)))
+		ft_error(NULL);
+}
+
 int					map_reader(t_data *data)
 {
 	char	*buff;
@@ -78,12 +86,7 @@ int					map_reader(t_data *data)
 	if (!buff)
 		return (2);
 	if (!data->map_width || !data->map_height)
-	{
-		data->map_height = ft_atoi(buff + 8);
-		data->map_width = ft_atoi(buff + 8 + ft_ndigits(data->map_height));
-		if (!(data->map = ini_mapel(data->map_width, data->map_height)))
-			ft_error(NULL);
-	}
+		allocate_map(data, buff);
 	free(buff);
 	if (!read_map(data))
 		return (0);

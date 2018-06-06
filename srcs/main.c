@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 18:49:37 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/06 02:00:35 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/06 02:02:15 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ int				main(void)
 	data = (t_data){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL};
 	if (ini_player(&data))
 		return (0);
-	while (1)
+	while ((ret = map_reader(&data)))
 	{
-		if (!(ret = map_reader(&data)))
-			return (0);
 		if (ret == 1)
 		{
 			if (!put_piece(&data))

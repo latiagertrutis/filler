@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 17:23:15 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/05/30 18:43:56 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/06 23:38:29 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,84 @@ static int	check_limits(t_data *data, int mp, int pp)
 **	pos = i + ((j_file - pp_file) * data->map_width) + (j_col - pp_col);
 */
 
-static int	check_overlap(t_data *data, int i, int pp, int j)
+static int	check_corners_p1(t_data *data, int pos)
+{
+	if ((pos % data->map_width) && (pos / data->map_width))
+	{
+		if (data->map[(pos - 1 - data->map_width)].is_o && data->map[pos - 1].is_x && data->map[pos - data->map_width].is_x)
+			return (1);
+	}
+	if ((pos % data->map_width) < (data->map_width - 1) && (pos / data->map_width))
+	{
+		if (data->map[(pos + 1 - data->map_width)].is_o && data->map[pos + 1].is_x && data->map[pos - data->map_width].is_x)
+			return (1);
+	}
+	if ((pos % data->map_width) < (data->map_width - 1) && (pos / data->map_width) < (data->map_height - 1))
+	{
+		if (data->map[(pos + 1 + data->map_width)].is_o && data->map[pos + 1].is_x && data->map[pos + data->map_width].is_x)
+			return (1);
+	}
+	if ((pos % data->map_width) && (pos / data->map_width) < (data->map_height - 1))
+	{
+		if (data->map[(pos - 1 + data->map_width)].is_o && data->map[pos - 1].is_x && data->map[pos + data->map_width].is_x)
+			return (1);
+	}
+	return (0);
+}
+
+static int	check_corners_p2(t_data *data, int pos)
+{
+	if ((pos % data->map_width) && (pos / data->map_width))
+	{
+		if (data->map[(pos - 1 - data->map_width)].is_x && data->map[pos - 1].is_o && data->map[pos - data->map_width].is_o)
+			return (1);
+	}
+	if ((pos % data->map_width) < (data->map_width - 1) && (pos / data->map_width))
+	{
+		if (data->map[(pos + 1 - data->map_width)].is_x && data->map[pos + 1].is_o && data->map[pos - data->map_width].is_o)
+			return (1);
+	}
+	if ((pos % data->map_width) < (data->map_width - 1) && (pos / data->map_width) < (data->map_height - 1))
+	{
+		if (data->map[(pos + 1 + data->map_width)].is_x && data->map[pos + 1].is_o && data->map[pos + data->map_width].is_o)
+			return (1);
+	}
+	if ((pos % data->map_width) && (pos / data->map_width) < (data->map_height - 1))
+	{
+		if (data->map[(pos - 1 + data->map_width)].is_x && data->map[pos - 1].is_o && data->map[pos + data->map_width].is_o)
+			return (1);
+	}
+	return (0);
+}
+
+static int	check_overlap(t_data *data, int i, int pp, int j, int r_val)
 {
 	int pos;
 
 	pos = cord_piece_to_map(data->piece_width, data->map_width,
 							(t_piece_point){i, pp, j});
 	if (data->map[pos].is_x || data->map[pos].is_o)
-		return (1);
+			return (1);
+	if (r_val != 2)
+	{
+		if (data->player)
+		{
+			if (check_corners_p2(data, pos))
+				return (2);
+		}
+		else if (check_corners_p1(data, pos))
+			return (2);
+	}
 	return (0);
 }
 
 int			check_position(t_data *data, int mp, int pp)
 {
 	int j;
+	int aux;
+	int r_val;
 
+	r_val = 1;
 	if (check_limits(data, mp, pp))
 		return (0);
 	j = pp + 1;
@@ -71,8 +134,11 @@ int			check_position(t_data *data, int mp, int pp)
 	{
 		if (data->piece[j / 8] & (0x80 >> (j % 8)))
 		{
-			if (check_overlap(data, mp, pp, j))
+			aux = check_overlap(data, mp, pp, j, r_val);
+			if (aux == 1)
 				return (0);
+			else if (aux == 2)
+				r_val = 2;
 		}
 		j++;
 	}
@@ -81,10 +147,13 @@ int			check_position(t_data *data, int mp, int pp)
 	{
 		if (data->piece[j / 8] & (0x80 >> (j % 8)))
 		{
-			if (check_overlap(data, mp, pp, j))
+			aux = check_overlap(data, mp, pp, j, r_val);
+			if (aux == 1)
 				return (0);
+			else if (aux == 2)
+				r_val = 2;
 		}
 		j--;
 	}
-	return (1);
+	return (r_val);
 }

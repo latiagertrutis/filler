@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 11:58:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/06 02:09:25 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/07 00:22:19 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,18 @@ int					map_reader(t_data *data)
 		ft_error(NULL);
 	if (!read_piece(data))
 		return (0);
+	 	int i = 0;
+	write_test("\n");
+	while (i < (data->piece_width * data->piece_height))
+	{
+		if (data->piece[i / 8] & (0x80 >> (i % 8)))
+			write_test("*");
+		else
+			write_test(".");
+		if ((i % data->piece_width) == (data->piece_width - 1))
+			write_test("\n");
+		i++;
+	}
 	return (1);
 }
 

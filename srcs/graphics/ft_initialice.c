@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 20:22:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/06 00:52:52 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/06 02:04:12 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void		error(char *line)
 	flag = get_next_line(STDIN_FILENO, &line);
 	if (flag < 0)
 		ft_error(NULL);
-	ft_error(line);	
+	ft_error(line);
 }
 
 void			ft_initialice(t_mlx *mlx)

@@ -6,7 +6,7 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/06 02:00:20 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/06 02:52:46 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,3 +104,6 @@ fclean: clean
 
 re: fclean
 	make
+
+exe: $(NAME)
+	sh start.sh

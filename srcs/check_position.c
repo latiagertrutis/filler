@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 17:23:15 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/06/06 23:38:29 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/06/07 18:26:08 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,71 +51,60 @@ static int	check_limits(t_data *data, int mp, int pp)
 
 static int	check_corners_p1(t_data *data, int pos)
 {
-	if ((pos % data->map_width) && (pos / data->map_width))
-	{
-		if (data->map[(pos - 1 - data->map_width)].is_o && data->map[pos - 1].is_x && data->map[pos - data->map_width].is_x)
-			return (1);
-	}
-	if ((pos % data->map_width) < (data->map_width - 1) && (pos / data->map_width))
-	{
-		if (data->map[(pos + 1 - data->map_width)].is_o && data->map[pos + 1].is_x && data->map[pos - data->map_width].is_x)
-			return (1);
-	}
-	if ((pos % data->map_width) < (data->map_width - 1) && (pos / data->map_width) < (data->map_height - 1))
-	{
-		if (data->map[(pos + 1 + data->map_width)].is_o && data->map[pos + 1].is_x && data->map[pos + data->map_width].is_x)
-			return (1);
-	}
-	if ((pos % data->map_width) && (pos / data->map_width) < (data->map_height - 1))
-	{
-		if (data->map[(pos - 1 + data->map_width)].is_o && data->map[pos - 1].is_x && data->map[pos + data->map_width].is_x)
-			return (1);
-	}
+	if ((pos % data->map_width) && (pos / data->map_width) &&
+		data->map[(pos - 1 - data->map_width)].is_o && data->map[pos - 1].is_x
+		&& data->map[pos - data->map_width].is_x)
+		return (1);
+	if ((pos % data->map_width) < (data->map_width - 1) &&
+		(pos / data->map_width) && data->map[(pos + 1 - data->map_width)].is_o
+		&& data->map[pos + 1].is_x && data->map[pos - data->map_width].is_x)
+		return (1);
+	if ((pos % data->map_width) < (data->map_width - 1) &&
+		(pos / data->map_width) < (data->map_height - 1) &&
+		data->map[(pos + 1 + data->map_width)].is_o && data->map[pos + 1].is_x
+		&& data->map[pos + data->map_width].is_x)
+		return (1);
+	if ((pos % data->map_width) &&
+		(pos / data->map_width) < (data->map_height - 1) &&
+		data->map[(pos - 1 + data->map_width)].is_o && data->map[pos - 1].is_x
+		&& data->map[pos + data->map_width].is_x)
+		return (1);
 	return (0);
 }
 
 static int	check_corners_p2(t_data *data, int pos)
 {
-	if ((pos % data->map_width) && (pos / data->map_width))
-	{
-		if (data->map[(pos - 1 - data->map_width)].is_x && data->map[pos - 1].is_o && data->map[pos - data->map_width].is_o)
-			return (1);
-	}
-	if ((pos % data->map_width) < (data->map_width - 1) && (pos / data->map_width))
-	{
-		if (data->map[(pos + 1 - data->map_width)].is_x && data->map[pos + 1].is_o && data->map[pos - data->map_width].is_o)
-			return (1);
-	}
-	if ((pos % data->map_width) < (data->map_width - 1) && (pos / data->map_width) < (data->map_height - 1))
-	{
-		if (data->map[(pos + 1 + data->map_width)].is_x && data->map[pos + 1].is_o && data->map[pos + data->map_width].is_o)
-			return (1);
-	}
-	if ((pos % data->map_width) && (pos / data->map_width) < (data->map_height - 1))
-	{
-		if (data->map[(pos - 1 + data->map_width)].is_x && data->map[pos - 1].is_o && data->map[pos + data->map_width].is_o)
-			return (1);
-	}
+	if ((pos % data->map_width) && (pos / data->map_width) &&
+		data->map[(pos - 1 - data->map_width)].is_x && data->map[pos - 1].is_o
+		&& data->map[pos - data->map_width].is_o)
+		return (1);
+	if ((pos % data->map_width) < (data->map_width - 1) &&
+		(pos / data->map_width) && data->map[(pos + 1 - data->map_width)].is_x
+		&& data->map[pos + 1].is_o && data->map[pos - data->map_width].is_o)
+		return (1);
+	if ((pos % data->map_width) < (data->map_width - 1) &&
+		(pos / data->map_width) < (data->map_height - 1) &&
+		data->map[(pos + 1 + data->map_width)].is_x && data->map[pos + 1].is_o
+		&& data->map[pos + data->map_width].is_o)
+		return (1);
+	if ((pos % data->map_width) &&
+		(pos / data->map_width) < (data->map_height - 1) &&
+		data->map[(pos - 1 + data->map_width)].is_x && data->map[pos - 1].is_o
+		&& data->map[pos + data->map_width].is_o)
+		return (1);
 	return (0);
 }
 
-static int	check_overlap(t_data *data, int i, int pp, int j, int r_val)
+static int	check_overlap(t_data *data, int pos, int *r_val)
 {
-	int pos;
-
-	pos = cord_piece_to_map(data->piece_width, data->map_width,
-							(t_piece_point){i, pp, j});
 	if (data->map[pos].is_x || data->map[pos].is_o)
-			return (1);
-	if (r_val != 2)
+		return (1);
+	if (*r_val != 2)
 	{
-		if (data->player)
-		{
-			if (check_corners_p2(data, pos))
-				return (2);
-		}
+		if (data->player && check_corners_p2(data, pos))
+			*r_val = 2;
 		else if (check_corners_p1(data, pos))
-			return (2);
+			*r_val = 2;
 	}
 	return (0);
 }
@@ -123,7 +112,6 @@ static int	check_overlap(t_data *data, int i, int pp, int j, int r_val)
 int			check_position(t_data *data, int mp, int pp)
 {
 	int j;
-	int aux;
 	int r_val;
 
 	r_val = 1;
@@ -132,28 +120,25 @@ int			check_position(t_data *data, int mp, int pp)
 	j = pp + 1;
 	while (j < (data->piece_width * data->piece_height))
 	{
-		if (data->piece[j / 8] & (0x80 >> (j % 8)))
-		{
-			aux = check_overlap(data, mp, pp, j, r_val);
-			if (aux == 1)
-				return (0);
-			else if (aux == 2)
-				r_val = 2;
-		}
+		if (data->piece[j / 8] & (0x80 >> (j % 8)) && check_overlap(data,
+			cord_piece_to_map(data->piece_width, data->map_width,
+			(t_piece_point){mp, pp, j}), &r_val))
+			return (0);
 		j++;
 	}
 	j = pp - 1;
 	while (j >= 0)
 	{
-		if (data->piece[j / 8] & (0x80 >> (j % 8)))
-		{
-			aux = check_overlap(data, mp, pp, j, r_val);
-			if (aux == 1)
-				return (0);
-			else if (aux == 2)
-				r_val = 2;
-		}
+		if (data->piece[j / 8] & (0x80 >> (j % 8)) && check_overlap(data,
+			cord_piece_to_map(data->piece_width, data->map_width,
+			(t_piece_point){mp, pp, j}), &r_val))
+			return (0);
 		j--;
 	}
 	return (r_val);
 }
+
+/*
+** if r_val is 2, the piece can jump
+** if r_val is 1, yhe piece is just fine
+*/

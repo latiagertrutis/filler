@@ -6,13 +6,13 @@
 #    By: jagarcia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/05 17:20:08 by jagarcia          #+#    #+#              #
-#    Updated: 2018/06/06 04:10:34 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/07 17:37:14 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY : all clean fclean re graf
 
-NAME = jagarcia.filler
+NAME = mrodrigu.filler
 
 GRAF_NAME = interface
 

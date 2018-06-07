@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/05 23:39:39 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/06/06 03:46:06 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/06/07 20:09:23 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,11 @@ then
 fi
 if [ "$p1" = "" ]
 then
-	p1="jagarcia.filler";
+	p1="mrodrigu.filler";
 fi
 if [ "$p2" = "" ]
 then
-	p2="jagarcia.filler";
+	p2="mrodrigu.filler";
 fi
 while true
 do

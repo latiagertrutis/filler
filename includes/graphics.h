@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 07:08:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/06/06 02:03:34 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/04/29 07:08:13 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/06/08 22:29:01 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define GRAPHICS_H
 
 # include <mlx.h>
-# include <math.h>
 
 # define BRICK_LONG 2
 # define BRICK_HEIGHT 1
